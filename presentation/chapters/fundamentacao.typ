@@ -1,39 +1,4 @@
-#import "@preview/touying:0.6.1": *
-#import themes.simple: *
-#import "../style.typ": *
-
-#show: simple-theme.with(aspect-ratio: "16-9")
-
-#show raw: set text(size: 18pt)
-
-#show figure.where(kind: raw): set align(left)
-
-#title-slide[
-	== Design e Implementação de um Protótipo de Interpretador para uma Linguagem de Programação Orientada ao Entity Component System
-
-	#v(2em)
-
-	*Autor* Francisco Sebastiany Junior
-
-	*Orientador* Prof. Me. Luciano Santos Cardoso
-]
-
-= Projeto
-
-== Pivotagem
-
-- Linguagem de Domínio Específico;
-
-- Utilização de Bibliotecas de _Lexing_ e _Parsing_;
-
-- Avaliação de Resultados após as Fases de Design e Implementação.
-
-== Etapas
-
-+ *Design da Linguagem:* como será a sintaxe, tipagem e tratamento de erros? Qual será o paradigma? Quais _features_ do ECS abstrair?
-+ *Análise do Design:* quais problemas o design resolve? Quão possível é a implementação dele?
-+ *Implementação do Interpretador:* qual será a metodologia de desenvolvimento? Como o ECS será representado internamente? Como será feito o _lexer_ e o _parser_?
-+ *Análise do Interpretador:* ele pode cumprir com o design proposto? Quais foram as dificuldades enfrentadas?
+#import "../style.typ": figura_legendada
 
 = Fundamentos
 
@@ -329,13 +294,3 @@ enum Expr<'a> {
 	```,
 	[Fonte: adaptado de #cite(<chumsky>, form: "prose").],
 )
-
-#empty-slide()[
-	== Referências
-
-	#bibliography(
-		"../../bibliography.yml",
-		title: none,
-		style: "associacao-brasileira-de-normas-tecnicas",
-	)
-]

@@ -1,0 +1,5 @@
+#let student = "Francisco Sebastiany Junior"
+#let advisor = "Prof. Me. Luciano S. Cardoso"
+#let title = "Design e Implementação de um Protótipo de Interpretador para uma Linguagem de Programação Orientada ao Entity Component System"
+#let city = "Foz do Iguaçu, PR"
+#let year = "2025"
