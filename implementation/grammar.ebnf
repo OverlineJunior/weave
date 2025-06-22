@@ -1,0 +1,55 @@
+program = { ( annotation | component_declaration | system_declaration | declaration | expression ) } ;
+
+annotation = "@(" , identifier , { "," , identifier } , ")" ;
+
+component_declaration = "component" , identifier ;
+
+system_declaration = "system" , identifier , "(" , [ parameter_list ] , ")" , "{" , [ system_body ] , "}" ;
+
+parameter_list = parameter , { "," , parameter } ;
+
+parameter = simple_parameter
+            | destructured_parameter
+            | aliased_parameter ;
+
+simple_parameter = identifier , ":" , identifier , [ "in" , identifier ] ;
+
+destructured_parameter = "(" , identifier , "," , identifier , ")" , "in" , identifier ;
+
+aliased_parameter = identifier , ":" , identifier , "as" , identifier , "in" , identifier ;
+
+system_body = { expression } ;
+
+expression = assignment
+             | removal
+             | if_statement
+             | function_call
+             | declaration ;
+
+assignment = identifier , "<-" , component_expression ;
+
+removal = identifier , "->" , component_expression ;
+
+component_expression = identifier | tuple ;
+
+tuple = "(" , identifier , "," , identifier , ")" ;
+
+if_statement = "if" , condition , "{" , "..." , "}" , { "else" , "if" , "..." } ;
+
+condition = identifier , "==" , identifier ;
+
+function_call = identifier , "(" , string_literal , ")" ;
+
+string_literal = '"' , { character } , '"' ;
+
+declaration = simple_declaration | destructured_declaration ;
+
+simple_declaration = identifier , ":" , identifier , "in" , identifier ;
+
+destructured_declaration = "(" , ( identifier | "_" ) , "," , identifier , ")" , ":" , component_expression , "in" , identifier ;
+
+identifier = letter , { letter | digit | "_" } ;
+
+letter = "a" | ... | "z" | "A" | ... | "Z" ;
+
+digit = "0" | ... | "9" ;
