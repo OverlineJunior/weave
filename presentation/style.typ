@@ -13,7 +13,7 @@
   // ]
 
   #title-slide[
-    #title
+    #text(size: 1.25em)[#title]
 
     #v(2em)
 
