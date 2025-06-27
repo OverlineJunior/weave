@@ -213,3 +213,25 @@
     panic("Número de legendas não suportado.")
   }
 }
+
+#let outline_manual(titulo, ..itens) = [
+  // #show heading: set heading(outlined: false)
+  // #show heading: set align(center)
+
+  // #show heading: it => [
+  //   #it
+  //   #v(1em)
+  // ]
+
+  // #it
+
+  #align(center)[#heading(titulo, outlined: false, numbering: none)]
+
+  #v(1em)
+
+  #for item in itens.pos() [
+    #item
+  ]
+
+  #pagebreak()
+]

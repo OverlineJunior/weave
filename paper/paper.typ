@@ -1,5 +1,5 @@
 #import "@preview/codly:1.3.0": codly-init
-#import "abnt_udc.typ": abnt_udc, capa, folha_de_rosto
+#import "abnt_udc.typ": abnt_udc, capa, folha_de_rosto, outline_manual
 #import "data.typ": title, student, advisor, city, year
 
 #show: abnt_udc
@@ -14,6 +14,11 @@
 #outline(title: "Lista de Tabelas e Quadros", target: figure.where(kind: table))
 
 #outline(title: "Lista de Códigos", target: figure.where(kind: raw))
+
+#outline_manual(
+	"Lista de Abreviaturas e Siglas",
+	[*ECS*: _Entity Component System_],
+)
 
 #outline(title: "Sumário")
 
