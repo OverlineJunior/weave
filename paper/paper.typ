@@ -17,7 +17,10 @@
 
 #outline_manual(
 	"Lista de Abreviaturas e Siglas",
+	[*AST*: Árvore Sintática Abstrata (do inglês, _Abstract Syntax Tree_)],
 	[*ECS*: _Entity Component System_],
+	[*LSP*: _Language Server Protocol_],
+	[*MVC*: _Model-View-Controller_],
 )
 
 #outline(title: "Sumário")
