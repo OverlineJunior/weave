@@ -8,18 +8,27 @@
 
   #show figure.where(kind: raw): set align(left)
 
-  // #show bibliography: it => [
-  //   #empty-slide[#it]
-  // ]
-
   #title-slide[
-    #text(size: 1.25em)[#title]
+    #grid(
+      columns: 1,
+      rows: (1fr, 1fr, 1fr),
+      align(top)[#grid(
+        columns: (1fr, 5fr, 1fr),
+        rows: 1,
+        align(left)[#image("../images/udc_logo.jpeg", height: 51pt)],
+        text(size: 0.8em)[
+          CENTRO UNIVERSITÁRIO DINÂMICA DAS CATARATAS
 
-    #v(2em)
+          CURSO DE CIÊNCIA DA COMPUTAÇÃO
+        ],
+      )],
+      align(horizon)[== #title],
+      align(bottom + left)[#text(size: 0.8em)[
+        *Aluno* #student
 
-    *Aluno* #student
-
-    *Orientador* #advisor
+        *Orientador* #advisor
+      ]],
+    )
   ]
 
   #body
@@ -52,4 +61,16 @@
   } else {
     panic("Número de legendas não suportado.")
   }
+}
+
+#let figura_legendada_titulada(titulo, corpo, ..legendas) = {
+  grid(
+		columns: 1,
+		rows: (1fr, 10fr),
+		align(center)[#titulo],
+		figura_legendada(
+			corpo,
+			..legendas,
+		),
+	)
 }

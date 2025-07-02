@@ -192,3 +192,11 @@ merriamwebster:
   url:
     value: https://www.merriam-webster.com/
     date: 2025-05-18
+
+wikipediamvc:
+  type: Reference
+  title: Model-view-controller
+  author: Wikipedia contributors
+  url:
+    value: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
+    date: 2025-06-30

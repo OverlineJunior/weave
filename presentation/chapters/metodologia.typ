@@ -1,18 +1,6 @@
-#import "@preview/touying:0.6.1": *
-#import themes.simple: *
 #import "../style.typ": *
 
-#show: simple-theme.with(aspect-ratio: "16-9")
-
-#title-slide[
-	== Design e Implementação de um Protótipo de Interpretador para uma Linguagem de Programação Orientada ao Entity Component System
-
-	#v(2em)
-
-	*Aluno* Francisco Sebastiany Junior
-
-	*Orientador* Prof. Me. Luciano Santos Cardoso
-]
+// ≈ 3-4 minutos
 
 = Metodologia
 
@@ -26,9 +14,20 @@
 
 == Contexto
 
-- Desenvolvimento de linguagens de programação;
+#grid(
+	columns: (1fr, 1fr),
+	rows: 1,
+	column-gutter: 30pt,
+	[
+		- Desenvolvimento de linguagens de programação;
 
-- Padrão arquitetural _Entity Component System_ (ECS).
+		- Padrão arquitetural _Entity Component System_ (ECS).
+	],
+	figura_legendada(
+		image("../../images/interseccao_ecs_linguagem.png"),
+		[Fonte: elaboração própria.],
+	),
+)
 
 == População e Amostra
 
@@ -52,9 +51,10 @@
 
 == Procedimentos Metodológicos
 
-+ *Design da Linguagem:* como será a sintaxe, tipagem e tratamento de erros? Qual será o paradigma? Quais _features_ do ECS abstrair?
++ *Design da Linguagem:* como será a sintaxe, tipagem e tratamento de erros? Qual será o paradigma?
+#pause
 + *Análise do Design:* quais problemas o design resolve? Quão possível é a implementação dele?
+#pause
 + *Implementação do Interpretador:* qual será a metodologia de desenvolvimento? Como o ECS será representado internamente? Como será feito o _lexer_ e o _parser_?
+#pause
 + *Análise do Interpretador:* ele pode cumprir com o design proposto? Quais foram as dificuldades enfrentadas?
-
-= Fim
