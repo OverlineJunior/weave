@@ -102,7 +102,7 @@ Permite o relacionamento entre entidades e componentes, tornando possível a rep
 
 - _Tree-Walking_ é uma variante de interpretador que executa a _AST_ diretamente, tornando o processo mais simples de implementar.
 
-- Pode ser separado em três fases: _análise léxica_, _análise sintática_, _análise semântica_ e _interpretação_.
+- Pode ser separado em quatro fases: _análise léxica_, _análise sintática_, _análise semântica_ e _interpretação_.
 
 #pagebreak()
 
