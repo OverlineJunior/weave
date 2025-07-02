@@ -9,6 +9,8 @@
 
 #include "chapters/metodologia.typ"
 
+= Obrigado!
+
 = Referências
 
 #pagebreak()
