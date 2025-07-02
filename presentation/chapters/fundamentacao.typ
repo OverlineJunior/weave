@@ -73,7 +73,7 @@ Conjunto de conceitos e princípios que orientam o desenvolvimento de software.
 
 #pagebreak()
 
-#align(center)[#image("../../images/mario.gif", height: 84%)]
+#align(center)[#image("../../images/mario.jpg", height: 84%)]
 
 #pagebreak()
 
