@@ -1,0 +1,57 @@
+\documentclass{abnt-UDC-CC}
+
+\usepackage{cmap}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+
+\input{config/dados_documento.tex}
+\input{config/dados_curso.tex}
+
+\begin{document}
+
+\frenchspacing
+
+% ------------------------------------------------------------------------------
+% Elementos pré-textuais.
+% ------------------------------------------------------------------------------
+
+\imprimircapa
+
+\imprimirfolhaderosto*
+
+% Resolve um bug onde a folha de rosto aparece depois da lista de figuras.
+% No futuro, quando o restante dos elementos forem incluidos,
+% talvez isso deixe de ser necessário.
+\clearpage
+
+\imprimirlistafiguras
+
+\imprimirlistatabelas
+
+\imprimirlistacodigos
+
+\input{config/siglas.tex}
+
+\imprimirsumario
+
+% ------------------------------------------------------------------------------
+% Elementos textuais.
+% ------------------------------------------------------------------------------
+
+\textual
+\pagestyle{abnt_CC-UDC}
+
+\input{capitulos/introducao.tex}
+
+\input{capitulos/fundamentacao.tex}
+
+\input{capitulos/metodologia.tex}
+
+% ------------------------------------------------------------------------------
+% Elementos pós-textuais.
+% ------------------------------------------------------------------------------
+
+\postextual
+
+\end{document}
