@@ -31,119 +31,69 @@ Como ilustrado na \autoref{fig:diagrama_ecs}, o estado da aplicação é dado po
 	\label{fig:diagrama_ecs}
 \end{figure}
 
-Em termos de código, o padrão ECS pode ser representado sem nenhum construto especializado, mapeando entidades para números únicos, componentes para \textit{structs} e sistemas para funções:
+Em termos de código, o padrão ECS pode ser representado sem nenhum construto especializado, mapeando entidades para números únicos, componentes para \textit{structs} e sistemas para funções, como ilustrado no \autoref{cod:exemplo_ecs}.
 
-% % A função 'figura_legendada' com um bloco de código foi traduzida abaixo.
-% % NOTA: O código abaixo requer o pacote 'listings'.
-% % Adicione \usepackage{listings} e configure-o no seu preâmbulo.
-% \begin{figure}[h!]
-%     \centering
-%     \begin{lstlisting}[language=Rust, basicstyle=\small\ttfamily]
-%     // Componentes podem ser representados através de simples structs.
-%     struct Position { x: f32, y: f32 }
+\codigoRust
+\lstinputlisting[
+	language=Rust,
+	label=cod:exemplo_ecs,
+	caption=Implementação simplificada de um padrão ECS incompleto.
+]{../codes/exemplo_ecs.rs}
 
-%     struct Velocity { dx: f32, dy: f32 }
+É importante ressaltar que o \autoref{cod:exemplo_ecs}, por mais que seja funcional e siga o design orientado a dados, ainda é uma simplificação da implementação de um padrão ECS incompleto. Na prática, o armazenamento dos dados é feito através de estruturas de dados mais complexas \cite{ecsstorageinpics}, que permitem que entidades escolham quais componentes possuem, que sistemas sejam executados automaticamente, além de outras funcionalidades principais do padrão ECS.
 
-%     // Sistemas podem ser representados como funções que processam todas as
-%     // entidades e seus respectivos componentes.
-%     fn apply_velocity(
-%         entities: &[usize],
-%         positions: &mut [Position],
-%         velocities: &[Velocity]
-%     ) {
-%         for &entity in entities {
-%             positions[entity].x += velocities[entity].dx;
-%             positions[entity].y += velocities[entity].dy;
-%         }
-%     }
+Fora a definição de ECS e seus três elementos fundamentais, o padrão ainda peca pela falta de formalização — quais são as práticas recomendadas ao usar ECS? Como os sistemas são executados? E se apenas entidades, componentes e sistemas não forem suficientes para resolver meu problema? Essas perguntas não possuem respostas definitivas, porém, diferentes autores e implementações abordam o padrão do seu jeito. A seguir, são apresentados alguns conceitos herdados de tais autores e implementações.
 
-%     fn main() {
-%         // Entidades podem ser representadas como números únicos.
-%         let entities = [0, 1];
+\subsubsection{Agendador}
 
-%         // Cada componente é armazenado em um vetor separado, onde o índice
-%         // representa a entidade e o valor representa seu componente.
-%         let mut positions = [
-%             Position { x: 0.0, y: 0.0 }, // Entidade 0.
-%             Position { x: 1.0, y: 1.0 }, // Entidade 1.
-%         ];
+O agendador é um construto com a finalidade de executar todos os sistemas da aplicação, podendo determinar a ordem e frequência de execução de forma declarativa, resolvendo dependência entre sistemas e tornando o ciclo de atualização da aplicação mais previsível \cite{bevy}. Pode-se dizer que, dentre os conceitos mais experimentais, o agendador é o mais próximo de uma formalização.
 
-%         let velocities = [
-%             Velocity { dx: 1.0, dy: 1.0 }, // Entidade 0.
-%             Velocity { dx: 2.0, dy: 2.0 }, // Entidade 1.
-%         ];
+A \autoref{fig:diagrama_agendador} ilustra o agendador executando os sistemas de forma cíclica e sequencial, onde cada sistema é executado uma vez por ciclo. O agendador pode ser configurado para executar sistemas em diferentes momentos do ciclo, como antes ou depois de outros sistemas.
 
-%         // No padrão ECS, é muito comum que os sistemas sejam executados repetidamente.
-%         loop {
-%             apply_velocity(&entities, &mut positions, &velocities);
-%         }
-%     }
-%     \end{lstlisting}
-%     \caption{Implementação simplificada de um padrão ECS incompleto.}
-%     \label{fig:ecs_simplificado}
-%     \footnotesize{\textit{Fonte: elaboração própria.}}
-% \end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textheight]{diagrama_agendador}
+	\caption{Agendador executando os sistemas de forma cíclica e sequencial.}
+	\fonte{Elaboração própria.}
+	\label{fig:diagrama_agendador}
+\end{figure}
 
-% É importante ressaltar que o código acima, por mais que seja funcional e siga o design orientado a dados, ainda é uma simplificação da implementação de um padrão ECS incompleto. Na prática, o armazenamento dos dados é feito através de estruturas de dados mais complexas \cite{ecsstorageinpics}, que permitem que entidades escolham quais componentes possuem, que sistemas sejam executados automaticamente, além de outras funcionalidades principais do padrão ECS.
+\subsubsection{Relacionamento de Entidades}
 
-% Fora a definição de ECS e seus três elementos fundamentais, o padrão ainda peca pela falta de formalização — quais são as práticas recomendadas ao usar ECS? Como os sistemas são executados? E se apenas entidades, componentes e sistemas não forem suficientes para resolver meu problema? Essas perguntas não possuem respostas definitivas, porém, diferentes autores e implementações abordam o padrão do seu jeito. A seguir, são apresentados alguns conceitos herdados de tais autores e implementações.
+Independente da aplicação, é muito comum a necessidade de relacionar diferentes conceitos entre si. Exemplo disso são os sistemas de arquivos, onde pastas podem conter arquivos, uma relação pai-filho.
 
-% \subsubsection{Agendador}
+Relacionamento de entidades (do inglês, \textit{entity relationship}) é um conceito que supre essa necessidade, permitindo que entidades se relacionem entre si. O autor da biblioteca Flecs, \citeauthor{flecs}, explica o conceito fazendo uma paralela com o simples ato de adicionar um componente a uma entidade, como ilustrado na \autoref{fig:entidade_posicao}.
 
-% O agendador é um construto com a finalidade de executar todos os sistemas da aplicação, podendo determinar a ordem e frequência de execução de forma declarativa, resolvendo dependência entre sistemas e tornando o ciclo de atualização da aplicação mais previsível \cite{bevy}. Pode-se dizer que, dentre os conceitos mais experimentais, o agendador é o mais próximo de uma formalização.
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.06\textheight]{entidade_posicao}
+	\caption{Representação do relacionamento entre o Sol, a Terra e a Lua.}
+	\fonte{Adaptado de \textcite{entityrelationships}.}
+	\label{fig:entidade_posicao}
+\end{figure}
 
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[height=0.30\textheight]{../../../../images/diagrama_agendador.png}
-%     \caption{Agendador executando os sistemas de forma cíclica e sequencial.}
-%     \label{fig:diagrama_agendador}
-%     \footnotesize{\textit{Fonte: elaboração própria.}}
-% \end{figure}
+Do mesmo jeito que se adiciona um único componente a uma entidade, como mostra a \autoref{fig:entidade_posicao}, pode-se criar um relacionamento entre duas entidades adicionando uma tupla componente-entidade, onde o componente dita o tipo de relação.
 
-% \subsubsection{Relacionamento de Entidades}
+Como exemplo, a \autoref{fig:relacionamento_entidades} ilustra o relacionamento entre o Sol, a Terra e a Lua, onde a Terra é filha do Sol e a Lua é filha da Terra.
 
-% Independente da aplicação, é muito comum a necessidade de relacionar diferentes conceitos entre si. Exemplo disso são os sistemas de arquivos, onde pastas podem conter arquivos, uma relação pai-filho.
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.13\textheight]{relacionamento_entidades}
+	\caption{Representação do relacionamento entre o Sol, a Terra e a Lua.}
+	\fonte{Adaptado de \textcite{entityrelationships}.}
+	\label{fig:relacionamento_entidades}
+\end{figure}
 
-% Relacionamento de entidades (do inglês, \textit{entity relationship}) é um conceito que supre essa necessidade, permitindo que entidades se relacionem entre si. O autor da biblioteca Flecs,
-% % NOTA: O comando #cite(..., form: "author") foi traduzido para \citeauthor{...}.
-% % Isso geralmente requer o pacote 'biblatex'.
-% \citeauthor{flecs}, explica o conceito fazendo uma paralela com o simples ato de adicionar um componente a uma entidade:
+\subsubsection{Depurador de ECS}
 
-% \begin{figure}[h!]
-%     \centering
-%     % A 'figura_legendada' aqui continha tanto imagem quanto um pequeno trecho de código.
-%     % Eles foram colocados um após o outro.
-%     \includegraphics[height=0.06\textheight]{../../../../images/entidade_posicao.png}
-%     \begin{lstlisting}[language=TypeScript, basicstyle=\small\ttfamily]
-% Entidade.set<Posição>({0, 0});
-%     \end{lstlisting}
-%     \caption{Entidade com um componente de posição.}
-%     \label{fig:entidade_posicao}
-%     \footnotesize{\textit{Fonte: \textcite{entityrelationships}.}}
-% \end{figure}
+Um depurador especializado em ECS é uma interface, gráfica ou não, responsável por ajudar o desenvolvedor a encontrar e resolver bugs relacionados ao ECS na aplicação. Tal depurador pode visualizar todas as entidades da aplicação, além  de seus respectivos componentes. Ele também pode listar os sistemas em execução e permitir o controle sobre eles, como pausar ou alterar a ordem de execução.
 
-% Do mesmo jeito que se adiciona um único componente a uma entidade, como mostra a figura acima, pode-se criar um relacionamento entre duas entidades adicionando uma tupla componente-entidade, onde o componente dita o tipo de relação:
+Um exemplo de depurador especializado em ECS é o Flecs Explorer, ilustrado na \autoref{fig:flecs_explorer}. Ele é um depurador visual para a biblioteca Flecs, que permite visualizar e interagir com as entidades, componentes e sistemas da aplicação.
 
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[height=0.13\textheight]{../../../../images/relacionamento_entidades.png}
-%     \begin{lstlisting}[language=CSharp, basicstyle=\small\ttfamily]
-% Terra.add(FilhoDe, Sol);
-% Lua.add(FilhoDe, Terra);
-%     \end{lstlisting}
-%     \caption{Representação do relacionamento entre o Sol, a Terra e a Lua.}
-%     \label{fig:relacionamento_sol_terra_lua}
-%     \footnotesize{\textit{Fonte: adaptado de \textcite{entityrelationships}.}}
-% \end{figure}
-
-% \subsubsection{Depurador de ECS}
-
-% Um depurador especializado em ECS é uma interface, gráfica ou não, responsável por ajudar o desenvolvedor a encontrar e resolver bugs relacionados ao ECS na aplicação. Tal depurador pode visualizar todas as entidades da aplicação, além  de seus respectivos componentes. Ele também pode listar os sistemas em execução e permitir o controle sobre eles, como pausar ou alterar a ordem de execução.
-
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[height=0.30\textheight]{../../../../images/flecs_explorer.png}
-%     \caption{Flex Explorer, depurador visual para a biblioteca Flecs.}
-%     \label{fig:flecs_explorer}
-%     \footnotesize{\textit{Fonte: \textcite{flecsexplorer}.}}
-% \end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.3\textheight]{flecs_explorer}
+	\caption{Flex Explorer, depurador visual para a biblioteca Flecs.}
+	\fonte{\cite{flecsexplorer}.}
+	\label{fig:flecs_explorer}
+\end{figure}
