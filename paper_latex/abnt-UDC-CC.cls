@@ -1,15 +1,15 @@
 % !TeX encoding = UTF-8
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                                                          
+%%
 %% abnt-UDC-CC.cls,v 1.2
 %% Nome deste arquivo: abnt-UDC-CC.cls
 %% Autores: Diogo Rosa Kuiaski <diogo.kuiaski@gmail.com>
 %%          Hugo Vieira Neto <hvieir@utfpr.edu.br>
 %%
-%% Customizações do abnTeX2 (http://abnTeX2.googlecode.com) para o          
-%% Curso de Ciência da Computação do Centro Universitário União             
-%% Dinâmica das Cataratas - UDC, realizadas com base nas definicoes do 
+%% Customizações do abnTeX2 (http://abnTeX2.googlecode.com) para o
+%% Curso de Ciência da Computação do Centro Universitário União
+%% Dinâmica das Cataratas - UDC, realizadas com base nas definicoes do
 %% arquivo abnt-UTFPR.sty
 %% Agradecimentos: Diogo Rosa Kuiaski <diogo.kuiaski@gmail.com>
 %%                 Hugo Vieira Neto <hvieir@utfpr.edu.br>
@@ -18,11 +18,11 @@
 %% comunicar aos autores para que outras pessoas possam ter acesso
 %% a essas melhorias. Sugestoes tambem sao bem-vindas.
 %%
-%% Este trabalho pode ser distribuido e/ou modificado sob as condições 
+%% Este trabalho pode ser distribuido e/ou modificado sob as condições
 %% da LaTeX Project Public License (LPPL) versão 1.3, ou (a sua escolha)
 %% qualquer versão mais recente. A versão mais recente desta licensa está
-%% publicada em http://www.latex-project.org/lppl.txt e a versão 1.3 ou mais 
-%% recente é parte de todas as distribuições do LaTeX versão 2005/12/01 ou 
+%% publicada em http://www.latex-project.org/lppl.txt e a versão 1.3 ou mais
+%% recente é parte de todas as distribuições do LaTeX versão 2005/12/01 ou
 %% mais recente.
 %%
 %% O mantenedor atual deste trabalho é Miguel Matrakas, mdmatrakas@gmail.com
@@ -34,10 +34,10 @@
 %%   http://www.latex-project.org/lppl.txt
 %% and version 1.3 or later is part of all distributions of LaTeX
 %% version 2005/12/01 or later.
-%%                                                                          
-%%                                                                          
+%%
+%%
 %% The Current Maintainer of this work is Miguel Matrakas, mdmatrakas@gmail.com
-%%                                                                          
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% $Log: cvs-id.def,v $
@@ -76,7 +76,7 @@
 \RequirePackage{ifthen}
 \RequirePackage{perpage}
 \PassOptionsToPackage{hyperindex=false}{hyperref}
-\usepackage[a4paper,left=30mm,right=20mm,top=30mm,bottom=30mm]{geometry} % tamanho atual em uso 
+\usepackage[a4paper,left=30mm,right=20mm,top=30mm,bottom=30mm]{geometry} % tamanho atual em uso
 \usepackage{framed}
 
 \makeatletter	%Para que se entenda o @
@@ -183,22 +183,22 @@
 	{\textbf{ \large{ \MakeUppercase{\imprimirinstituicao} } } }
 
     { \normalsize\MakeUppercase{\imprimirautor } }
-    
+
     \ifnotempty{\imprimirsegundoautor}{{ \normalsize\MakeUppercase{\imprimirsegundoautor } }
 
     \ifnotempty{\imprimirterceiroautor}{ \normalsize\MakeUppercase{\imprimirterceiroautor } }
 	}
 
     \vspace*{8cm}
-    
+
     { \ABNTEXchapterfont\bfseries\large\MakeUppercase{\imprimirtitulo} }
     \vfill
-    
+
     { \normalfont\small\MakeUppercase{\imprimirlocal} }
 
     { \normalfont\small\imprimirdata }
-    
-    \vspace*{1cm} 
+
+    \vspace*{1cm}
     \makeatother
   \end{capa}
 }
@@ -207,39 +207,39 @@
 % FOLHA DE ROSTO
 % ---
 \renewcommand{\folhaderostocontent}{
-		\center	
+		\center
 		{ \normalsize\MakeUppercase{\imprimirautor} }
-    
+
 		\ifnotempty{\imprimirsegundoautor}{{ \normalsize\MakeUppercase{\imprimirsegundoautor } }
-			
+
 		\ifnotempty{\imprimirterceiroautor}{ \normalsize\MakeUppercase{\imprimirterceiroautor } }
 		}
-	
-	    \vspace*{8cm}		
-		
+
+	    \vspace*{8cm}
+
 		{\large\MakeUppercase{\imprimirtitulo}}
-	
-		\vspace*{3cm}	
+
+		\vspace*{3cm}
 
 		\abntex@ifnotempty{\imprimirpreambulo}{
 			\hspace{.45\textwidth}
 			\begin{minipage}{.5\textwidth}
 				{ \footnotesize \SingleSpacing
-				  \imprimirpreambulo				
-				  \SingleSpacing				
+				  \imprimirpreambulo
+				  \SingleSpacing
 				  {\imprimirorientadorRotulo~\imprimirorientador\par }
-				  \SingleSpacing	
+				  \SingleSpacing
 		          \abntex@ifnotempty{\imprimircoorientador}{
-		              {\imprimircoorientadorRotulo~\imprimircoorientador} } 
+		              {\imprimircoorientadorRotulo~\imprimircoorientador} }
 	            }
 			\end{minipage}
-		
+
 			\vspace*{\fill}
 		}
-		
+
 		{\normalfont\small\MakeUppercase{\imprimirlocal}}
-		
-		{\normalfont\small\imprimirdata}		
+
+		{\normalfont\small\imprimirdata}
 }
 \makeatother
 
@@ -248,33 +248,33 @@
 % FICHA CATALOGRAFICA
 % ---
 \newcommand{\imprimirfichacatalografica}{
-		\ 
-		
+		\
+
 		\vfill
-		
-		%\noident 
-		\fbox{			
+
+		%\noident
+		\fbox{
 			\begin{minipage}[t]{2cm}
 			\center \imprimircodigoautor %\hspace{1cm}
-			\end{minipage}			
+			\end{minipage}
 			\begin{minipage}[t]{11cm}  %  Largura
 				\imprimirautorcitado{\ifnotempty{\imprimirsegundoautorcitado}{; \imprimirsegundoautorcitado \ifnotempty{\imprimirterceiroautorcitado}{; \imprimirterceiroautorcitado} }} % Nome de referência. Por ex. Silva, João Paulo
-				
+
 				\vspace{0.5cm}
-				
+
 				\hspace{0.5cm}  \imprimirtitulo~/~\imprimirautor \ifnotempty{\imprimirsegundoautor}{, \imprimirsegundoautor \ifnotempty{\imprimirterceiroautor}{, \imprimirterceiroautor}}. \imprimirlocal,  \imprimirdata.
-				
+
 				\pageref{LastPage} fls.
-				
+
 				\hspace{0.5cm}  \imprimirorientadorRotulo ~\imprimirorientador
 
 				\ifnotempty{\imprimircoorientador}{%
 					\hspace{0.5cm}  \imprimircoorientadorRotulo ~\imprimircoorientador }
 
 				\hspace{0.5cm}  \imprimirtipotrabalho
-				
+
 				\hspace{0.5cm}  \imprimirinstituicao ~(\imprimirinstituicaoSigla)
-								
+
 				\hspace{0.5cm}
 				\ifnotempty{\imprimirpalavrachaveum}{%
 				1.  \imprimirpalavrachaveum.
@@ -285,9 +285,9 @@
 				\ifnotempty{\imprimirpalavrachavequatro}{%
 				4.  \imprimirpalavrachavequatro.
 				}}}}
-				
+
 				\hspace{7.75cm}  \imprimircodigopublicacao   %CDU 02:141:005.7
-				
+
 			\end{minipage}
 	}
 	\pagebreak
@@ -300,32 +300,32 @@
 	\begin{center}
 		\vspace*{1cm}
 		{ \normalsize\MakeUppercase{\imprimirautor} }
-		
+
 		\ifnotempty{\imprimirsegundoautor}{{ \normalsize\MakeUppercase{\imprimirsegundoautor } }
-			
+
 			\ifnotempty{\imprimirterceiroautor}{ \normalsize\MakeUppercase{\imprimirterceiroautor } }
 		}
-		
+
 		\vspace*{1cm}
-		\normalsize\MakeUppercase{\large\textbf\imprimirtitulo}   
-	\end{center}     
-	
-	
+		\normalsize\MakeUppercase{\large\textbf\imprimirtitulo}
+	\end{center}
+
+
 	\hspace{2cm}
 	{ \SingleSpace\noindent\normalsize{\imprimirtextoaprovacao} }
 
-	\vspace*{1cm}  
+	\vspace*{1cm}
 
 	\begin{flushright}
 	\vspace*{1cm}{{\imprimirorientador}\\{\small \imprimirinstituicao\\(Orientador)}}
-	
+
 	\vspace*{1cm}{{\imprimirprofbancaum}\\{\small\imprimirinstituicaoprofum}}
-	
+
 	\vspace*{1cm}{{\imprimirprofbancadois}\\{\small\imprimirinstituicaoprofdois}}
 	\end{flushright}
-	
+
 	\vfill
-	
+
 	\begin{center}
 		{\imprimirlocal, \ \imprimirdatabanca}
 	\end{center}
@@ -338,7 +338,7 @@
 \newcommand{\imprimirdedicatoria}{
 	\vspace*{\fill}
 	\begin{flushright}
-		\textit{\imprimirtextodedicatoria}		
+		\textit{\imprimirtextodedicatoria}
 	\end{flushright}
 	\pagebreak
 }
@@ -365,9 +365,9 @@
 	{ \normalsize\bfseries\MakeUppercase{AGRADECIMENTOS} }
 	\end{center}
 	\vspace*{1cm}
-	
+
 	\imprimirtextoagradecimento
-	
+
 	\pagebreak
 }
 % ---
@@ -379,11 +379,11 @@
 		{ \normalsize\bfseries\MakeUppercase{Resumo} }
 	\end{center}
 	\vspace*{1cm}
-	
+
 	\noindent\imprimirtextoresumo
-	
+
 	\vspace{\onelineskip}
-	
+
 	\noindent
 	\textbf{Palavras-chaves}: \ifnotempty{\imprimirpalavrachaveum}{\imprimirpalavrachaveum.
 		\ifnotempty{\imprimirpalavrachavedois}{\ \imprimirpalavrachavedois.
@@ -391,7 +391,7 @@
 		\ifnotempty{\imprimirpalavrachavequatro}{\ \imprimirpalavrachavequatro.
 	}}}}
 	% 4 palavras separadas por . (ponto)
-	
+
 	\pagebreak
 }
 % ---
@@ -403,11 +403,11 @@
 		{ \normalsize\bfseries\MakeUppercase{Abstract} }
 	\end{center}
 	\vspace*{1cm}
-	
+
 	\noindent\imprimirtextoabstract
-	
+
 	\vspace{\onelineskip}
-	
+
 	\noindent
 	\textbf{Keywords}: \ifnotempty{\imprimirkeywordum}{\imprimirkeywordum.
 		\ifnotempty{\imprimirkeyworddois}{\ \imprimirkeyworddois.
@@ -415,7 +415,7 @@
 		\ifnotempty{\imprimirkeywordquatro}{\ \imprimirkeywordquatro.
 	}}}}
 	% 4 palavras separadas por . (ponto)
-	
+
 	\pagebreak
 }
 
@@ -461,12 +461,12 @@
 % CONFIGURAÇÕES DA APARENCIA DO PDF FINAL
 %==============================================================================
 \makeatletter
-\hypersetup{     	
-	pdftitle={\@title}, 
+\hypersetup{
+	pdftitle={\@title},
 	pdfauthor={\@author},
 	pdfsubject={\imprimirpreambulo},
 	pdfcreator={LaTeX with abnTeX2},
-	pdfkeywords={\imprimirpalavrachaveum}{\imprimirpalavrachavedois}{\imprimirpalavrachavetres}{\imprimirpalavrachavequatro}, 
+	pdfkeywords={\imprimirpalavrachaveum}{\imprimirpalavrachavedois}{\imprimirpalavrachavetres}{\imprimirpalavrachavequatro},
 	colorlinks=true,       		% false: boxed links; true: colored links
 	linkcolor=black,          	% color of internal links
 	citecolor=black,        	% color of links to bibliography
@@ -483,8 +483,8 @@
 % Controle do espaçamento entre a legenda e a fonte (e nota) de figuras e tabelas}:
 \setlength{\abovecaptionskip}{1 mm}
 \setlength{\belowcaptionskip}{1 mm}
-%----------------------------------------------------------------------------- 
-%----------------------------------------------------------------------------- 
+%-----------------------------------------------------------------------------
+%-----------------------------------------------------------------------------
 % Define os tamanhos das margens do documento
 \setlrmarginsandblock{3cm}{2cm}{*}
 \setulmarginsandblock{3cm}{2cm}{*}
@@ -492,7 +492,7 @@
 
 
 %-----------------------------------------------------------------------------
-% CONFIGURACAO DO ESTILO DE PÁGINA TEXTUAL 
+% CONFIGURACAO DO ESTILO DE PÁGINA TEXTUAL
 %-----------------------------------------------------------------------------
 %%criar um novo estilo de cabeçalhos e rodapés
 \makepagestyle{abnt_CC-UDC}
@@ -501,7 +501,7 @@
   \makeoddhead{abnt_CC-UDC}{}{}{\ABNTEXfontereduzida\thepage}
   %\makeheadrule{textualCC-Anglo}{\textwidth}{\normalrulethickness} %linha
   %% rodapé
-  \makeevenfoot{abnt_CC-UDC}{}{}{} 
+  \makeevenfoot{abnt_CC-UDC}{}{}{}
   \makeoddfoot{abnt_CC-UDC}{}{}{}
 \pagestyle{abnt_CC-UDC}
 
@@ -513,10 +513,10 @@
 \makeatother
 
 
-%----------------------------------------------------------------------------- 
-% Definição das configurações de fonte para part, chapter, section, 
+%-----------------------------------------------------------------------------
+% Definição das configurações de fonte para part, chapter, section,
 % subsection e subsubsection
-%----------------------------------------------------------------------------- 
+%-----------------------------------------------------------------------------
 \renewcommand{\ABNTEXpartfont}{\normalfont\bfseries\large}
 \renewcommand{\ABNTEXpartfontsize}{\large}
 \renewcommand{\ABNTEXchapterfont}{\normalfont\bfseries}
@@ -568,7 +568,7 @@
 
 
 
-%---------------------------------------------------------------------------- 
+%----------------------------------------------------------------------------
 % CONFIGURAÇÃO DE LISTAS DE CONTEÚDO
 % ---
 % lista de gráficos
@@ -588,9 +588,12 @@
 \renewcommand{\lstlistingname}{C{\'O}DIGO}
 \renewcommand{\lstlistlistingname}{LISTA DE C{\'O}DIGOS}
 \newcommand{\lstnumberautorefname}{C{\'o}digo}
+% Adicionado por Francisco.
+% Corrige referência automática resultando em "CÓDIGO 1", e não "Código 1.
+\newcommand{\lstlistingautorefname}{Código}
 
 % configurações para atender às regras da ABNT em listas
-\begingroup\makeatletter				
+\begingroup\makeatletter
 \let\newcounter\@gobble\let\setcounter\@gobbletwo
   \globaldefs\@ne \let\c@loldepth\@ne
   \newlistof{listings}{lol}{\lstlistlistingname}
@@ -609,9 +612,9 @@
 
 
 
-%----------------------------------------------------------------------------- 
+%-----------------------------------------------------------------------------
 % Nomes constantes do abnTeX2 em portugues (definições padrões)
-%----------------------------------------------------------------------------- 
+%-----------------------------------------------------------------------------
 	%% ajusta nomes padrões do babel
 \addto\captionsbrazil{
 	% CAPITALIZAÇÃO DE LISTAS
@@ -648,9 +651,9 @@
 
 
 
-%---------------------------------------------------------------------------- 
+%----------------------------------------------------------------------------
 % DEFINIÇÃO DE NOMES DE CORES
-%---------------------------------------------------------------------------- 
+%----------------------------------------------------------------------------
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{whitesmoke}{rgb}{0.96, 0.96, 0.96}
@@ -709,7 +712,7 @@
     showtabs=false,%
     showspaces=false,%
     showstringspaces=false,%
-    backgroundcolor=\color{whitesmoke},   
+    backgroundcolor=\color{whitesmoke},
     commentstyle=\color{codegreen},
     keywordstyle=\color{deepcarminepink}\bfseries,
     numberstyle=\tiny\color{tealblue},
@@ -717,11 +720,11 @@
     basicstyle=\footnotesize,
     numbers=left,%
 	fancyvrb=true,%
-	mathescape=true,%    
+	mathescape=true,%
 	captionpos=t,%
     escapeinside={\%*}{*)},%
-    numbersep=5pt,              
-    firstnumber=1,    
+    numbersep=5pt,
+    firstnumber=1,
     tabsize=2
 }
 }
@@ -821,6 +824,48 @@
 \newcommand{\codigoPython}{%
 \lstset{%
     language=Python,%
+    backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    breaklines=true,                 % sets automatic line breaking
+    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    keywordstyle=\color{blue},       % keyword style
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+    tabsize=2,	                   % sets default tabsize to 2 spaces
+    basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{deepcarminepink}\bfseries,
+    numberstyle=\tiny\color{tealblue},
+    stringstyle=\color{tealgreen}\itshape,
+    numbers=left,%
+    captionpos=t,%
+    firstnumber=1,
+    escapeinside={\%*}{*)},%
+}
+}
+
+\lstdefinelanguage{Rust}{
+  morekeywords={
+    fn, let, mut, pub, impl, trait, struct, enum, match, if, else, while, for, loop,
+    in, use, mod, crate, super, self, Self, return, break, continue, as, const, static,
+    ref, type, where, move, async, await, dyn, unsafe, println
+  },
+  sensitive=true,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]{"},
+}
+
+% Define a formatação de código fonte da linguagem Rust
+\newcommand{\codigoRust}{%
+\lstset{
+	language=Rust,
     backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
     breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
     breaklines=true,                 % sets automatic line breaking
