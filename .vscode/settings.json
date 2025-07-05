@@ -1,0 +1,39 @@
+{
+	"latex-workshop.bibtex-format.tab": "tab",
+	"latex-workshop.bibtex-format.trailingComma": true,
+	"latex-workshop.formatting.latex": "latexindent",
+	"latex-workshop.latex.outDir": "%DIR%/build",
+	"[latex]": {
+		"editor.wordWrap": "on"
+	},
+	"latex-workshop.latex.recipes": [
+		{
+			"name": "pdflatex -> bibtex -> pdflatex*2",
+			"tools": [
+				"pdflatex",
+				"bibtex",
+				"pdflatex",
+				"pdflatex"
+			]
+		}
+	],
+	"latex-workshop.latex.tools": [
+		{
+			"name": "pdflatex",
+			"command": "pdflatex",
+			"args": [
+				"-interaction=nonstopmode",
+				"-synctex=1",
+				"-output-directory=build",
+				"%DOC%"
+			]
+		},
+		{
+			"name": "bibtex",
+			"command": "bibtex",
+			"args": [
+				"build/%DOCFILE%"
+			]
+		}
+	]
+}
