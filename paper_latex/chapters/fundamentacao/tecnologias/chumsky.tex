@@ -1,0 +1,41 @@
+\subsection{Biblioteca Chumsky}
+
+Chumsky é uma biblioteca de análise sintática para Rust. Ela é baseada no conceito de \textit{parser combinators}\footnote{Um \textit{parser combinator} consiste na combinação de parsers mais simples para criar parsers mais complexos, assim como é de costume compor uma função maior de funções menores.}, e permite que a definição de \textit{parsers} seja feita de forma declarativa. Seu escopo abrange tanto gramáticas livres de contexto quanto gramáticas sensíveis ao contexto.
+
+Ao usar a biblioteca para construir um \textit{parser}, nota-se a influência do paradigma funcional. Por mais que seja um paradigma mais incomum, seu uso na biblioteca torna o processo de construção do \textit{parser} muito parecido com a construção de uma gramática formal, como demonstrado pelos comentários no \autoref{cod:chumsky_example}.
+
+\codigoRust
+\lstinputlisting[
+	language=Rust,
+	label=cod:chumsky_example,
+	caption=\textit{Parser} para uma gramática de expressões aritméticas simples usando a biblioteca Chumsky.
+]{../codes/chumsky_example.rs}
+\vspace{-1em}
+\fonte{Adaptado de \textcite{logos}.}
+
+De acordo com a classificação do teste de desempenho da biblioteca e seus competidores localizada na \autoref{tab:chumsky_benchmark}, Chusmky tem a capacidade de ser a biblioteca de análise sintática mais rápida para Rust.
+
+\FloatBarrier
+
+\begin{table}[H]
+	\centering
+	\caption{Classificação do teste de desempenho da biblioteca Chumsky e competidores.}
+	{
+		\begin{tabular}{lll}
+			\hline
+			\textbf{Classificação} & \textbf{Biblioteca}      & \textbf{Tempo de Execução} \\ \hline
+			1                      & chumsky (check-only) & 140.77 µs                  \\
+			2                      & winnow               & 178.91 µs                  \\
+			3                      & chusmky              & 210.43 µs                  \\
+			4                      & sn                   & 237.94 µs                  \\
+			5                      & serde\_json          & 477.41 µs                  \\
+			6                      & nom                  & 526.52 µs                  \\
+			7                      & pest                 & 1.9706 ms                  \\
+			8                      & pom                  & 13.730 ms                  \\ \hline
+		\end{tabular}
+	}
+	\fonte{Adaptado de \textcite{chumsky}.}
+	\label{tab:chumsky_benchmark}
+\end{table}
+
+Por fim, o uso da biblioteca Chumsky estará na implementação da análise sintática, e será utilizada em conjunto com a biblioteca Logos na implementação do interpretador como um todo. Assim como foi o caso com Logos, a escolha de Chumsky se deve à sua maturidade.
