@@ -8,40 +8,40 @@ Um interpretador \textit{tree-walking} é dividido em três fases principais: an
 	\centering
 	\includegraphics[height=0.275\textheight]{mapa_interpretador}
 	\caption{Mapa do território de um interpretador.}
-	\fonte{\textcite{craftinginterpreters}.}
+	\fonte{\cite{craftinginterpreters}.}
 	\label{fig:mapa_interpretador}
 \end{figure}
 
 A seguir, serão definidas em detalhe cada uma das três principais fases de um interpretador:
 
 \begin{enumerate}
-    \item Análise léxica: primeira fase do processo de interpretação, onde as palavras do código fonte são transformadas em tokens, estruturas de dados que armazenam informações sobre cada palavra da gramática da linguagem \cite{craftinginterpreters}. A \autoref{fig:analise_lexica} ilustra o processo, onde o código fonte é mapeado para uma lista de \textit{tokens};
+	\item Análise léxica: primeira fase do processo de interpretação, onde as palavras do código fonte são transformadas em tokens, estruturas de dados que armazenam informações sobre cada palavra da gramática da linguagem \cite{craftinginterpreters}. A \autoref{fig:analise_lexica} ilustra o processo, onde o código fonte é mapeado para uma lista de \textit{tokens};
 
-    \begin{figure}[H]
-    	\centering
-    	\includegraphics[height=0.2\textheight]{analise_lexica}
-    	\caption{Código fonte sendo mapeado para uma lista de tokens pela análise léxica.}
-    	\fonte{Elaboração própria com base em \textcite{craftinginterpreters}.}
-    	\label{fig:analise_lexica}
-    \end{figure}
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[height=0.2\textheight]{analise_lexica}
+		      \caption{Código fonte sendo mapeado para uma lista de tokens pela análise léxica.}
+		      \fonte{Elaboração própria com base em \citeonline{craftinginterpreters}.}
+		      \label{fig:analise_lexica}
+	      \end{figure}
 
-    \item Análise sintática: segunda fase do processo de interpretação, onde os tokens gerados na fase anterior são organizados em uma árvore sintática abstrata (do inglês, \textit{abstract syntax tree} — AST), que representa a hierarquia estrutural do código de acordo com as regras gramaticais da linguagem \cite{craftinginterpreters}. A \autoref{fig:analise_sintatica} ilustra o processo, onde os \textit{tokens} são organizados em uma AST, criando uma hierarquia que reflete a estrutura do código fonte;
+	\item Análise sintática: segunda fase do processo de interpretação, onde os tokens gerados na fase anterior são organizados em uma árvore sintática abstrata (do inglês, \textit{abstract syntax tree} — AST), que representa a hierarquia estrutural do código de acordo com as regras gramaticais da linguagem \cite{craftinginterpreters}. A \autoref{fig:analise_sintatica} ilustra o processo, onde os \textit{tokens} são organizados em uma AST, criando uma hierarquia que reflete a estrutura do código fonte;
 
-    \begin{figure}[H]
-    	\centering
-    	\includegraphics[height=0.27\textheight]{analise_sintatica}
-    	\caption{Tokens sendo organizados em uma AST pela análise sintática.}
-    	\fonte{Elaboração própria com base em \textcite{craftinginterpreters}.}
-    	\label{fig:analise_sintatica}
-    \end{figure}
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[height=0.27\textheight]{analise_sintatica}
+		      \caption{Tokens sendo organizados em uma AST pela análise sintática.}
+		      \fonte{Elaboração própria com base em \citeonline{craftinginterpreters}.}
+		      \label{fig:analise_sintatica}
+	      \end{figure}
 
-    \item Interpretação: última fase do processo de interpretação, onde a AST gerada na fase de análise sintática é percorrida e executada. Durante esta fase, o interpretador avalia expressões, atualiza o estado do programa e executa funções \cite{craftinginterpreters}. A \autoref{fig:interpretacao} ilustra o processo, onde a AST é percorrida e executada pelo interpretador, resultando no número 10.
+	\item Interpretação: última fase do processo de interpretação, onde a AST gerada na fase de análise sintática é percorrida e executada. Durante esta fase, o interpretador avalia expressões, atualiza o estado do programa e executa funções \cite{craftinginterpreters}. A \autoref{fig:interpretacao} ilustra o processo, onde a AST é percorrida e executada pelo interpretador, resultando no número 10.
 
-    \begin{figure}[H]
-    	\centering
-    	\includegraphics[height=0.25\textheight]{interpretacao}
-    	\caption{AST sendo percorrida e executada pela fase de interpretação.}
-    	\fonte{Elaboração própria com base em \textcite{craftinginterpreters}.}
-    	\label{fig:interpretacao}
-    \end{figure}
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[height=0.25\textheight]{interpretacao}
+		      \caption{AST sendo percorrida e executada pela fase de interpretação.}
+		      \fonte{Elaboração própria com base em \citeonline{craftinginterpreters}.}
+		      \label{fig:interpretacao}
+	      \end{figure}
 \end{enumerate}

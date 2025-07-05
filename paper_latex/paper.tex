@@ -5,10 +5,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{indentfirst}
 \usepackage{csquotes}
-\usepackage[backend=biber, style=authoryear]{biblatex}
+%\usepackage[backend=biber, style=authoryear]{biblatex}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{placeins}
+\usepackage[alf]{abntex2cite}
 
 \input{config/paper_data.tex}
 \input{config/institution_data.tex}
@@ -60,5 +61,7 @@
 % ------------------------------------------------------------------------------
 
 \postextual
+
+\bibliography{../bibliography.bib}
 
 \end{document}
