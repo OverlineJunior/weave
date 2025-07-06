@@ -1,0 +1,13 @@
+// Only includes the most essential extensions for the project.
+
+{
+	"recommendations": [
+		"James-Yu.latex-workshop",
+		"rust-lang.rust-analyzer",
+		"myriad-dreamin.tinymist",
+		"phr0s.bib",
+		"OMKOV.vscode-ebnf",
+		"streetsidesoftware.code-spell-checker",
+		"streetsidesoftware.code-spell-checker-portuguese-brazilian",
+	]
+}
