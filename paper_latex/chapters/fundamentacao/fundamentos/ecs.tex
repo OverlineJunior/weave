@@ -1,10 +1,10 @@
 \subsection{Entity Component System}
 
-Entity Component System (ECS) é um padrão arquitetural baseado no design orientado a dados. Ele surgiu na área de desenvolvimento de jogos, onde há uma grande necessidade de otimização e atualizações frequentes no código. Com o passar do tempo, o padrão ECS começou a ser utilizado em outras áreas, como em simulações físicas \cite{flightdynamics}.
+\textit{Entity Component System} (ECS) é um padrão arquitetural baseado no \textit{design} orientado a dados. Ele surgiu na área de desenvolvimento de jogos, onde há uma grande necessidade de otimização e atualizações frequentes no código. Com o passar do tempo, o padrão ECS começou a ser utilizado em outras áreas, como em simulações físicas \cite{flightdynamics}.
 
 O padrão consiste na separação de dado e lógica de tal forma que as vários entidades da aplicação possam ser compostas de dados reutilizáveis e independentes \cite{ecsfaq}, com as funções sendo direcionadas aos dados, e não às entidades em si. Devido ao desacoplamento gerado por essa separação, o padrão ECS garante alta flexibilidade e modularidade, além do aumento de desempenho gerado pela melhor distribuição de dados na memória \cite{ecsstorageinpics}.
 
-Neste projeto, o padrão ECS será um dos principais fundamentos para o design e implementação da linguagem de programação, já que o intuíto dela será abstrair ele.
+Neste projeto, o padrão ECS será um dos principais fundamentos para o \textit{design} e implementação da linguagem de programação, já que o intuíto dela será abstrair ele.
 
 \subsubsection{Os Três Elementos Fundamentais do ECS}
 
@@ -13,7 +13,7 @@ Pode-se dizer que o ECS é separado em três elementos fundamentais: entidades, 
 \begin{itemize}
 	\item Entidades: identificadores únicos que representam os vários conceitos de uma aplicação. Sozinhas, as entidades não contêm dados nem funcionalidade;
 	\item Componentes: estruturas de dados que armazenam informações específicas. Uma entidade pode ter múltiplos componentes diferentes, definindo suas características;
-	\item Sistemas: funções responsáveis por processar sobre entidades com um determinado conjunto de componentes — processo denominado querying.
+	\item Sistemas: funções responsáveis por processar sobre entidades com um determinado conjunto de componentes — processo denominado \textit{querying}.
 \end{itemize}
 
 Como ilustrado na \autoref{fig:diagrama_ecs}, o estado da aplicação é dado por um conjunto de entidades, cada uma com seus respectivos componentes. Os sistemas são responsáveis pela transformação do estado da aplicação, processando as entidades que possuem os componentes necessários para a execução do sistema.
@@ -37,7 +37,7 @@ Em termos de código, o padrão ECS pode ser representado sem nenhum construto e
 \vspace{-1em}
 \fonte{Elaboração própria.}
 
-É importante ressaltar que o \autoref{cod:exemplo_ecs}, por mais que seja funcional e siga o design orientado a dados, ainda é uma simplificação da implementação de um padrão ECS incompleto. Na prática, o armazenamento dos dados é feito através de estruturas de dados mais complexas \cite{ecsstorageinpics}, que permitem que entidades escolham quais componentes possuem, que sistemas sejam executados automaticamente, além de outras funcionalidades principais do padrão ECS.
+É importante ressaltar que o \autoref{cod:exemplo_ecs}, por mais que seja funcional e siga o \textit{design} orientado a dados, ainda é uma simplificação da implementação de um padrão ECS incompleto. Na prática, o armazenamento dos dados é feito através de estruturas de dados mais complexas \cite{ecsstorageinpics}, que permitem que entidades escolham quais componentes possuem, que sistemas sejam executados automaticamente, além de outras funcionalidades principais do padrão ECS.
 
 Fora a definição de ECS e seus três elementos fundamentais, o padrão ainda peca pela falta de formalização — quais são as práticas recomendadas ao usar ECS? Como os sistemas são executados? E se apenas entidades, componentes e sistemas não forem suficientes para resolver meu problema? Essas perguntas não possuem respostas definitivas, porém, diferentes autores e implementações abordam o padrão do seu jeito. A seguir, são apresentados alguns conceitos herdados de tais autores e implementações.
 
@@ -59,7 +59,7 @@ A \autoref{fig:diagrama_agendador} ilustra o agendador executando os sistemas de
 
 Independente da aplicação, é muito comum a necessidade de relacionar diferentes conceitos entre si. Exemplo disso são os sistemas de arquivos, onde pastas podem conter arquivos, uma relação pai-filho.
 
-Relacionamento de entidades (do inglês, \textit{entity relationship}) é um conceito que supre essa necessidade, permitindo que entidades se relacionem entre si. O autor da biblioteca Flecs, \citeauthor{flecs}, explica o conceito fazendo uma paralela com o simples ato de adicionar um componente a uma entidade, como ilustrado na \autoref{fig:entidade_posicao}.
+Relacionamento de entidades (do inglês, \textit{entity relationship}) é um conceito que supre essa necessidade, permitindo que entidades se relacionem entre si. O autor da biblioteca Flecs, \citeonline{flecs}, explica o conceito fazendo uma paralela com o simples ato de adicionar um componente a uma entidade, como ilustrado na \autoref{fig:entidade_posicao}.
 
 \begin{figure}[H]
 	\centering
