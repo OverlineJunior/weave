@@ -12,7 +12,7 @@ flightdynamics:
 agile:
   type: Article
   title: The Agile Manifesto
-  author: Agile Aliance
+  author: Agile Alliance
   date: 2001
   url:
     value: https://www.agilealliance.org/agile101/the-agile-manifesto/

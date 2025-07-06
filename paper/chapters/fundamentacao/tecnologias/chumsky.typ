@@ -71,7 +71,7 @@ Ao usar a biblioteca para construir um _parser_, nota-se a influência do paradi
     [Fonte: adaptado de #cite(<chumsky>, form: "prose").],
 )
 
-De acordo com a classificação do _benchmark_ da biblioteca e seus competidores, localizada no repositório oficial, Chusmky tem a capacidade de ser a biblioteca de análise sintática mais rápida para Rust:
+De acordo com a classificação do _benchmark_ da biblioteca e seus competidores, localizada no repositório oficial, Chumsky tem a capacidade de ser a biblioteca de análise sintática mais rápida para Rust:
 
 #figura_legendada(
     [Classificação do _benchmark_ da biblioteca Chumsky e competidores.],
@@ -87,7 +87,7 @@ De acordo com a classificação do _benchmark_ da biblioteca e seus competidores
         [winnow],
         [178.91 µs],
         [3],
-        [chusmky],
+        [chumsky],
         [210.43 µs],
         [4],
         [sn],
