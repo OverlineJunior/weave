@@ -1,10 +1,10 @@
 \subsection{Interpretador \textit{Tree-Walking}}
 
-Um interpretador é um programa que executa diretamente o código fonte de uma linguagem de programação, linha por linha. No caso deste projeto, será utilizada uma variante chamada de interpretador \textit{tree-walking}, que pula algumas das etapas finais, resultando em maior simplicidade com menor desempenho \cite{craftinginterpreters}, o que combina com a proposta de implementação de um protótipo.
+Um interpretador é um programa que executa diretamente o código fonte de uma linguagem de programação, linha por linha. No caso deste trabalho, será utilizada a variante \textit{tree-walking}, que simplifica o método de execução do interpretador ao custo de desempenho \cite{craftinginterpreters}. Esta variante se adequa ao objetivo do trabalho, que visa a implementação de um protótipo simples, sem preocupações com desempenho.
 
-Um interpretador \textit{tree-walking} é dividido em três fases principais: análise léxica, análise sintática e interpretação. As etapas puladas são a de análise semântica\footnote{Por mais que a análise semântica tenha sua própria fase pulada, ela ainda é parcialmente implementada de forma implícita nas fases de análise sintática e interpretação \cite{craftinginterpreters}.} e a de geração de representação intermediária, como mostra a \autoref{fig:mapa_interpretador}.
+Interpretadores \textit{tree-walking} podem ser divididos em quatro fases sequenciais: análise léxica, análise sintática, análise semântica, e por fim, interpretação \cite{craftinginterpreters}. Cada fase, com exceção da interpretação, gera um produto que é posteriormente processado pela fase seguinte.
 
-\clearpage
+A \autoref{fig:mapa_interpretador} ilustra alguns dos principais caminhos que um interpretador pode seguir.
 
 \begin{figure}[H]
 	\centering
