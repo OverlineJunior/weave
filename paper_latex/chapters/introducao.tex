@@ -1,6 +1,6 @@
 \chapter{Introdução}\label{ch:introducao}
 
-Nos últimos anos, as empresas têm adotado novas abordagens para o desenvolvimento de software, especialmente as metodologias ágeis. Sabendo que tais metodologias favorecem a flexibilidade ao invés de planejamento rígido \cite{agile}, vem a necessidade de um modelo arquitetural que permite uma adaptação rápida a novas demandas. Um dos modelos que atendem esses requisitos é o padrão arquitetural \textit{Entity Component System} (ECS).
+Nos últimos anos, as empresas têm adotado novas abordagens para o desenvolvimento de software, e dentre elas, a que se destaca é a metodologia ágil \cite{17thstateofagile}. Sabendo que tais metodologias favorecem a flexibilidade ao invés de planejamento rígido \cite{agile}, vem a necessidade de um modelo arquitetural que permite uma adaptação rápida a novas demandas. Um dos modelos que atendem esses requisitos é o padrão arquitetural \textit{Entity Component System} (ECS).
 
 O padrão ECS surgiu na área de desenvolvimento de jogos, com um dos fatores sendo a alta necessidade de adaptação rápida na indústria. Por mais que ECS continue sendo majoritariamente aplicado em jogos, sua utilidade expande para qualquer aplicação que dependa fortemente de rápida iteração de desenvolvimento, flexibilidade ou desempenho \cite{flightdynamics}.
 
@@ -16,7 +16,7 @@ Como projetar e desenvolver um protótipo de interpretador para uma linguagem de
 
 \subsection{Objetivo Geral}
 
-Investigar como o \textit{design} e a implementação de um protótipo de interpretador para uma linguagem de programação orientada a ECS podem ser efetuados.
+Investigar como o \textit{design} e a implementação de um protótipo de interpretador para uma linguagem de programação orientada ao ECS podem ser efetuados.
 
 \subsection{Objetivos Específicos}
 
@@ -28,8 +28,8 @@ Investigar como o \textit{design} e a implementação de um protótipo de interp
 
 \section{Justificativa}
 
-Com o crescimento da adoção de metodologias ágeis pelas empresas, vem a demanda por arquiteturas que promovam flexibilidade no desenvolvimento de software \cite{flightdynamics}. O padrão ECS tem se destacado por atender tais demandas, especialmente nas áreas de desenvolvimento de jogos e simulações.
+Sabendo que o padrão ECS se adequa as metodologias ágeis, que estão sendo amplamente adotadas pelas empresas \cite{17thstateofagile}, este trabalho propõe explorar o ECS de uma forma menos usual, mas que pode trazer benefícios para o padrão e para o desenvolvimento de software em geral.
 
-A maioria das abstrações feitas sobre ECS estão no formato de bibliotecas específicas para determinadas linguagens de programação, limitando a expressividade do desenvolvedor no processo de abstração.
+A criação de uma linguagem de programação orientada ao ECS tem a capacidade de inovar na forma como o padrão é criado e utilizado, pois linguagens de programação permitem abstrações mais expressivas e específicas do que bibliotecas.
 
-Dado isso, este trabalho propõe uma rota alternativa: a criação do \textit{design} e implementação de uma linguagem de programação orientada a ECS. Com a capacidade de moldar a linguagem diante dos requisitos específicos do padrão ECS, essa rota propõe investigar e implementar abstrações que são difíceis ou até mesmo impossíveis de serem aplicadas em bibliotecas.
+A lacuna se dá pelo fato da escassez de linguagens de programação que são projetadas especificamente para o padrão ECS, com a maioria das implementações sendo feitas em forma de bibliotecas para linguagens já existentes. Exceções incluem linguagens como \textit{Flecs Script} \cite{flecsscript} e \textit{Ecsact} \cite{ecsact}, porém, \textit{Flecs Script} é uma linguagem diretamente ligada a biblioteca \textit{Flecs} e \textit{Ecsact} é uma linguagem incompleta, dependendo de linguagens de programação existentes, como C\# \cite{ecsact}.
