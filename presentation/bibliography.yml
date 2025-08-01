@@ -1,0 +1,72 @@
+# https://github.com/typst/hayagriva/blob/main/docs/file-format.md
+
+logos:
+  type: Repository
+  title: Logos
+  author: Maciej Hirsz
+  date: 2018
+  url:
+    value: https://github.com/maciejhirsz/logos
+    date: 2025-05-17
+
+chumsky:
+  type: Repository
+  title: Chumsky
+  author:
+    name: Joshua Barretto
+    alias: zesterer
+  date: 2021
+  url:
+    value: https://github.com/zesterer/chumsky
+    date: 2025-05-17
+
+ecsfaq:
+  type: Repository
+  title: Entity Component System FAQ
+  author: Sander Mertens
+  date: 2019
+  url:
+    value: https://github.com/SanderMertens/ecs-faq
+    date: 2025-05-15
+
+craftinginterpreters:
+  type: Book
+  title: Crafting Interpreters
+  author: Robert Nystrom
+  date: 2021
+  publisher: Genever Benning
+
+whatsprogrammingparadigm:
+  type: Blog
+  title: What is a Programming Paradigm?
+  author: Ario Liyan
+  date: 2023
+  url:
+    value: https://medium.com/@Ariobarxan/what-is-a-programming-paradigm-ec6c5879952b
+    date: 2025-05-18
+
+refactoringguru:
+  type: Article
+  title: Refactoring Guru
+  author: Alexander Shvets
+  date: 2018
+  url:
+    value: https://refactoring.guru/design-patterns
+    date: 2025-04-30
+
+wikipediamvc:
+  type: Reference
+  title: Model-view-controller
+  author: Wikipedia contributors
+  url:
+    value: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
+    date: 2025-06-30
+
+entityrelationships:
+  type: Reference
+  title: Building Games in ECS with Entity Relationships
+  author: Mertens, Sander
+  year: 2022
+  url:
+    value: https://ajmmertens.medium.com/building-games-in-ecs-with-entity-relationships-657275ba2c6c
+    date: 2025-05-19
