@@ -1,0 +1,93 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: build/paper.aux
+Reallocating 'name_of_file' (item size: 1) to 16 items.
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+Reallocating 'name_of_file' (item size: 1) to 12 items.
+The style file: abntex2-alf.bst
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 9000 items.
+Database file #1: abntex2-options.bib
+Database file #2: ../bibliography.bib
+Warning--entry type for "agile" isn't style-file defined
+--line 19 of file ../bibliography.bib
+Warning--entry type for "reactivex" isn't style-file defined
+--line 35 of file ../bibliography.bib
+Warning--entry type for "flecs" isn't style-file defined
+--line 51 of file ../bibliography.bib
+Warning--entry type for "bevy" isn't style-file defined
+--line 83 of file ../bibliography.bib
+Warning--entry type for "logos" isn't style-file defined
+--line 99 of file ../bibliography.bib
+Warning--entry type for "chumsky" isn't style-file defined
+--line 115 of file ../bibliography.bib
+Warning--entry type for "ecsstorageinpics" isn't style-file defined
+--line 311 of file ../bibliography.bib
+Warning--entry type for "ecsparadigm" isn't style-file defined
+--line 327 of file ../bibliography.bib
+Warning--entry type for "entityrelationships" isn't style-file defined
+--line 343 of file ../bibliography.bib
+Warning--entry type for "whatsprogrammingparadigm" isn't style-file defined
+--line 359 of file ../bibliography.bib
+Warning--entry type for "programmingparadigmsionos" isn't style-file defined
+--line 375 of file ../bibliography.bib
+Warning--entry type for "merriamwebster" isn't style-file defined
+--line 407 of file ../bibliography.bib
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'glb_str_end' (item size: 4) to 20 items.
+Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
+Reallocating 'global_strs' (item size: 1) to 4000000 items.
++---------------------------------------------------------+
+| Estilo bibliográfico abntex2-alf.bst versão v-1.9.7           |
+| Em caso de dúvidas ou problemas com este estilo procure |
+| http://www.abntex.net.br/                               |
++---------------------------------------------------------+
+You've used 20 entries,
+            6714 wiz_defined-function locations,
+            1287 strings with 11588 characters,
+and the built_in function-call counts, 26418 in all, are:
+= -- 3204
+> -- 384
+< -- 703
++ -- 883
+- -- 122
+* -- 1524
+:= -- 3348
+add.period$ -- 73
+call.type$ -- 20
+change.case$ -- 143
+chr.to.int$ -- 28
+cite$ -- 19
+duplicate$ -- 2656
+empty$ -- 1144
+format.name$ -- 570
+if$ -- 5267
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 337
+newline$ -- 99
+num.names$ -- 95
+pop$ -- 462
+preamble$ -- 1
+purify$ -- 66
+quote$ -- 0
+skip$ -- 2835
+stack$ -- 1
+substring$ -- 1090
+swap$ -- 919
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 3
+warning$ -- 0
+while$ -- 129
+width$ -- 0
+write$ -- 279
+(There were 12 warnings)
