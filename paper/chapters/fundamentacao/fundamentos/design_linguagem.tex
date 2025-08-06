@@ -45,26 +45,46 @@ Todo \textit{design} para uma determinada linguagem de programação busca atend
 	\label{tab:criterios_caracteristicas}
 \end{table}
 
-A seguir, as características ilustradas na \autoref{tab:criterios_caracteristicas} serão descritas de forma resumida com base em \citeonline{conceptsoflanguages}:
+A seguir, os critérios e características ilustrados na \autoref{tab:criterios_caracteristicas} serão descritos de forma resumida com base em \citeonline{conceptsoflanguages}:
 
 \subsubsubsection{Legibilidade}
 
+A legibilidade de uma linguagem de programação é a facilidade com que um programador pode ler e entender o código escrito nessa linguagem. É um critério extremamente importante, pois maior parte do tempo de desenvolvimento é gasto na leitura e compreensão do código, e não na escrita \cite{howdevsspendtime}.
+
+As principais características que afetam a legibilidade de uma linguagem de programação são as seguintes:
+
 \begin{itemize}
-	\item a
+	\item \textbf{Simplicidade}: inversamente proporcional ao número de construtos e regras na linguagem e proporcional à familiaridade da linguagem (construtos e regras semelhantes a outras linguagens). Múltiplos meios de expressar a mesma intenção também afetam negativamente a simplicidade;
+	\item \textbf{Ortogonalidade}: um conjunto pequeno de regras que podem ser combinadas para formar construções mais complexas. Isso reduz o número de conceitos que um programador precisa entender, contribuindo para a legibilidade;
+	\item \textbf{Tipos de Dados}: tipos de dados mais específicos podem tornar o código mais explícito, tornando-o mais específico à intenção do programador. Um exemplo é o uso de booleanos em vez de inteiros para representar valores verdadeiros e falsos;
+	\item \textbf{Design da Sintaxe}: os itens da sintaxe, como palavras-chave, operadores, e como eles podem ser combinados, afetam a legibilidade. Idealmente, o programador deve ser capaz de entender a semântica de cada item da sintaxe sem conhecimento prévio da linguagem.
 \end{itemize}
 
 \subsubsubsection{Facilidade de Escrita}
 
+A facilidade de escrita de uma linguagem de programação é a capacidade do programador de expressar suas intenções de forma clara e concisa. É um critério importante, pois uma linguagem que permite escrever código facilmente pode aumentar a produtividade do programador.
+
+As principais características que afetam a facilidade de escrita de uma linguagem de programação são as seguintes:
+
 \begin{itemize}
-	\item a
+	\item \textbf{Simplicidade e Ortogonalidade}: menor quantidade de construtos, além de regras simples e combináveis, resultam em menos informação para o programador ter em mente, facilitando a escrita do código;
+	\item \textbf{Suporte a Abstração}: sabendo que abstração é o processo de ocultar detalhes desnecessários para focar em aspectos relevantes, um bom suporte a abstração na linguagem pode permitir que o programador as crie com maior capacidade e menor esforço, facilitando a escrita do código;
+	\item \textbf{Expressividade}: a capacidade de expressar intenções de forma clara e concisa. Linguagens com alta expressividade permitem que o programador escreva menos código para alcançar o mesmo resultado, o que é muitas vezes associado a açúcar sintático\footnote{Açúcar sintático (do inglês, \textit{syntactic sugar}) é um termo, originalmente criado em \citeonline{mechanicalevaluationexpressions}, usado para descrever construções de uma determinada linguagem de programação que tornam funcionalidades já existentes mais fáceis ou agradáveis de usar. Um exemplo é o laço \textit{for}, que pode tornar o código mais conciso e legível em comparação com um laço \textit{while} tradicional.}.
 \end{itemize}
 
 \subsubsubsection{Confiabilidade}
 
+A confiabilidade de uma linguagem de programação é a capacidade de garantir que o código escrito funcione como esperado, sem erros ou comportamentos inesperados. É outro critério muito importante, pois um código confiável reduz a probabilidade de falhas e aumenta a confiança do programador na linguagem.
+
+As principais características que afetam a confiabilidade de uma linguagem de programação são as seguintes:
+
 \begin{itemize}
-	\item a
+	\item \textbf{Checagem de Tipos}: é o ato de verificar se um determinado valor é do tipo esperado antes de ser usado. Isso pode prevenir erros em tempo de execução, aumentando a confiabilidade do código. A checagem de tipos pode ser feita em tempo de execução ou, preferencialmente, em tempo de compilação;
+	\item \textbf{Tratamento de Exceções}: conceito que permite o tratamento de erros de forma controlada, evitando que o programa falhe inesperadamente. Algumas linguagens tornam o tratamento de exceções obrigatório, o que pode aumentar mais ainda a confiabilidade do código em troca de maior complexidade;
+	\item \textbf{Restrição de \textit{Aliasing}}: \textit{aliasing} é o ato de definir dois ou mais nomes para o mesmo local de memória. Restringir o uso de \textit{aliasing} pode aumentar a confiabilidade do código, pois reduz a possibilidade de efeitos colaterais indesejados, onde uma alteração em um nome afeta outro nome que deveria ser independente;
+	\item \textbf{Legibilidade e Facilidade de Escrita}: tanto a legibilidade quanto a facilidade de escrita contribuem para a confiabilidade do código, pois um código mais claro e fácil de escrever tende a ter menos erros.
 \end{itemize}
 
-\subsubsection{Definição Formal de Sintaxe}
+% \subsubsection{Definição Formal de Sintaxe}
 
-BNF e EBNF.
+% BNF e EBNF.
