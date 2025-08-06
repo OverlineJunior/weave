@@ -11,9 +11,9 @@ Neste projeto, o padrão ECS será um dos principais fundamentos para o \textit{
 Pode-se dizer que o ECS é separado em três elementos fundamentais: entidades, componentes e sistemas \cite{ecsfaq}. Cada um desses elementos desempenha um papel específico na aplicação:
 
 \begin{itemize}
-	\item Entidades: identificadores únicos que representam os vários conceitos de uma aplicação. Sozinhas, as entidades não contêm dados nem funcionalidade;
-	\item Componentes: estruturas de dados que armazenam informações específicas. Uma entidade pode ter múltiplos componentes diferentes, definindo suas características;
-	\item Sistemas: funções responsáveis por processar sobre entidades com um determinado conjunto de componentes — processo denominado \textit{querying}.
+	\item \textbf{Entidades}: identificadores únicos que representam os vários conceitos de uma aplicação. Sozinhas, as entidades não contêm dados nem funcionalidade;
+	\item \textbf{Componentes}: estruturas de dados que armazenam informações específicas. Uma entidade pode ter múltiplos componentes diferentes, definindo suas características;
+	\item \textbf{Sistemas}: funções responsáveis por processar sobre entidades com um determinado conjunto de componentes — processo denominado \textit{querying}.
 \end{itemize}
 
 Como ilustrado na \autoref{fig:diagrama_ecs}, o estado da aplicação é dado por um conjunto de entidades, cada uma com seus respectivos componentes. Os sistemas são responsáveis pela transformação do estado da aplicação, processando as entidades que possuem os componentes necessários para a execução do sistema.
