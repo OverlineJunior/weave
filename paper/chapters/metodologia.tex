@@ -43,11 +43,22 @@ A análise dos dados coletados será realizada de forma qualitativa, por meio da
 
 \section{Procedimentos Metodológicos}
 
-O procedimento metodológico adotado para o desenvolvimento do projeto será dividido nas quatro etapas a seguir, onde cada uma depende da conclusão da anterior:
+O procedimento metodológico adotado para o desenvolvimento deste trabalho será dividido em etapas auto-contidas, ou seja, cada etapa será realizada de forma independente, mas todas interligadas para alcançar o objetivo final do projeto. As etapas são as seguintes:
 
-\begin{itemize}
-    \item \textbf{Definição do \textit{design} da linguagem}: nesta etapa, serão definidos os conceitos fundamentais da linguagem, como o que ela propõe e não propõe fazer, além de sua sintaxe, semântica e paradigmas de programação, tudo com um foco na abstração do padrão ECS.
-    \item \textbf{Avaliação do \textit{design} da linguagem}: nesta etapa, serão avaliados os conceitos definidos na etapa anterior, buscando analisar critérios de qualidade de software, como usabilidade, expressividade, acoplamento, entre outros. As avaliações serão feitas de forma qualitativa, comparando com as linguagens e bibliotecas selecionadas na amostra.
-    \item \textbf{Implementação do protótipo de interpretador}: nesta etapa, as definições do \textit{design} da linguagem serão implementadas em um protótipo de interpretador, que será desenvolvido em Rust. É importante ressaltar que será permitido que alguns itens menos importantes propostos pelo design não sejam implementados, a fim de tornar esta etapa viável dentro do tempo disponível para o projeto.
-    \item \textbf{Avaliação e validação do protótipo}: nesta etapa, será avaliado todo o processo da implementação do protótipo, buscando analisar dificuldades e limitações encontradas. Além disso, será analisado o quanto o protótipo atende ao design da linguagem previamente definido.
-\end{itemize}
+\begin{enumerate}
+    \item \textbf{MVP Fundacional da Linguagem}: inclui os conceitos de entidade, componente e sistema, representando um mínimo produto viável (do inglês, \textit{minimum viable product} — MVP). A conclusão desta etapa não segere uma linguagem pronta para uso prático, mas sim um protótipo funcional que pode ser utilizado para provar a viabilidade da fundação do trabalho;
+    \item \textbf{Operações Envolvendo Entidades}: inclui as operações essenciais da linguagem, como a criação e remoção de entidades, além da adição e remoção de componentes.
+    \item \textbf{Inserção de Componentes em Tempo de Compilação}: inclui a operação de inserção de componentes em entidades durante o tempo de compilação. Esta etapa é essencial para a etapa seguinte, que fará uso da operação implementada nesta;
+    \item \textbf{Agendamento de Sistemas}: inclui o agendamento de sistemas, permitindo que o programador defina a ordem de execução deles. Esta etapa fará uso da operação de inserção de componentes em tempo de compilação implementada na etapa anterior;
+    \item \textbf{\textit{Querying} de Entidades}: inclui a operação de \textit{querying} de entidades dentro de sistemas, permitindo que o programador consulte entidades com base em seus componentes. Esta é a etapa final do projeto, onde todos os conceitos terão sido implementados e analisados.
+\end{enumerate}
+
+Todas as etapas do trabalho serão compostas de três subetapas cronológicas: planejamento, implementação e análise, respectivamente. Elas são descritas a seguir:
+
+\begin{enumerate}
+    \item \textbf{Planejamento}: consiste na definição dos objetivos e \textit{design} dos conceitos relacionados a etapa, incluindo a definição de sintaxe e semântica;
+    \item \textbf{Implementação}: consiste na implementação dos conceitos relacionados a etapa, sempre levando em consideração a linguagem como um todo;
+    \item \textbf{Análise}: consiste na análise qualitativa do \textit{design} definido usando as características e critérios definidos na \autoref{sec:design_linguagem}, além de uma análise comparativa com as bibliotecas de ECS selecionadas na amostra. O processo de implementação também será analisado, buscando documentar possíveis problemas e soluções encontradas.
+\end{enumerate}
+
+A motivação por trás dessa escolha de metodologia é dada pela possibilidade de gerar um MVP logo na primeira etapa do trabalho, gerando \textit{feedback} fundacional para o restante do trabalho. Além disso, a abordagem iterativa permite uma evolução incremental, permitindo ajustes e melhorias ao longo do desenvolvimento.
