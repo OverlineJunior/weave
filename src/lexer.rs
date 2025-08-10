@@ -38,6 +38,9 @@ impl<'a> Lexer<'a> {
         }
 
         let token = match self.chars.peek().unwrap() {
+			// Single lexeme tokens.
+			c if is_single_lexeme(*c) => self.next_single_lexeme(),
+
 			// Int.
             c if c.is_ascii_digit() => self.next_int()?,
 
@@ -66,6 +69,19 @@ impl<'a> Lexer<'a> {
 
         Ok(Some(token))
     }
+
+	fn next_single_lexeme(&mut self) -> Spanned<Token> {
+		let ch = self.chars.next().unwrap();
+		let token = match ch {
+			'(' => Token::LPar,
+			')' => Token::RPar,
+			'{' => Token::LBrace,
+			'}' => Token::RBrace,
+			_ => unreachable!(),
+		};
+
+		(self.line, token, self.line)
+	}
 
     fn next_int(&mut self) -> Result<Spanned<Token>, LexingError> {
         assert!(
@@ -151,4 +167,8 @@ fn is_id_continue(c: char) -> bool {
 
 fn is_whitespace(c: char) -> bool {
     matches!(c, ' ' | '\r' | '\t')
+}
+
+fn is_single_lexeme(c: char) -> bool {
+	matches!(c, '(' | ')' | '{' | '}')
 }
