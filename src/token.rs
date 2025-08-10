@@ -23,10 +23,13 @@ pub enum Token {
     Component,
 	System,
 
-	LPar,
-	RPar,
-	LBrace,
-	RBrace,
+	LPar,   // (
+	RPar,   // )
+	LBrace, // {
+	RBrace, // }
+    Comma,  // ,
+    Dot,    // .
+    Colon,  // :
 }
 
 impl Token {
@@ -52,6 +55,9 @@ impl Token {
 			Token::RPar => ")".to_string(),
 			Token::LBrace => "{".to_string(),
 			Token::RBrace => "}".to_string(),
+            Token::Comma => ",".to_string(),
+            Token::Dot => ".".to_string(),
+            Token::Colon => ":".to_string(),
         }
     }
 

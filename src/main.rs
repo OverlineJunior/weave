@@ -6,9 +6,16 @@ mod lexing_error;
 mod lexer;
 
 const SOURCE: &str = r#"
-	55 entity ( "foo bar" var1 123
-	"This is a } test string" system }
-	_var2
+	system Foo(bar: Bar) {
+		print(bar.baz, bar.qux)
+	}
+
+	component Bar {
+		baz: Int,
+		qux: String,
+	}
+
+	entity(Bar { baz: 1, qux: "a" })
 "#;
 
 fn main() {

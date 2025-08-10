@@ -38,50 +38,53 @@ impl<'a> Lexer<'a> {
         }
 
         let token = match self.chars.peek().unwrap() {
-			// Single lexeme tokens.
-			c if is_single_lexeme(*c) => self.next_single_lexeme(),
+            // Single lexeme tokens.
+            c if is_single_lexeme(*c) => self.next_single_lexeme(),
 
-			// Int.
+            // Int.
             c if c.is_ascii_digit() => self.next_int()?,
 
-			// String.
+            // String.
             '"' => self.next_string()?,
 
-			// Keyword, or else, identifier.
+            // Keyword, or else, identifier.
             c if is_id_start(*c) => self.next_id(),
 
-			// Newline skip and line increment.
+            // Newline skip and line increment.
             '\n' => {
                 self.chars.next();
                 self.line += 1;
                 return self.next_token();
             }
 
-			// Whitespace skip.
+            // Whitespace skip.
             c if is_whitespace(*c) => {
                 self.chars.next();
                 return self.next_token();
             }
 
-			// No match was found.
+            // No match was found.
             c => return Err(LexingError::UnexpectedChar { ch: *c, line: 1 }),
         };
 
         Ok(Some(token))
     }
 
-	fn next_single_lexeme(&mut self) -> Spanned<Token> {
-		let ch = self.chars.next().unwrap();
-		let token = match ch {
-			'(' => Token::LPar,
-			')' => Token::RPar,
-			'{' => Token::LBrace,
-			'}' => Token::RBrace,
-			_ => unreachable!(),
-		};
+    fn next_single_lexeme(&mut self) -> Spanned<Token> {
+        let ch = self.chars.next().unwrap();
+        let token = match ch {
+            '(' => Token::LPar,
+            ')' => Token::RPar,
+            '{' => Token::LBrace,
+            '}' => Token::RBrace,
+			',' => Token::Comma,
+			'.' => Token::Dot,
+			':' => Token::Colon,
+            _ => unreachable!(),
+        };
 
-		(self.line, token, self.line)
-	}
+        (self.line, token, self.line)
+    }
 
     fn next_int(&mut self) -> Result<Spanned<Token>, LexingError> {
         assert!(
@@ -135,7 +138,7 @@ impl<'a> Lexer<'a> {
         let lexeme = self.eat_while(|c| is_id_start(c) || is_id_continue(c));
         let token = Token::keyword_from(&lexeme).unwrap_or(Token::Id(lexeme.to_string()));
 
-		(self.line, token, self.line)
+        (self.line, token, self.line)
     }
 
     fn eat_while<F>(&mut self, predicate: F) -> String
@@ -170,5 +173,5 @@ fn is_whitespace(c: char) -> bool {
 }
 
 fn is_single_lexeme(c: char) -> bool {
-	matches!(c, '(' | ')' | '{' | '}')
+    matches!(c, '(' | ')' | '{' | '}' | ',' | '.' | ':')
 }
