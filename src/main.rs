@@ -1,19 +1,20 @@
-mod literal;
-mod token;
+use crate::lexer::tokenize;
 
-use token::Token;
-use logos::Logos;
+mod value;
+mod token;
+mod lexing_error;
+mod lexer;
 
 const SOURCE: &str = r#"
-    system add_inversion() {
-
-    }
+	55 "foo bar" 123
+	"This is a test string"
 "#;
 
 fn main() {
-    let token_iter = Token::lexer(SOURCE);
-
-    token_iter.for_each(|t| {
-        println!("{:?}", t.unwrap());
-    });
+	tokenize(SOURCE.to_string())
+		.expect("Failed to tokenize source")
+		.iter()
+		.for_each(|(line, token, _)| {
+			println!("Line {}: {}", line, token);
+		});
 }

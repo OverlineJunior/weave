@@ -1,25 +1,89 @@
-use crate::literal::Literal;
-use logos::Logos;
+use std::fmt::{self, Display, Formatter};
 
-#[derive(Logos, Debug)]
-#[logos(skip r"[ \t\n\f]+")]
+use crate::value::Value;
+
+pub type Spanned<T> = (usize, T, usize);
+
+fn uppercase_first(s: &str) -> String {
+    let mut chars = s.chars();
+    match chars.next() {
+        Some(first) => first.to_uppercase().to_string() + chars.as_str(),
+        None => String::new(),
+    }
+}
+
+
+#[derive(Debug, Clone)]
 pub enum Token {
-    #[regex("[0-9]+", |lex| Literal::Number(lex.slice().parse::<f64>().unwrap()))]
-    Number(Literal),
-    #[regex(r#""[^"]*""#, |lex| Literal::String(lex.slice().trim_matches('"').into()))]
-    String(Literal),
-    #[regex(r"[a-zA-Z_][a-zA-Z0-9_]*", |lex| lex.slice().to_string())]
+    Int(Value),
+    String(Value),
     Id(String),
 
-	#[token("system")]
+    Entity,
+    Component,
 	System,
 
-	#[token("(")]
 	LPar,
-	#[token(")")]
 	RPar,
-	#[token("{")]
 	LBrace,
-	#[token("}")]
 	RBrace,
+}
+
+impl Token {
+    // Cannot be exhaustive, so never forget to add new keywords here.
+    pub fn keyword_from(s: &str) -> Option<Token> {
+        match s {
+            "system" => Some(Token::System),
+			_ => None,
+        }
+    }
+
+    pub fn lexeme(&self) -> String {
+        match self {
+            Token::Int(val) => val.to_string(),
+			Token::String(val) => val.to_string(),
+			Token::Id(name) => name.clone(),
+            Token::Entity => "entity".to_string(),
+            Token::Component => "component".to_string(),
+			Token::System => "system".to_string(),
+			Token::LPar => "(".to_string(),
+			Token::RPar => ")".to_string(),
+			Token::LBrace => "{".to_string(),
+			Token::RBrace => "}".to_string(),
+        }
+    }
+
+    pub fn is_value(&self) -> bool {
+        matches!(
+            self,
+            Token::Int { .. } | Token::String { .. }
+        )
+    }
+
+    pub fn is_statement(&self) -> bool {
+        matches!(self, Token::Entity | Token::Component | Token::System)
+    }
+}
+
+impl Display for Token {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        match self {
+            Token::Int(val) => write!(f, "Int({})", val),
+			Token::String(val) => write!(f, "String({})", val),
+			Token::Id(name) => write!(f, "Id({})", name),
+            _ => uppercase_first(&self.lexeme()).fmt(f),
+        }
+    }
+}
+
+impl From<i64> for Token {
+    fn from(value: i64) -> Self {
+        Token::Int(Value::Int(value))
+    }
+}
+
+impl From<String> for Token {
+    fn from(value: String) -> Self {
+        Token::String(Value::String(value))
+    }
 }
