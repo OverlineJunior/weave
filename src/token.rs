@@ -33,6 +33,8 @@ impl Token {
     // Cannot be exhaustive, so never forget to add new keywords here.
     pub fn keyword_from(s: &str) -> Option<Token> {
         match s {
+            "entity" => Some(Token::Entity),
+            "component" => Some(Token::Component),
             "system" => Some(Token::System),
 			_ => None,
         }
