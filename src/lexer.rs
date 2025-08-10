@@ -1,5 +1,5 @@
 use std::{iter::Peekable, str::Chars};
-use crate::{lexing_error::LexingError, token::{Spanned, Token}, value::Value};
+use crate::{lexing_error::LexingError, token::{Spanned, Token}};
 
 pub fn tokenize(source: String) -> Result<Vec<Spanned<Token>>, LexingError> {
 	let mut lexer = Lexer::new(&source);
@@ -63,7 +63,7 @@ impl<'a> Lexer<'a> {
 			"`next_number` called when next char is not a digit"
 		);
 
-		let lexeme = eat_while(&mut self.chars, |c| c.is_ascii_digit());
+		let lexeme = self.eat_while(|c| c.is_ascii_digit());
 		let value = lexeme
 			.parse::<i64>()
 			.unwrap_or_else(|_| panic!("Failed to parse int: {lexeme}"));
@@ -103,24 +103,24 @@ impl<'a> Lexer<'a> {
 	fn next_id(&mut self) -> Spanned<Token> {
 		todo!();
 	}
-}
 
-fn eat_while<F>(chars: &mut Peekable<Chars>, predicate: F) -> String
-where
-	F: Fn(char) -> bool,
-{
-	let mut lexeme = String::new();
+	fn eat_while<F>(&mut self, predicate: F) -> String
+	where
+		F: Fn(char) -> bool,
+	{
+		let mut lexeme = String::new();
 
-	while let Some(&ch) = chars.peek() {
-		if predicate(ch) {
-			lexeme.push(ch);
-			chars.next();
-		} else {
-			break;
+		while let Some(&ch) = self.chars.peek() {
+			if predicate(ch) {
+				lexeme.push(ch);
+				self.chars.next();
+			} else {
+				break;
+			}
 		}
-	}
 
-	lexeme
+		lexeme
+	}
 }
 
 fn is_id_start(c: char) -> bool {
