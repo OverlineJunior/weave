@@ -39,3 +39,18 @@ system foo(name: Name as nameE in e) {
     print("Entity {e} has Name {name}, where Name is entity {nameE}")
     nameE <- OtherComponent
 }
+
+
+
+// Phase 1:
+
+system Foo(bar: Bar) {
+    print(bar.baz, bar.qux)
+}
+
+component Bar {
+    baz: Int,
+    qux: String,
+}
+
+entity(Bar { baz: 1, qux: "a" })
