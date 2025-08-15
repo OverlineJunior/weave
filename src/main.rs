@@ -1,4 +1,4 @@
-use crate::{analyzer::analyze, lexer::tokenize, parser::parser};
+use crate::{analyzer::analyze, lexer::tokenize, parser::parser, type_env::TypeEnv};
 use chumsky::prelude::*;
 
 mod value;
@@ -8,6 +8,7 @@ mod lexer;
 mod stmt;
 mod parser;
 mod r#type;
+mod type_env;
 mod analyzer;
 
 // const SOURCE: &str = r#"
@@ -34,7 +35,9 @@ fn main() {
 	let spanned_tokens = tokenize(SOURCE.to_string()).expect("Failed to tokenize source");
 	let tokens = spanned_tokens.into_iter().map(|(_, t, _)| t).collect::<Vec<_>>();
 	let ast = parser().parse(tokens.as_slice()).unwrap();
-	let decorated_ast = analyze(&ast);
-	println!("AST: {:#?}", ast);
-	println!("{:#?}", decorated_ast);
+	let mut type_env = TypeEnv::new();
+	let decorated_ast = analyze(&ast, &mut type_env);
+	println!("AST:\n{:#?}\n", ast);
+	println!("Decorated AST:\n{:#?}\n", decorated_ast);
+	println!("Type Environment:\n{:#?}\n", type_env);
 }
