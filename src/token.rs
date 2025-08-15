@@ -13,7 +13,7 @@ fn uppercase_first(s: &str) -> String {
 }
 
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Token {
     Int(Value),
     String(Value),

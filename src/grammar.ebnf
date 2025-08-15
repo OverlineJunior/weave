@@ -53,3 +53,16 @@ identifier = letter , { letter | digit | "_" } ;
 letter = "a" | ... | "z" | "A" | ... | "Z" ;
 
 digit = "0" | ... | "9" ;
+
+
+
+component Bar {
+    baz: Int,
+    qux: String,
+}
+
+comp_def = "component" , id , "{", field_list , "}" ;
+
+field_list = field , ( "," , field )* ;
+
+field = id , ":" , type ;
