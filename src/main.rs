@@ -10,6 +10,7 @@ mod parser;
 mod r#type;
 mod type_env;
 mod analyzer;
+mod semantic_error;
 
 // const SOURCE: &str = r#"
 // 	system Foo(bar: Bar) {
@@ -36,7 +37,7 @@ fn main() {
 	let tokens = spanned_tokens.into_iter().map(|(_, t, _)| t).collect::<Vec<_>>();
 	let ast = parser().parse(tokens.as_slice()).unwrap();
 	let mut type_env = TypeEnv::new();
-	let decorated_ast = analyze(&ast, &mut type_env);
+	let decorated_ast = analyze(&ast, &mut type_env).expect("Failed to analyze AST");
 	println!("AST:\n{:#?}\n", ast);
 	println!("Decorated AST:\n{:#?}\n", decorated_ast);
 	println!("Type Environment:\n{:#?}\n", type_env);
