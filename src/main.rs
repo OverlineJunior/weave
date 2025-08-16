@@ -12,6 +12,7 @@ mod r#type;
 mod type_env;
 mod analyzer;
 mod semantic_error;
+mod error;
 
 // const SOURCE: &str = r#"
 // 	system Foo(bar: Bar) {
