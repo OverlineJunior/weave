@@ -6,11 +6,31 @@ use crate::{
 use chumsky::{input::ValueInput, prelude::*};
 
 /*
-comp_def = "component" , id , "{", field_list , "}" ;
+Grammar (EBNF):
 
-field_list = field , ( "," , field )* ;
+int 			= ? parsed by lexer ? 							;
 
-field = id , ":" , type ;
+string			= ? parsed by lexer ? 							;
+
+id 				= ? parsed by lexer ? 							;
+
+atom 			= int | string 									;
+
+type_field 		= id , ":" , id 								;
+
+data_field 		= id , ":" , atom 								; // TODO! Replace atom with expr.
+
+type_field_list = type_field , { "," , type_field } , [ "," ] 	;
+
+data_field_list = data_field , { "," , data_field } , [ "," ] 	;
+
+comp_def 		= "component" , id , "{", type_field_list , "}" ;
+
+comp_cons 		= id , "{", data_field_list , "}" 				;
+
+expr_stmt 		= atom | comp_cons 								;
+
+program 		= { comp_def | expr_stmt } 						;
 */
 
 #[allow(clippy::let_and_return)]
