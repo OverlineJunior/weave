@@ -9,7 +9,7 @@ pub struct TypeField<Ty> {
 }
 
 #[derive(Debug, Clone)]
-pub enum Stmt<Ty> {
+pub enum Stmt<Ty = ()> {
 	Block(Vec<Stmt<Ty>>),
 	Expr(Expr<Ty>),
 	ComponentDef {

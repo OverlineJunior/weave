@@ -34,7 +34,7 @@ program 		= { comp_def | expr_stmt } 						;
 */
 
 #[allow(clippy::let_and_return)]
-pub fn parser<'a, I>() -> impl Parser<'a, I, Stmt<()>, extra::Err<Rich<'a, Token>>>
+pub fn parser<'a, I>() -> impl Parser<'a, I, Stmt, extra::Err<Rich<'a, Token>>>
 where
     I: ValueInput<'a, Token = Token, Span = SimpleSpan>,
 {
@@ -83,7 +83,7 @@ where
     let program = comp_def
         .or(expr_stmt)
         .repeated()
-        .collect::<Vec<Stmt<()>>>()
+        .collect::<Vec<Stmt>>()
         .map(Stmt::Block);
 
     program
