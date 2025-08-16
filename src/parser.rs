@@ -1,9 +1,14 @@
 use crate::{
-    expr::{DataField, Expr},
     lexer::token::Token,
-    stmt::{Stmt, TypeField},
+    parser::{
+        expr::{DataField, Expr},
+        stmt::{Stmt, TypeField},
+    },
 };
 use chumsky::{input::ValueInput, prelude::*};
+
+pub mod expr;
+pub mod stmt;
 
 /*
 Grammar (EBNF):

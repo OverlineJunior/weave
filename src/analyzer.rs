@@ -1,10 +1,5 @@
 use crate::{
-    expr::{DataField, Expr},
-    lexer::value::Value,
-    semantic_error::SemanticError,
-    stmt::{Stmt, TypeField},
-    r#type::Type,
-    type_env::TypeEnv,
+    lexer::value::Value, parser::{expr::{DataField, Expr}, stmt::{Stmt, TypeField}}, semantic_error::SemanticError, r#type::Type, type_env::TypeEnv
 };
 
 pub fn analyze(ast: &Stmt, env: &mut TypeEnv) -> Result<Stmt<Type>, SemanticError> {

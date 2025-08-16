@@ -1,5 +1,6 @@
 use std::fmt::{self, Debug, Display, Formatter};
-use crate::expr::Expr;
+
+use crate::parser::expr::Expr;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct TypeField<Ty = ()> {

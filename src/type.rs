@@ -1,4 +1,4 @@
-use crate::stmt::TypeField;
+use crate::parser::stmt::TypeField;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Type {

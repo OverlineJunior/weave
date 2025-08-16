@@ -2,8 +2,6 @@ use crate::{analyzer::analyze, lexer::tokenize, parser::parser, type_env::TypeEn
 use chumsky::prelude::*;
 
 mod lexer;
-mod expr;
-mod stmt;
 mod parser;
 mod r#type;
 mod type_env;
