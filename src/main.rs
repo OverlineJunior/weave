@@ -3,7 +3,7 @@ use chumsky::prelude::*;
 
 mod value;
 mod token;
-mod lexing_error;
+mod lexical_error;
 mod lexer;
 mod expr;
 mod stmt;

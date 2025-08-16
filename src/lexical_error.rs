@@ -1,7 +1,7 @@
 use thiserror::Error;
 
 #[derive(Clone, Copy, PartialEq, Debug, Error)]
-pub enum LexingError {
+pub enum LexicalError {
 	#[error("[line {}] Unexpected character: `{}`", line, .ch)]
     UnexpectedChar { ch: char, line: usize },
     #[error("[line {}] Digit expected after dot", .line)]

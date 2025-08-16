@@ -1,10 +1,10 @@
 use crate::{
-    lexing_error::LexingError,
+    lexical_error::LexicalError,
     token::{Spanned, Token},
 };
 use std::{iter::Peekable, str::Chars};
 
-pub fn tokenize(source: String) -> Result<Vec<Spanned<Token>>, LexingError> {
+pub fn tokenize(source: String) -> Result<Vec<Spanned<Token>>, LexicalError> {
     let mut lexer = Lexer::new(&source);
     let mut tokens = Vec::new();
 
@@ -32,7 +32,7 @@ impl<'a> Lexer<'a> {
         }
     }
 
-    fn next_token(&mut self) -> Result<Option<Spanned<Token>>, LexingError> {
+    fn next_token(&mut self) -> Result<Option<Spanned<Token>>, LexicalError> {
         if self.chars.peek().is_none() {
             return Ok(None);
         }
@@ -64,7 +64,7 @@ impl<'a> Lexer<'a> {
             }
 
             // No match was found.
-            c => return Err(LexingError::UnexpectedChar { ch: *c, line: 1 }),
+            c => return Err(LexicalError::UnexpectedChar { ch: *c, line: 1 }),
         };
 
         Ok(Some(token))
@@ -86,7 +86,7 @@ impl<'a> Lexer<'a> {
         (self.line, token, self.line)
     }
 
-    fn next_int(&mut self) -> Result<Spanned<Token>, LexingError> {
+    fn next_int(&mut self) -> Result<Spanned<Token>, LexicalError> {
         assert!(
             self.chars.peek().unwrap().is_ascii_digit(),
             "`next_int` called when next char is not a digit"
@@ -100,7 +100,7 @@ impl<'a> Lexer<'a> {
         Ok((self.line, value.into(), self.line))
     }
 
-    fn next_string(&mut self) -> Result<Spanned<Token>, LexingError> {
+    fn next_string(&mut self) -> Result<Spanned<Token>, LexicalError> {
         assert_eq!(
             self.chars.peek().unwrap(),
             &'"',
@@ -117,7 +117,7 @@ impl<'a> Lexer<'a> {
                     break;
                 }
                 '\n' => {
-                    return Err(LexingError::UnterminatedString { line: self.line });
+                    return Err(LexicalError::UnterminatedString { line: self.line });
                 }
                 _ => {
                     lexeme.push(ch);
