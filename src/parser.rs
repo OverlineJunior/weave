@@ -1,7 +1,7 @@
 use crate::{
     expr::{DataField, Expr},
+    lexer::token::Token,
     stmt::{Stmt, TypeField},
-    token::Token,
 };
 use chumsky::{input::ValueInput, prelude::*};
 

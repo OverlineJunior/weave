@@ -1,5 +1,10 @@
 use crate::{
-    expr::{DataField, Expr}, semantic_error::SemanticError, stmt::{Stmt, TypeField}, r#type::Type, type_env::TypeEnv, value::Value
+    expr::{DataField, Expr},
+    lexer::value::Value,
+    semantic_error::SemanticError,
+    stmt::{Stmt, TypeField},
+    r#type::Type,
+    type_env::TypeEnv,
 };
 
 pub fn analyze(ast: &Stmt, env: &mut TypeEnv) -> Result<Stmt<Type>, SemanticError> {
@@ -11,7 +16,7 @@ pub fn analyze(ast: &Stmt, env: &mut TypeEnv) -> Result<Stmt<Type>, SemanticErro
                 .collect::<Result<Vec<_>, _>>()?;
 
             Ok(Stmt::Block(analyzed_stmts))
-        },
+        }
         Stmt::ComponentDef { name, fields } => {
             let resolved_fields = resolve_type_fields(fields.clone(), env)?;
 
@@ -29,11 +34,11 @@ pub fn analyze(ast: &Stmt, env: &mut TypeEnv) -> Result<Stmt<Type>, SemanticErro
             );
 
             Ok(comp_def)
-        },
+        }
         Stmt::Expr(expr) => {
             let analyzed_expr = analyze_expr(expr, env)?;
             Ok(Stmt::Expr(analyzed_expr))
-        },
+        }
     }
 }
 
@@ -45,7 +50,7 @@ fn analyze_expr(expr: &Expr<()>, env: &TypeEnv) -> Result<Expr<Type>, SemanticEr
                 Value::String(_) => Type::String,
             };
             Ok(Expr::Literal(val.clone(), ty))
-        },
+        }
         Expr::ComponentCons { name, fields } => {
             let resolved_fields = resolve_data_fields(fields.clone(), env)?;
 
@@ -57,7 +62,7 @@ fn analyze_expr(expr: &Expr<()>, env: &TypeEnv) -> Result<Expr<Type>, SemanticEr
             // TODO! Do env stuff. Gotta edit resolve_data_fields.
 
             Ok(comp_cons)
-        },
+        }
     }
 }
 

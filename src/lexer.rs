@@ -1,8 +1,12 @@
-use crate::{
+use crate::lexer::{
     lexical_error::LexicalError,
     token::{Spanned, Token},
 };
 use std::{iter::Peekable, str::Chars};
+
+pub mod lexical_error;
+pub mod token;
+pub mod value;
 
 pub fn tokenize(source: String) -> Result<Vec<Spanned<Token>>, LexicalError> {
     let mut lexer = Lexer::new(&source);
@@ -77,9 +81,9 @@ impl<'a> Lexer<'a> {
             ')' => Token::RPar,
             '{' => Token::LBrace,
             '}' => Token::RBrace,
-			',' => Token::Comma,
-			'.' => Token::Dot,
-			':' => Token::Colon,
+            ',' => Token::Comma,
+            '.' => Token::Dot,
+            ':' => Token::Colon,
             _ => unreachable!(),
         };
 

@@ -1,6 +1,5 @@
+use crate::lexer::value::Value;
 use std::fmt::{self, Display, Formatter};
-
-use crate::value::Value;
 
 pub type Spanned<T> = (usize, T, usize);
 
@@ -12,7 +11,6 @@ fn uppercase_first(s: &str) -> String {
     }
 }
 
-
 #[derive(Debug, Clone, PartialEq)]
 pub enum Token {
     Int(Value),
@@ -21,12 +19,12 @@ pub enum Token {
 
     Entity,
     Component,
-	System,
+    System,
 
-	LPar,   // (
-	RPar,   // )
-	LBrace, // {
-	RBrace, // }
+    LPar,   // (
+    RPar,   // )
+    LBrace, // {
+    RBrace, // }
     Comma,  // ,
     Dot,    // .
     Colon,  // :
@@ -39,22 +37,22 @@ impl Token {
             "entity" => Some(Token::Entity),
             "component" => Some(Token::Component),
             "system" => Some(Token::System),
-			_ => None,
+            _ => None,
         }
     }
 
     pub fn lexeme(&self) -> String {
         match self {
             Token::Int(val) => val.to_string(),
-			Token::String(val) => val.to_string(),
-			Token::Id(name) => name.clone(),
+            Token::String(val) => val.to_string(),
+            Token::Id(name) => name.clone(),
             Token::Entity => "entity".to_string(),
             Token::Component => "component".to_string(),
-			Token::System => "system".to_string(),
-			Token::LPar => "(".to_string(),
-			Token::RPar => ")".to_string(),
-			Token::LBrace => "{".to_string(),
-			Token::RBrace => "}".to_string(),
+            Token::System => "system".to_string(),
+            Token::LPar => "(".to_string(),
+            Token::RPar => ")".to_string(),
+            Token::LBrace => "{".to_string(),
+            Token::RBrace => "}".to_string(),
             Token::Comma => ",".to_string(),
             Token::Dot => ".".to_string(),
             Token::Colon => ":".to_string(),
@@ -62,10 +60,7 @@ impl Token {
     }
 
     pub fn is_value(&self) -> bool {
-        matches!(
-            self,
-            Token::Int { .. } | Token::String { .. }
-        )
+        matches!(self, Token::Int { .. } | Token::String { .. })
     }
 
     pub fn is_statement(&self) -> bool {
@@ -77,8 +72,8 @@ impl Display for Token {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         match self {
             Token::Int(val) => write!(f, "Int({})", val),
-			Token::String(val) => write!(f, "String({})", val),
-			Token::Id(name) => write!(f, "Id({})", name),
+            Token::String(val) => write!(f, "String({})", val),
+            Token::Id(name) => write!(f, "Id({})", name),
             _ => uppercase_first(&self.lexeme()).fmt(f),
         }
     }

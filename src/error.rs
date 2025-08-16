@@ -1,4 +1,4 @@
-use crate::{lexical_error::LexicalError, semantic_error::SemanticError};
+use crate::{lexer::lexical_error::LexicalError, semantic_error::SemanticError};
 
 #[derive(Debug)]
 pub enum Error {
