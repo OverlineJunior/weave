@@ -5,6 +5,7 @@ mod value;
 mod token;
 mod lexing_error;
 mod lexer;
+mod expr;
 mod stmt;
 mod parser;
 mod r#type;
@@ -29,6 +30,11 @@ const SOURCE: &str = r#"
 	component Bar {
 		baz: Int,
 		qux: String,
+	}
+
+	Bar {
+		baz: 1,
+		qux: "b",
 	}
 "#;
 
