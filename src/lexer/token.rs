@@ -58,14 +58,6 @@ impl Token {
             Token::Colon => ":".to_string(),
         }
     }
-
-    pub fn is_value(&self) -> bool {
-        matches!(self, Token::Int { .. } | Token::String { .. })
-    }
-
-    pub fn is_statement(&self) -> bool {
-        matches!(self, Token::Entity | Token::Component | Token::System)
-    }
 }
 
 impl Display for Token {
