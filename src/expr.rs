@@ -3,7 +3,7 @@ use std::fmt::{self, Debug, Display, Formatter};
 use crate::value::Value;
 
 #[derive(Debug, Clone, PartialEq)]
-pub struct DataField<Ty> {
+pub struct DataField<Ty = ()> {
 	pub name: String,
 	pub data: Expr<Ty>,
 }

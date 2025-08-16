@@ -62,7 +62,7 @@ fn analyze_expr(expr: &Expr<()>, env: &TypeEnv) -> Result<Expr<Type>, SemanticEr
 }
 
 fn resolve_type_fields(
-    fields: Vec<TypeField<()>>,
+    fields: Vec<TypeField>,
     env: &TypeEnv,
 ) -> Result<Vec<TypeField<Type>>, SemanticError> {
     fields
@@ -86,7 +86,7 @@ fn resolve_type_fields(
 }
 
 fn resolve_data_fields(
-    fields: Vec<DataField<()>>,
+    fields: Vec<DataField>,
     env: &TypeEnv,
 ) -> Result<Vec<DataField<Type>>, SemanticError> {
     fields

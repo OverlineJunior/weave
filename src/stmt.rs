@@ -2,7 +2,7 @@ use std::fmt::{self, Debug, Display, Formatter};
 use crate::expr::Expr;
 
 #[derive(Debug, Clone, PartialEq)]
-pub struct TypeField<Ty> {
+pub struct TypeField<Ty = ()> {
 	pub name: String,
 	pub ty_name: String,
 	pub ty: Ty,
