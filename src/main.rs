@@ -1,12 +1,9 @@
-use crate::{analyzer::analyze, lexer::tokenize, parser::parser, type_env::TypeEnv};
+use crate::{analyzer::{analyze, type_env::TypeEnv}, lexer::tokenize, parser::parser};
 use chumsky::prelude::*;
 
 mod lexer;
 mod parser;
-mod r#type;
-mod type_env;
 mod analyzer;
-mod semantic_error;
 mod error;
 
 // const SOURCE: &str = r#"

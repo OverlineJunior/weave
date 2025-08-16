@@ -1,5 +1,5 @@
+use crate::analyzer::r#type::Type;
 use std::collections::HashMap;
-use crate::r#type::Type;
 
 #[derive(Debug)]
 pub struct TypeEnv {

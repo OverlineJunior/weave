@@ -1,19 +1,19 @@
-use crate::{lexer::lexical_error::LexicalError, semantic_error::SemanticError};
+use crate::{analyzer::semantic_error::SemanticError, lexer::lexical_error::LexicalError};
 
 #[derive(Debug)]
 pub enum Error {
-	LexicalError(LexicalError),
-	SemanticError(SemanticError),
+    LexicalError(LexicalError),
+    SemanticError(SemanticError),
 }
 
 impl From<LexicalError> for Error {
-	fn from(error: LexicalError) -> Self {
-		Error::LexicalError(error)
-	}
+    fn from(error: LexicalError) -> Self {
+        Error::LexicalError(error)
+    }
 }
 
 impl From<SemanticError> for Error {
-	fn from(error: SemanticError) -> Self {
-		Error::SemanticError(error)
-	}
+    fn from(error: SemanticError) -> Self {
+        Error::SemanticError(error)
+    }
 }
