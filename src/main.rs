@@ -1,7 +1,6 @@
 use crate::{lexer::tokenize, parser::parser};
 use chumsky::prelude::*;
 
-mod error;
 mod lexer;
 mod parser;
 
