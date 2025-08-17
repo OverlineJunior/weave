@@ -13,7 +13,17 @@ pub enum Expr<Ty> {
     ComponentCons {
         name: String,
         fields: Vec<DataField<Ty>>,
+        ty: Ty,
     },
+}
+
+impl<Ty> Expr<Ty> {
+    pub fn ty(&self) -> &Ty {
+        match self {
+            Expr::Literal(_, ty) => ty,
+            Expr::ComponentCons { ty, .. } => ty,
+        }
+    }
 }
 
 impl<T: Debug> Display for Expr<T> {
@@ -22,8 +32,8 @@ impl<T: Debug> Display for Expr<T> {
             Expr::Literal(val, ty) => {
                 write!(f, "Literal(value: {:?}, type: {:?})", val, ty)
             }
-            Expr::ComponentCons { name, fields } => {
-                write!(f, "ComponentCons(name: {}, fields: {:?})", name, fields)
+            Expr::ComponentCons { name, fields, ty } => {
+                write!(f, "ComponentCons(name: {}, fields: {:?}, type: {:?})", name, fields, ty)
             }
         }
     }

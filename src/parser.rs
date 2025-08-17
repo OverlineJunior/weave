@@ -47,46 +47,53 @@ where
         Token::Id(id) => id,
     };
 
-    let atom = select! {
-        Token::Int(value) => Expr::Literal(value, ()),
-        Token::String(value) => Expr::Literal(value, ()),
+    let expr = recursive(|expr| {
+        let data_field = id
+            .then_ignore(just(Token::Colon))
+            .then(expr)
+            .map(|(name, expr)| DataField { name, data: expr });
+
+        let data_field_list = field_list(data_field).boxed();
+
+        let atom = select! {
+            Token::Int(value) => Expr::Literal(value, ()),
+            Token::String(value) => Expr::Literal(value, ()),
+        };
+
+        let comp_cons = id
+            .then_ignore(just(Token::LBrace))
+            .then(data_field_list)
+            .then_ignore(just(Token::RBrace))
+            .map(|(name, fields)| Expr::ComponentCons { name, fields, ty: () });
+
+        atom.or(comp_cons)
+    });
+
+    let stmt = {
+        let type_field = id
+            .then_ignore(just(Token::Colon))
+            .then(id)
+            .map(|(name, ty_name)| TypeField {
+                name,
+                ty_name,
+                ty: (),
+            });
+
+        let type_field_list = field_list(type_field);
+
+        let comp_def = just(Token::Component)
+            .ignore_then(id)
+            .then_ignore(just(Token::LBrace))
+            .then(type_field_list)
+            .then_ignore(just(Token::RBrace))
+            .map(|(name, fields)| Stmt::ComponentDef { name, fields });
+
+        let expr_stmt = expr.map(Stmt::Expr);
+
+        comp_def.or(expr_stmt)
     };
 
-    let type_field = id
-        .then_ignore(just(Token::Colon))
-        .then(id)
-        .map(|(name, ty_name)| TypeField {
-            name,
-            ty_name,
-            ty: (),
-        });
-
-    let data_field = id
-        .then_ignore(just(Token::Colon))
-        .then(atom)
-        .map(|(name, atom)| DataField { name, data: atom });
-
-    let type_field_list = field_list(type_field);
-
-    let data_field_list = field_list(data_field);
-
-    let comp_def = just(Token::Component)
-        .ignore_then(id)
-        .then_ignore(just(Token::LBrace))
-        .then(type_field_list)
-        .then_ignore(just(Token::RBrace))
-        .map(|(name, fields)| Stmt::ComponentDef { name, fields });
-
-    let comp_cons = id
-        .then_ignore(just(Token::LBrace))
-        .then(data_field_list)
-        .then_ignore(just(Token::RBrace))
-        .map(|(name, fields)| Expr::ComponentCons { name, fields });
-
-    let expr_stmt = atom.or(comp_cons).map(Stmt::Expr);
-
-    let program = comp_def
-        .or(expr_stmt)
+    let program = stmt
         .repeated()
         .collect::<Vec<Stmt>>()
         .map(Stmt::Block);

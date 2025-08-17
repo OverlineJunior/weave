@@ -1,12 +1,22 @@
 use std::fmt::{self, Debug, Display, Formatter};
 
-use crate::parser::expr::Expr;
+use crate::parser::expr::{DataField, Expr};
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct TypeField<Ty = ()> {
 	pub name: String,
 	pub ty_name: String,
 	pub ty: Ty,
+}
+
+impl<Ty: Clone> From<DataField<Ty>> for TypeField<Ty> {
+	fn from(data_field: DataField<Ty>) -> Self {
+		TypeField {
+			name: data_field.name,
+			ty_name: "".to_string(),
+			ty: data_field.data.ty().clone(),
+		}
+	}
 }
 
 #[derive(Debug, Clone)]

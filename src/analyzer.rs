@@ -53,19 +53,42 @@ fn analyze_expr(expr: &Expr<()>, env: &TypeEnv) -> Result<Expr<Type>, SemanticEr
                 Value::Int(_) => Type::Int,
                 Value::String(_) => Type::String,
             };
+
             Ok(Expr::Literal(val.clone(), ty))
         }
-        Expr::ComponentCons { name, fields } => {
+        Expr::ComponentCons { name, fields, .. } => {
             let resolved_fields = resolve_data_fields(fields.clone(), env)?;
 
-            let comp_cons = Expr::ComponentCons {
+            let inferred_ty = Type::Component {
                 name: name.clone(),
-                fields: resolved_fields,
+                fields: resolved_fields
+                    .clone()
+                    .into_iter()
+                    .map(|df| df.into())
+                    .collect(),
             };
 
-            // TODO! Do env stuff. Gotta edit resolve_data_fields.
+            let actual_ty = env
+                .get(name)
+                .cloned()
+                .ok_or_else(|| SemanticError::UndefinedType {
+                    ty_name: name.clone(),
+                    line: 0,
+                })?;
 
-            Ok(comp_cons)
+            if inferred_ty != actual_ty {
+                return Err(SemanticError::TypeMismatch {
+                    expected: actual_ty,
+                    found: inferred_ty,
+                    line: 0,
+                });
+            }
+
+            Ok(Expr::ComponentCons {
+                name: name.clone(),
+                fields: resolved_fields,
+                ty: actual_ty,
+            })
         }
     }
 }
