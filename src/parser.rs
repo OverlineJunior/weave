@@ -47,7 +47,7 @@ where
     let expr = recursive(|expr| {
         let field = id.then_ignore(just(Token::Colon)).then(expr);
 
-        let field_list = field_list(field).boxed();
+        let field_list = comma_separated(field).boxed();
 
         let atom = select! {
             Token::Int(value) => Expr::Literal(value),
@@ -66,7 +66,7 @@ where
     let stmt = {
         let field_decl = id;
 
-        let field_decl_list = field_list(field_decl);
+        let field_decl_list = comma_separated(field_decl);
 
         let comp_def = just(Token::Component)
             .ignore_then(id)
@@ -85,7 +85,7 @@ where
     program
 }
 
-fn field_list<'a, I, F, O>(field_kind: F) -> impl Parser<'a, I, Vec<O>, extra::Err<Rich<'a, Token>>>
+fn comma_separated<'a, I, F, O>(field_kind: F) -> impl Parser<'a, I, Vec<O>, extra::Err<Rich<'a, Token>>>
 where
     I: ValueInput<'a, Token = Token, Span = SimpleSpan>,
     F: Parser<'a, I, O, extra::Err<Rich<'a, Token>>>,
