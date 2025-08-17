@@ -85,12 +85,12 @@ where
     program
 }
 
-fn comma_separated<'a, I, F, O>(field_kind: F) -> impl Parser<'a, I, Vec<O>, extra::Err<Rich<'a, Token>>>
+fn comma_separated<'a, I, F, O>(parser: F) -> impl Parser<'a, I, Vec<O>, extra::Err<Rich<'a, Token>>>
 where
     I: ValueInput<'a, Token = Token, Span = SimpleSpan>,
     F: Parser<'a, I, O, extra::Err<Rich<'a, Token>>>,
 {
-    field_kind
+    parser
         .separated_by(just(Token::Comma))
         .allow_trailing()
         .at_least(1)
