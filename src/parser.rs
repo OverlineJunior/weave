@@ -1,9 +1,6 @@
 use crate::{
     lexer::token::Token,
-    parser::{
-        expr::{DataField, Expr},
-        stmt::{Stmt, TypeField},
-    },
+    parser::{expr::Expr, stmt::Stmt},
 };
 use chumsky::{input::ValueInput, prelude::*};
 
@@ -48,55 +45,42 @@ where
     };
 
     let expr = recursive(|expr| {
-        let data_field = id
-            .then_ignore(just(Token::Colon))
-            .then(expr)
-            .map(|(name, expr)| DataField { name, data: expr });
+        let field = id.then_ignore(just(Token::Colon)).then(expr);
 
-        let data_field_list = field_list(data_field).boxed();
+        let field_list = field_list(field).boxed();
 
         let atom = select! {
-            Token::Int(value) => Expr::Literal(value, ()),
-            Token::String(value) => Expr::Literal(value, ()),
+            Token::Int(value) => Expr::Literal(value),
+            Token::String(value) => Expr::Literal(value),
         };
 
         let comp_cons = id
             .then_ignore(just(Token::LBrace))
-            .then(data_field_list)
+            .then(field_list)
             .then_ignore(just(Token::RBrace))
-            .map(|(name, fields)| Expr::ComponentCons { name, fields, ty: () });
+            .map(|(name, fields)| Expr::ComponentCons { name, fields });
 
         atom.or(comp_cons)
     });
 
     let stmt = {
-        let type_field = id
-            .then_ignore(just(Token::Colon))
-            .then(id)
-            .map(|(name, ty_name)| TypeField {
-                name,
-                ty_name,
-                ty: (),
-            });
+        let field_decl = id;
 
-        let type_field_list = field_list(type_field);
+        let field_decl_list = field_list(field_decl);
 
         let comp_def = just(Token::Component)
             .ignore_then(id)
             .then_ignore(just(Token::LBrace))
-            .then(type_field_list)
+            .then(field_decl_list)
             .then_ignore(just(Token::RBrace))
-            .map(|(name, fields)| Stmt::ComponentDef { name, fields });
+            .map(|(name, field_decls)| Stmt::ComponentDef { name, field_decls });
 
         let expr_stmt = expr.map(Stmt::Expr);
 
         comp_def.or(expr_stmt)
     };
 
-    let program = stmt
-        .repeated()
-        .collect::<Vec<Stmt>>()
-        .map(Stmt::Block);
+    let program = stmt.repeated().collect::<Vec<Stmt>>().map(Stmt::Block);
 
     program
 }

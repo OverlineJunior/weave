@@ -1,39 +1,25 @@
 use crate::lexer::value::Value;
 use std::fmt::{self, Debug, Display, Formatter};
 
-#[derive(Debug, Clone, PartialEq)]
-pub struct DataField<Ty = ()> {
-    pub name: String,
-    pub data: Expr<Ty>,
-}
+pub type Field = (String, Expr);
 
 #[derive(Debug, Clone, PartialEq)]
-pub enum Expr<Ty> {
-    Literal(Value, Ty),
+pub enum Expr {
+    Literal(Value),
     ComponentCons {
         name: String,
-        fields: Vec<DataField<Ty>>,
-        ty: Ty,
+        fields: Vec<Field>,
     },
 }
 
-impl<Ty> Expr<Ty> {
-    pub fn ty(&self) -> &Ty {
-        match self {
-            Expr::Literal(_, ty) => ty,
-            Expr::ComponentCons { ty, .. } => ty,
-        }
-    }
-}
-
-impl<T: Debug> Display for Expr<T> {
+impl Display for Expr {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         match self {
-            Expr::Literal(val, ty) => {
-                write!(f, "Literal(value: {:?}, type: {:?})", val, ty)
+            Expr::Literal(value) => {
+                write!(f, "Literal(value: {:?})", value)
             }
-            Expr::ComponentCons { name, fields, ty } => {
-                write!(f, "ComponentCons(name: {}, fields: {:?}, type: {:?})", name, fields, ty)
+            Expr::ComponentCons { name, fields } => {
+                write!(f, "ComponentCons(name: {}, fields: {:?})", name, fields)
             }
         }
     }

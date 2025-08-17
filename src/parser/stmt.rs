@@ -1,46 +1,25 @@
+use crate::parser::expr::Expr;
 use std::fmt::{self, Debug, Display, Formatter};
 
-use crate::parser::expr::{DataField, Expr};
-
-#[derive(Debug, Clone, PartialEq)]
-pub struct TypeField<Ty = ()> {
-	pub name: String,
-	pub ty_name: String,
-	pub ty: Ty,
-}
-
-impl<Ty: Clone> From<DataField<Ty>> for TypeField<Ty> {
-	fn from(data_field: DataField<Ty>) -> Self {
-		TypeField {
-			name: data_field.name,
-			ty_name: "".to_string(),
-			ty: data_field.data.ty().clone(),
-		}
-	}
-}
-
 #[derive(Debug, Clone)]
-pub enum Stmt<Ty = ()> {
-	Block(Vec<Stmt<Ty>>),
-	Expr(Expr<Ty>),
-	ComponentDef {
-		name: String,
-		fields: Vec<TypeField<Ty>>,
-	},
+pub enum Stmt {
+    Block(Vec<Stmt>),
+    Expr(Expr),
+    ComponentDef { name: String, field_decls: Vec<String> },
 }
 
-impl<T: Debug> Display for Stmt<T> {
-	fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-		match self {
-			Stmt::Block(stmts) => {
-				write!(f, "Block(stmts: {:?})", stmts)
-			},
-			Stmt::Expr(expr) => {
-				write!(f, "Expr(expr: {})", expr)
-			},
-			Stmt::ComponentDef { name, fields } => {
-				write!(f, "ComponentDef(name: {}, fields: {:?})", name, fields)
-			},
-		}
-	}
+impl Display for Stmt {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        match self {
+            Stmt::Block(stmts) => {
+                write!(f, "Block(stmts: {:?})", stmts)
+            }
+            Stmt::Expr(expr) => {
+                write!(f, "Expr(expr: {})", expr)
+            }
+            Stmt::ComponentDef { name, field_decls } => {
+                write!(f, "ComponentDef(name: {}, field_decls: {:?})", name, field_decls)
+            }
+        }
+    }
 }

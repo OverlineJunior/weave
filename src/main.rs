@@ -1,10 +1,9 @@
-use crate::{analyzer::{analyze, type_env::TypeEnv}, lexer::tokenize, parser::parser};
+use crate::{lexer::tokenize, parser::parser};
 use chumsky::prelude::*;
 
+mod error;
 mod lexer;
 mod parser;
-mod analyzer;
-mod error;
 
 // const SOURCE: &str = r#"
 // 	system Foo(bar: Bar) {
@@ -21,8 +20,8 @@ mod error;
 
 const SOURCE: &str = r#"
 	component Bar {
-		baz: Int,
-		qux: String,
+		baz,
+		qux,
 	}
 
 	Bar {
@@ -32,12 +31,11 @@ const SOURCE: &str = r#"
 "#;
 
 fn main() {
-	let spanned_tokens = tokenize(SOURCE.to_string()).expect("Failed to tokenize source");
-	let tokens = spanned_tokens.into_iter().map(|(_, t, _)| t).collect::<Vec<_>>();
-	let ast = parser().parse(tokens.as_slice()).unwrap();
-	let mut type_env = TypeEnv::new();
-	let decorated_ast = analyze(&ast, &mut type_env).expect("Failed to analyze AST");
-	println!("AST:\n{:#?}\n", ast);
-	println!("Decorated AST:\n{:#?}\n", decorated_ast);
-	println!("Type Environment:\n{:#?}\n", type_env);
+    let spanned_tokens = tokenize(SOURCE.to_string()).expect("Failed to tokenize source");
+    let tokens = spanned_tokens
+        .into_iter()
+        .map(|(_, t, _)| t)
+        .collect::<Vec<_>>();
+    let ast = parser().parse(tokens.as_slice()).unwrap();
+    println!("AST:\n{:#?}\n", ast);
 }
