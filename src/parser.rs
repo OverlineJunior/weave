@@ -71,7 +71,7 @@ where
         atom.or(comp_cons).or(entity_cons)
     });
 
-    let stmt = {
+    let stmt = recursive(|stmt| {
         let field_decl = id;
 
         let field_decl_list = comma_separated(field_decl);
@@ -83,10 +83,33 @@ where
             .then_ignore(just(Token::RBrace))
             .map(|(name, field_decls)| Stmt::ComponentDef { name, field_decls });
 
-        let expr_stmt = expr.map(Stmt::Expr);
+        let expr_stmt = expr.clone().map(Stmt::Expr);
 
-        comp_def.or(expr_stmt)
-    };
+        let block = just(Token::LBrace)
+            .ignore_then(stmt.repeated().collect::<Vec<_>>())
+            .then_ignore(just(Token::RBrace))
+            .map(Stmt::Block)
+            .boxed();
+
+        // TODO! Add support for variables. In `system Foo(bar: Bar) { ... }`, `Bar` must be a variable, not a ComponentCons.
+        let query_item = id.then_ignore(just(Token::Colon)).then(id);
+
+        let query = comma_separated(query_item).boxed();
+
+        let system_decl = just(Token::System)
+            .ignore_then(id)
+            .then_ignore(just(Token::LParen))
+            .then(query)
+            .then_ignore(just(Token::RParen))
+            .then(block.clone())
+            .map(|((name, query), body)| Stmt::SystemDecl {
+                name,
+                query,
+                body: Box::new(body),
+            });
+
+        comp_def.or(expr_stmt).or(system_decl).boxed()
+    });
 
     let program = stmt.repeated().collect::<Vec<Stmt>>().map(Stmt::Block);
 
