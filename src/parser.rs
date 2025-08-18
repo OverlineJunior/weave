@@ -60,7 +60,15 @@ where
             .then_ignore(just(Token::RBrace))
             .map(|(name, fields)| Expr::ComponentCons { name, fields });
 
-        atom.or(comp_cons)
+        let comp_list = comma_separated(comp_cons.clone()).boxed();
+
+        let entity_cons = just(Token::Entity)
+            .then_ignore(just(Token::LParen))
+            .then(comp_list)
+            .then_ignore(just(Token::RParen))
+            .map(|(_, comps)| Expr::EntityCons(comps));
+
+        atom.or(comp_cons).or(entity_cons)
     });
 
     let stmt = {
@@ -85,7 +93,9 @@ where
     program
 }
 
-fn comma_separated<'a, I, F, O>(parser: F) -> impl Parser<'a, I, Vec<O>, extra::Err<Rich<'a, Token>>>
+fn comma_separated<'a, I, F, O>(
+    parser: F,
+) -> impl Parser<'a, I, Vec<O>, extra::Err<Rich<'a, Token>>>
 where
     I: ValueInput<'a, Token = Token, Span = SimpleSpan>,
     F: Parser<'a, I, O, extra::Err<Rich<'a, Token>>>,

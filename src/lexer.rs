@@ -77,8 +77,8 @@ impl<'a> Lexer<'a> {
     fn next_single_lexeme(&mut self) -> Spanned<Token> {
         let ch = self.chars.next().unwrap();
         let token = match ch {
-            '(' => Token::LPar,
-            ')' => Token::RPar,
+            '(' => Token::LParen,
+            ')' => Token::RParen,
             '{' => Token::LBrace,
             '}' => Token::RBrace,
             ',' => Token::Comma,

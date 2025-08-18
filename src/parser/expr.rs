@@ -10,6 +10,7 @@ pub enum Expr {
         name: String,
         fields: Vec<Field>,
     },
+    EntityCons(Vec<Expr>)
 }
 
 impl Display for Expr {
@@ -20,6 +21,9 @@ impl Display for Expr {
             }
             Expr::ComponentCons { name, fields } => {
                 write!(f, "ComponentCons(name: {}, fields: {:?})", name, fields)
+            },
+            Expr::EntityCons(exprs) => {
+                write!(f, "EntityCons(exprs: {:?})", exprs)
             }
         }
     }

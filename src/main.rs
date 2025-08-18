@@ -25,8 +25,10 @@ const SOURCE: &str = r#"
 
 	Bar {
 		baz: 1,
-		qux: "b",
+		qux: "a",
 	}
+
+	entity(Bar { baz: 2, qux: "b" })
 "#;
 
 fn main() {
