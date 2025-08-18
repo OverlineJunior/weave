@@ -31,7 +31,7 @@ const SOURCE: &str = r#"
 	entity(Bar { baz: 2, qux: "b" })
 
 	system Foo(bar: Bar) {
-		
+
 	}
 "#;
 

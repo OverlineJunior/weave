@@ -10,7 +10,8 @@ pub enum Expr {
         name: String,
         fields: Vec<Field>,
     },
-    EntityCons(Vec<Expr>)
+    EntityCons(Vec<Expr>),
+    Var { name: String },
 }
 
 impl Display for Expr {
@@ -24,6 +25,9 @@ impl Display for Expr {
             },
             Expr::EntityCons(exprs) => {
                 write!(f, "EntityCons(exprs: {:?})", exprs)
+            },
+            Expr::Var { name } => {
+                write!(f, "Var(name: {})", name)
             }
         }
     }

@@ -20,6 +20,7 @@ pub enum Token {
     Entity,
     Component,
     System,
+    Var,
 
     LParen,   // (
     RParen,   // )
@@ -28,6 +29,7 @@ pub enum Token {
     Comma,  // ,
     Dot,    // .
     Colon,  // :
+    Assign, // =
 }
 
 impl Token {
@@ -37,6 +39,7 @@ impl Token {
             "entity" => Some(Token::Entity),
             "component" => Some(Token::Component),
             "system" => Some(Token::System),
+            "var" => Some(Token::Var),
             _ => None,
         }
     }
@@ -49,6 +52,7 @@ impl Token {
             Token::Entity => "entity".to_string(),
             Token::Component => "component".to_string(),
             Token::System => "system".to_string(),
+            Token::Var => "var".to_string(),
             Token::LParen => "(".to_string(),
             Token::RParen => ")".to_string(),
             Token::LBrace => "{".to_string(),
@@ -56,6 +60,7 @@ impl Token {
             Token::Comma => ",".to_string(),
             Token::Dot => ".".to_string(),
             Token::Colon => ":".to_string(),
+            Token::Assign => "=".to_string(),
         }
     }
 }

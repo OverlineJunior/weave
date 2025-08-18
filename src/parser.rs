@@ -68,7 +68,9 @@ where
             .then_ignore(just(Token::RParen))
             .map(|(_, comps)| Expr::EntityCons(comps));
 
-        atom.or(comp_cons).or(entity_cons)
+        let var = id.map(|name| Expr::Var { name });
+
+        atom.or(comp_cons).or(entity_cons).or(var)
     });
 
     let stmt = recursive(|stmt| {
@@ -92,7 +94,7 @@ where
             .boxed();
 
         // TODO! Add support for variables. In `system Foo(bar: Bar) { ... }`, `Bar` must be a variable, not a ComponentCons.
-        let query_item = id.then_ignore(just(Token::Colon)).then(id);
+        let query_item = id.then_ignore(just(Token::Colon)).then(expr.clone());
 
         let query = comma_separated(query_item).boxed();
 
@@ -108,7 +110,13 @@ where
                 body: Box::new(body),
             });
 
-        comp_def.or(expr_stmt).or(system_decl).boxed()
+        let var_decl = just(Token::Var)
+            .ignore_then(id)
+            .then_ignore(just(Token::Assign))
+            .then(expr.clone())
+            .map(|(name, value)| Stmt::VarDecl { name, value });
+
+        comp_def.or(expr_stmt).or(system_decl).or(var_decl).boxed()
     });
 
     let program = stmt.repeated().collect::<Vec<Stmt>>().map(Stmt::Block);

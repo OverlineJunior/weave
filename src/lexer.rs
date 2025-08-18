@@ -84,6 +84,7 @@ impl<'a> Lexer<'a> {
             ',' => Token::Comma,
             '.' => Token::Dot,
             ':' => Token::Colon,
+            '=' => Token::Assign,
             _ => unreachable!(),
         };
 
@@ -177,5 +178,5 @@ fn is_whitespace(c: char) -> bool {
 }
 
 fn is_single_lexeme(c: char) -> bool {
-    matches!(c, '(' | ')' | '{' | '}' | ',' | '.' | ':')
+    matches!(c, '(' | ')' | '{' | '}' | ',' | '.' | ':' | '=')
 }
