@@ -23,15 +23,12 @@ const SOURCE: &str = r#"
 		qux,
 	}
 
-	Bar {
-		baz: 1,
-		qux: "a",
-	}
+	var bar = Bar { baz: 1, qux: "a" }
 
-	entity(Bar { baz: 2, qux: "b" })
+	entity(bar)
 
 	system Foo(bar: Bar) {
-
+		
 	}
 "#;
 

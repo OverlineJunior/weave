@@ -1,7 +1,7 @@
 use crate::parser::expr::Expr;
 use std::fmt::{self, Debug, Display, Formatter};
 
-pub type QueryItem = (String, Expr);
+pub type QueryItem = (String, String);
 
 #[derive(Debug, Clone)]
 pub enum Stmt {

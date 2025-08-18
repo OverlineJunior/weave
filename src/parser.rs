@@ -45,7 +45,7 @@ where
     };
 
     let expr = recursive(|expr| {
-        let field = id.then_ignore(just(Token::Colon)).then(expr);
+        let field = id.then_ignore(just(Token::Colon)).then(expr.clone());
 
         let field_list = comma_separated(field).boxed();
 
@@ -60,11 +60,11 @@ where
             .then_ignore(just(Token::RBrace))
             .map(|(name, fields)| Expr::ComponentCons { name, fields });
 
-        let comp_list = comma_separated(comp_cons.clone()).boxed();
+        let expr_list = comma_separated(expr.clone()).boxed();
 
         let entity_cons = just(Token::Entity)
             .then_ignore(just(Token::LParen))
-            .then(comp_list)
+            .then(expr_list)
             .then_ignore(just(Token::RParen))
             .map(|(_, comps)| Expr::EntityCons(comps));
 
@@ -93,8 +93,7 @@ where
             .map(Stmt::Block)
             .boxed();
 
-        // TODO! Add support for variables. In `system Foo(bar: Bar) { ... }`, `Bar` must be a variable, not a ComponentCons.
-        let query_item = id.then_ignore(just(Token::Colon)).then(expr.clone());
+        let query_item = id.then_ignore(just(Token::Colon)).then(id);
 
         let query = comma_separated(query_item).boxed();
 
