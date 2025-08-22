@@ -1,8 +1,9 @@
-use crate::{lexer::tokenize, parser::parser};
+use crate::{interpreter::interpret, lexer::tokenize, parser::parser};
 use chumsky::prelude::*;
 
 mod lexer;
 mod parser;
+mod interpreter;
 
 // const SOURCE: &str = r#"
 // 	system Foo(bar: Bar) {
@@ -40,4 +41,5 @@ fn main() {
         .collect::<Vec<_>>();
     let ast = parser().parse(tokens.as_slice()).unwrap();
     println!("AST:\n{:#?}\n", ast);
+	interpret(&ast).expect("Failed to interpret AST");
 }
