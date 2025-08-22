@@ -16,11 +16,11 @@ string			= ? parsed by lexer ? 							;
 
 id 				= ? parsed by lexer ? 							;
 
-atom 			= int | string 									;
+literal 	    = int | string 									;
 
 type_field 		= id , ":" , id 								;
 
-data_field 		= id , ":" , atom 								;
+data_field 		= id , ":" , literal 							;
 
 type_field_list = type_field , { "," , type_field } , [ "," ] 	;
 
@@ -30,7 +30,7 @@ comp_def 		= "component" , id , "{", type_field_list , "}" ;
 
 comp_cons 		= id , "{", data_field_list , "}" 				;
 
-expr_stmt 		= atom | comp_cons 								;
+expr_stmt 		= literal | comp_cons 							;
 
 var             = id 											;
 
@@ -53,7 +53,7 @@ where
 
         let field_list = comma_separated(field).boxed();
 
-        let atom = select! {
+        let literal = select! {
             Token::Int(value) => Expr::Literal(value),
             Token::String(value) => Expr::Literal(value),
         };
@@ -74,7 +74,7 @@ where
 
         let var = id.map(|name| Expr::Var { name });
 
-        atom.or(comp_cons).or(entity_cons).or(var)
+        literal.or(comp_cons).or(entity_cons).or(var)
     });
 
     let stmt = recursive(|stmt| {
