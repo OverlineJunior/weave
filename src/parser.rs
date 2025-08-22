@@ -20,7 +20,7 @@ atom 			= int | string 									;
 
 type_field 		= id , ":" , id 								;
 
-data_field 		= id , ":" , atom 								; // TODO! Replace atom with expr.
+data_field 		= id , ":" , atom 								;
 
 type_field_list = type_field , { "," , type_field } , [ "," ] 	;
 
@@ -31,6 +31,10 @@ comp_def 		= "component" , id , "{", type_field_list , "}" ;
 comp_cons 		= id , "{", data_field_list , "}" 				;
 
 expr_stmt 		= atom | comp_cons 								;
+
+var             = id 											;
+
+var_decl        = "var" , id , "=" , expr 					    ;
 
 program 		= { comp_def | expr_stmt } 						;
 */
