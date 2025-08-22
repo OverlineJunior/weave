@@ -28,7 +28,7 @@ const SOURCE: &str = r#"
 	entity(bar)
 
 	system Foo(bar: Bar) {
-		var baz = bar.baz
+		print bar.baz
 	}
 "#;
 

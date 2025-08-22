@@ -21,6 +21,7 @@ pub enum Token {
     Component,
     System,
     Var,
+    Print,
 
     LParen,   // (
     RParen,   // )
@@ -40,6 +41,7 @@ impl Token {
             "component" => Some(Token::Component),
             "system" => Some(Token::System),
             "var" => Some(Token::Var),
+            "print" => Some(Token::Print),
             _ => None,
         }
     }
@@ -53,6 +55,7 @@ impl Token {
             Token::Component => "component".to_string(),
             Token::System => "system".to_string(),
             Token::Var => "var".to_string(),
+            Token::Print => "print".to_string(),
             Token::LParen => "(".to_string(),
             Token::RParen => ")".to_string(),
             Token::LBrace => "{".to_string(),

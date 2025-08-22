@@ -36,7 +36,9 @@ var             = id 											;
 
 var_decl        = "var" , id , "=" , expr 					    ;
 
-field_get       = id , "." , id 					;
+field_get       = id , "." , id 					            ;
+
+print           = "print" , expr 						        ;
 
 program 		= { comp_def | expr_stmt } 						;
 */
@@ -126,7 +128,11 @@ where
             .then(expr.clone())
             .map(|(name, value)| Stmt::VarDecl { name, value });
 
-        comp_def.or(expr_stmt).or(system_decl).or(var_decl).boxed()
+        let print = just(Token::Print)
+            .ignore_then(expr.clone())
+            .map(Stmt::Print);
+
+        comp_def.or(expr_stmt).or(system_decl).or(var_decl).or(print).boxed()
     });
 
     let program = stmt.repeated().collect::<Vec<Stmt>>().map(Stmt::Block);
