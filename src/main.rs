@@ -5,19 +5,6 @@ mod lexer;
 mod parser;
 mod interpreter;
 
-// const SOURCE: &str = r#"
-// 	system Foo(bar: Bar) {
-// 		print(bar.baz, bar.qux)
-// 	}
-
-// 	component Bar {
-// 		baz: Int,
-// 		qux: String,
-// 	}
-
-// 	entity(Bar { baz: 1, qux: "a" })
-// "#;
-
 const SOURCE: &str = r#"
 	component Bar {
 		baz,
