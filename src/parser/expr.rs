@@ -12,6 +12,10 @@ pub enum Expr {
     },
     EntityCons(Vec<Expr>),
     Var { name: String },
+    FieldGet {
+        name: String,
+        field: String,
+    },
 }
 
 impl Display for Expr {
@@ -28,7 +32,10 @@ impl Display for Expr {
             },
             Expr::Var { name } => {
                 write!(f, "Var(name: {})", name)
-            }
+            },
+            Expr::FieldGet { name, field } => {
+                write!(f, "FieldGet(name: {}, field: {})", name, field)
+            },
         }
     }
 }

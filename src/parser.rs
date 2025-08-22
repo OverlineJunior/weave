@@ -36,6 +36,8 @@ var             = id 											;
 
 var_decl        = "var" , id , "=" , expr 					    ;
 
+field_get       = id , "." , id 					;
+
 program 		= { comp_def | expr_stmt } 						;
 */
 
@@ -74,7 +76,12 @@ where
 
         let var = id.map(|name| Expr::Var { name });
 
-        literal.or(comp_cons).or(entity_cons).or(var)
+        let field_get = id
+            .then_ignore(just(Token::Dot))
+            .then(id)
+            .map(|(name, field)| Expr::FieldGet { name, field });
+
+        literal.or(comp_cons).or(entity_cons).or(field_get).or(var)
     });
 
     let stmt = recursive(|stmt| {
