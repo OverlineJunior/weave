@@ -91,12 +91,12 @@ where
 
         let field_decl_list = comma_separated(field_decl);
 
-        let comp_def = just(Token::Component)
+        let comp_decl = just(Token::Component)
             .ignore_then(id)
             .then_ignore(just(Token::LBrace))
             .then(field_decl_list)
             .then_ignore(just(Token::RBrace))
-            .map(|(name, field_decls)| Stmt::ComponentDef { name, field_decls });
+            .map(|(name, field_decls)| Stmt::ComponentDecl { name, field_decls });
 
         let expr_stmt = expr.clone().map(Stmt::Expr);
 
@@ -132,7 +132,7 @@ where
             .ignore_then(expr.clone())
             .map(Stmt::Print);
 
-        comp_def.or(expr_stmt).or(system_decl).or(var_decl).or(print).boxed()
+        comp_decl.or(expr_stmt).or(system_decl).or(var_decl).or(print).boxed()
     });
 
     let program = stmt.repeated().collect::<Vec<Stmt>>().map(Stmt::Block);

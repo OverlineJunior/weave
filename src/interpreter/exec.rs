@@ -2,7 +2,7 @@ use crate::{interpreter::eval::eval, parser::stmt::Stmt};
 
 pub fn exec(stmt: &Stmt) -> Result<(), String> {
 	match stmt {
-		Stmt::ComponentDef { name, field_decls } => {
+		Stmt::ComponentDecl { name, field_decls } => {
 			// TODO! Register component definition in environment.
 			println!("Defining component {} with fields: {:?}", name, field_decls);
 			Ok(())

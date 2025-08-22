@@ -7,7 +7,7 @@ pub type QueryItem = (String, String);
 pub enum Stmt {
     Block(Vec<Stmt>),
     Expr(Expr),
-    ComponentDef { name: String, field_decls: Vec<String> },
+    ComponentDecl { name: String, field_decls: Vec<String> },
     SystemDecl { name: String, query: Vec<QueryItem>, body: Box<Stmt> },
     VarDecl { name: String, value: Expr },
     Print(Expr),
@@ -22,8 +22,8 @@ impl Display for Stmt {
             Stmt::Expr(expr) => {
                 write!(f, "Expr(expr: {})", expr)
             }
-            Stmt::ComponentDef { name, field_decls } => {
-                write!(f, "ComponentDef(name: {}, field_decls: {:?})", name, field_decls)
+            Stmt::ComponentDecl { name, field_decls } => {
+                write!(f, "ComponentDecl(name: {}, field_decls: {:?})", name, field_decls)
             }
             Stmt::SystemDecl { name, query, body } => {
                 write!(f, "SystemDecl(name: {}, query: {:?}, body: {:?})", name, query, body)
