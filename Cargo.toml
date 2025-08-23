@@ -5,4 +5,5 @@ edition = "2024"
 
 [dependencies]
 chumsky = "0.10.1"
+flecs_ecs = "0.1.3"
 thiserror = "2.0.12"

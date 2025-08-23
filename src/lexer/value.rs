@@ -5,6 +5,7 @@ pub enum Value {
     Int(i64),
     String(String),
     Entity(u64),
+	ComponentType { name: String, id: u64 },
     ComponentInst { fields: Vec<(String, Value)> },
 }
 
@@ -14,6 +15,7 @@ impl Display for Value {
             Value::Int(n) => write!(f, "{}", n),
             Value::String(s) => write!(f, "\"{}\"", s),
             Value::Entity(id) => write!(f, "Entity({})", id),
+			Value::ComponentType { name, id } => write!(f, "ComponentType({}, {})", name, id),
             Value::ComponentInst { fields } => {
                 let fields_str: Vec<String> = fields
                     .iter()

@@ -6,6 +6,9 @@ pub fn exec(stmt: &Stmt, env: &mut HashMap<String, Value>) -> Result<(), String>
         Stmt::ComponentDecl { name, field_decls } => {
             // TODO! Register component definition in environment.
             println!("Defining component {} with fields: {:?}", name, field_decls);
+
+			
+
             Ok(())
         }
         Stmt::SystemDecl { name, query, body } => {
