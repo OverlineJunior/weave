@@ -1,0 +1,37 @@
+int = ? gerado pelo lexer ? ;
+string = ? gerado pelo lexer ? ;
+id = ? gerado pelo lexer ? ;
+
+literal = int | string ;
+
+field_decl = id ;
+field_decl_list = field_decl , { "," , field_decl } , [ "," ] ;
+
+data_field = id , ":" , expr ;
+data_field_list = data_field , { "," , data_field } , [ "," ] ;
+
+comp_decl = "component" , id , "{" , field_decl_list , "}" ;
+
+comp_cons = id , "{" , data_field_list , "}" ;
+
+entity_cons = "entity" , "(" , expr_list , ")" ;
+expr_list = expr , { "," , expr } , [ "," ] ;
+
+field_get = id , "." , id ;
+
+expr = literal | comp_cons | entity_cons | field_get ;
+
+expr_stmt = expr ;
+
+print = "print" , "(" , expr_list , ")" ;
+
+block = "{" , { stmt } , "}" ;
+
+query_item = id , ":" , id ;
+query = query_item , { "," , query_item } , [ "," ] ;
+
+system_decl = "system" , id , "(" , query , ")" , block ;
+
+stmt = comp_decl | expr_stmt | system_decl | print | block ;
+
+program = { stmt } ;

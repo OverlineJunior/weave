@@ -1,60 +1,5 @@
-use crate::{
-    lexer::token::Token,
-    parser::{expr::Expr, stmt::Stmt},
-};
-use chumsky::{input::ValueInput, prelude::*};
-
-pub mod expr;
-pub mod stmt;
-
-/*
-Grammar (EBNF):
-
-int = ? parsed by lexer ? ;
-string = ? parsed by lexer ? ;
-id = ? parsed by lexer ? ;
-
-literal = int | string ;
-
-field_decl = id ;
-field_decl_list = field_decl , { "," , field_decl } , [ "," ] ;
-
-data_field = id , ":" , expr ;
-data_field_list = data_field , { "," , data_field } , [ "," ] ;
-
-comp_decl = "component" , id , "{" , field_decl_list , "}" ;
-
-comp_cons = id , "{" , data_field_list , "}" ;
-
-entity_cons = "entity" , "(" , expr_list , ")" ;
-expr_list = expr , { "," , expr } , [ "," ] ;
-
-field_get = id , "." , id ;
-
-var = id ;
-
-expr = literal | comp_cons | entity_cons | field_get | var ;
-
-expr_stmt = expr ;
-
-var_decl = "var" , id , "=" , expr ;
-
-print = "print" , expr ;
-
-block = "{" , { stmt } , "}" ;
-
-query_item = id , ":" , id ;
-query = query_item , { "," , query_item } , [ "," ] ;
-
-system_decl = "system" , id , "(" , query , ")" , block ;
-
-stmt = comp_decl | expr_stmt | system_decl | var_decl | print | block ;
-
-program = { stmt } ;
-*/
-
-#[allow(clippy::let_and_return)]
-pub fn parser<'a, I>() -> impl Parser<'a, I, Stmt, extra::Err<Rich<'a, Token>>>
+// O tipo de retorno do parser parece estranho, mas tudo que ele diz é que o parser consome tokens do tipo `Token` e produz uma AST do tipo `Stmt`, além de fornecer informações de erro detalhadas em caso de falha na análise.
+fn parser<'a, I>() -> impl Parser<'a, I, Stmt, extra::Err<Rich<'a, Token>>>
 where
     I: ValueInput<'a, Token = Token, Span = SimpleSpan>,
 {
@@ -62,6 +7,7 @@ where
         Token::Id(id) => id,
     };
 
+	// O macro `recursive` se torna necessário quando é preciso referenciar o parser dentro de sua própria definição.
     let expr = recursive(|expr| {
         let field = id.then_ignore(just(Token::Colon)).then(expr.clone());
 
@@ -148,18 +94,4 @@ where
     let program = stmt.repeated().collect::<Vec<Stmt>>().map(Stmt::Block);
 
     program
-}
-
-fn comma_separated<'a, I, F, O>(
-    parser: F,
-) -> impl Parser<'a, I, Vec<O>, extra::Err<Rich<'a, Token>>>
-where
-    I: ValueInput<'a, Token = Token, Span = SimpleSpan>,
-    F: Parser<'a, I, O, extra::Err<Rich<'a, Token>>>,
-{
-    parser
-        .separated_by(just(Token::Comma))
-        .allow_trailing()
-        .at_least(1)
-        .collect::<Vec<_>>()
 }

@@ -1,3 +1,57 @@
 \section{Implementação da Análise Sintática}
 
-Hi!
+A implementação da análise sintática começou com a representação da AST pela definição das enumerações \texttt{Expr} e \texttt{Stmt}, que representam expressões e instruções, respectivamente. No código, essas enumerações são definidas como mostrado no \autoref{cod:expr_enum} e no \autoref{cod:stmt_enum}.
+
+\codigoRust
+\lstinputlisting[
+	language=Rust,
+	label=cod:expr_enum,
+	caption={Versão simplificada do código que define \texttt{Expr} e suas variantes.},
+]{../codes/expr_enum.rs}
+\vspace{-1em}
+\fonte{Elaboração própria.}
+
+Sabendo que expressão é qualquer construto que retorna um valor \cite{craftinginterpreters}, a enumeração \texttt{Expr} foi definida para representar os diferentes tipos de expressões que a linguagem suporta. Junto das instruções, que são representadas pela enumeração \texttt{Stmt} ilustrada no \autoref{cod:stmt_enum}, esses dois tipos representam a AST em sua totalidade através da composição de suas variantes.
+
+Diferente de expressões, instruções não retornam valores, e por isso, costumam ser responsáveis por alterar o estado do programa ou controlar o fluxo de execução \cite{craftinginterpreters}. A enumeração \texttt{Stmt}, ilustrada no \autoref{cod:stmt_enum}, foi definida para representar os diferentes tipos de instruções que a linguagem suporta.
+
+\codigoRust
+\lstinputlisting[
+	language=Rust,
+	label=cod:stmt_enum,
+	caption={Versão simplificada do código que define \texttt{Stmt} e suas variantes.},
+]{../codes/stmt_enum.rs}
+\vspace{-1em}
+\fonte{Elaboração própria.}
+
+Vale notar a aparente contradição da variante \texttt{Stmt::Expr} no \autoref{cod:stmt_enum}. Ela existe para permitir que certas expressões sejam usadas como instruções, já que a gramática da linguagem define um programa como um conjunto de instruções. Assim, expressões como \texttt{Expr::EntityCons} podem ser tratadas como instruções quando necessário.
+
+Com a AST representada no código, resta a implementação do \textit{parser}, que será responsável por transformar a sequência de \textit{tokens} gerada pelo \textit{lexer} em uma AST. Para isso, foi escrita a gramática formal da linguagem na notação EBNF, apresentada no \autoref{cod:grammar}.
+
+\codigoRust
+\lstinputlisting[
+	language=Rust,
+	label=cod:grammar,
+	caption={Gramática formal da linguagem proposta na notação EBNF.},
+]{../codes/grammar.ebnf}
+\vspace{-1em}
+\fonte{Elaboração própria.}
+
+Note como a maioria das regras de produção tem como objetivo gerar as variantes das enumerações \texttt{Expr} e \texttt{Stmt}, salvo as regras auxiliares, como \texttt{field\_decl}, que servem para auxiliar na definição das regras principais.
+
+Com a gramática definida, o próximo passo foi a implementação do \textit{parser} utilizando a biblioteca \textit{Chumsky}, abordada na seção \ref{sec:chumsky}. Pelo fato da biblioteca abstrair maior parte da complexidade envolvida na construção do \textit{parser}, a implementação acabou sendo um espelho direto da gramática formal definida no \autoref{cod:grammar}, como ilustrado no \autoref{cod:parser}.
+
+\codigoRust
+\lstinputlisting[
+	language=Rust,
+	label=cod:parser,
+	caption={Versão simplificada do código que compõe o \textit{parser}.},
+]{../codes/parser.rs}
+\vspace{-1em}
+\fonte{Elaboração própria com o uso de Chumsky \cite{chumsky}.}
+
+Como é possível observar no \autoref{cod:parser}, as regras de produção da gramática foram traduzidas para o código de forma quase literal, salvo diferenças de sintaxe e o mapeamento das produções para as variantes das enumerações \texttt{Expr} e \texttt{Stmt}.
+
+Vale notar o mepeamento da regra \texttt{program} para a instrução \texttt{Stmt::Block} — por mais que o programa teoricamente não seja um bloco de código, a semântica de ambos é a mesma neste trabalho, por isso, foi decidido reutilizar a variante \texttt{Stmt::Block} para representar o programa como um todo, eliminando a necessidade de criar uma nova variante apenas para esse fim.
+
+Com a implementação do \textit{parser} concluída, o próximo passo foi interpretar a AST gerada, o que será abordado na próxima seção.
