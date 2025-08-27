@@ -1,3 +1,42 @@
 \section{Implementação da Análise Léxica}
 
-Hi!
+A implementação do \textit{lexer} começou com a definição de \textit{token}, que serão responsáveis por representar as palavras individuais do código-fonte e seus dados. No código, os \textit{tokens} são variantes de uma enumeração, como pode ser visto no \autoref{cod:token_enum}.
+
+\codigoRust
+\lstinputlisting[
+	language=Rust,
+	label=cod:token_enum,
+	caption={Versão simplificada do código que define \texttt{Token} e suas variantes.},
+]{../codes/token_enum.rs}
+\vspace{-1em}
+\fonte{Elaboração própria.}
+
+No \autoref{cod:token_enum}, pode-se observar que as variantes \texttt{Int} e \texttt{String} carregam um valor do tipo \texttt{Value}. Esse tipo é outra enumeração, dessa vez responsável por representar os tipos de dados primitivos da linguagem, como mostrado no \autoref{cod:value_enum}.
+
+\codigoRust
+\lstinputlisting[
+	language=Rust,
+	label=cod:value_enum,
+	caption={Versão simplificada do código que define \texttt{Value} e suas variantes.},
+]{../codes/value_enum.rs}
+\vspace{-1em}
+\fonte{Elaboração própria.}
+
+A escolha de representar \texttt{Token} e \texttt{Value} como enumerações (\texttt{enum}), e não como estruturas (\texttt{struct}) com um campo que indica a variante, foi motivada principalmente pelo fato de que, em Rust, \textit{pattern matching} com \texttt{match} é exaustivo, garantindo que todas as variantes sejam tratadas. Isso reduz a probabilidade de erros, como esquecer de tratar um tipo específico de \textit{token} ou valor.
+
+Com a definição de \textit{tokens} e valores, o próximo passo foi a implementação do \textit{lexer} em si. O \textit{lexer} é responsável por ler o código-fonte caractere por caractere e agrupá-los em \textit{tokens} significativos. No caso deste trabalho, o \textit{lexer} foi implementado do zero, sem o uso de bibliotecas externas, a fim de ter mais controle na produção de erros léxicos\footnote{Em uma versão mais antiga da implementação, foi utilizada a biblioteca de análise léxica Logos. Por mais que seu uso foi capaz de reduzir dramaticamente a complexidade do código, sua funcionalidade de permitir que o usuário crie seus próprios erros léxicos ainda faltava documentação.}.
+
+A implementação do \textit{lexer} nestre trabalho fez uso do iterador \texttt{Peekable}, incluido na biblioteca padrão de Rust, que permite olhar o próximo caractere sem consumi-lo. Podendo ver o próximo caractere a ser examinado permite descobrir padrões prematuramente para depois iniciar o consumo de um tipo de \textit{token} específico. Por exemplo, ao encontrar um caractere de aspas duplas (\texttt{"}), o \textit{lexer} sabe que deve começar a consumir um \textit{token} do tipo \texttt{String} até encontrar outra aspas duplas, simbolizando o fim da \textit{string}.
+
+O \autoref{cod:lexer} ilustra uma versão simplificada do código que compõe o \textit{lexer}, mostrando a detecção do padrão de forma prematura para iniciar o consumo do seu respectivo \textit{token}.
+
+\codigoRust
+\lstinputlisting[
+	language=Rust,
+	label=cod:lexer,
+	caption={Versão simplificada do código que compõe o \textit{lexer}.},
+]{../codes/lexer.rs}
+\vspace{-1em}
+\fonte{Elaboração própria.}
+
+Com o \textit{lexer} implementado, se tornou possível transformar o código-fonte em uma sequência de \textit{tokens}, que serão utilizados na próxima etapa do processo de interpretação: a análise sintática.

@@ -13,24 +13,24 @@ fn uppercase_first(s: &str) -> String {
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Token {
-    Int(Value),
-    String(Value),
-    Id(String),
+    Int(Value),     // e.g.: `42`
+    String(Value),  // e.g.: `"Hello, world!"`
+    Id(String),     // e.g.: em `var foo = 42`, `foo` é um Id.
 
-    Entity,
-    Component,
-    System,
-    Var,
-    Print,
+    Entity,         // entity
+    Component,      // component
+    System,         // system
+    Var,            // var
+    Print,          // print
 
-    LParen,   // (
-    RParen,   // )
-    LBrace, // {
-    RBrace, // }
-    Comma,  // ,
-    Dot,    // .
-    Colon,  // :
-    Assign, // =
+    LParen,         // (
+    RParen,         // )
+    LBrace,         // {
+    RBrace,         // }
+    Comma,          // ,
+    Dot,            // .
+    Colon,          // :
+    Assign,         // =
 }
 
 impl Token {
