@@ -1,0 +1,66 @@
+@startuml diagrama_componentes
+skinparam packageStyle rectangle
+skinparam shadowing true
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+
+package "Análise Léxica" {
+    [Lexer] as lexer
+    [Token] as token
+	[Valor] as valor
+    [Erro Léxico] as erro_lexico
+}
+
+package "Análise Sintática" {
+    [Parser] as parser
+    [Expressão] as expressao
+    [Instrução] as instrucao
+    [Erro Sintático] as erro_sintatico
+    interface Chumsky as chumsky
+}
+
+package "Interpretação" {
+    [Interpretador] as interpretador
+    [Executador] as executador
+    [Avaliador] as avaliador
+    [Erro de Tempo de Execução] as erro_execucao
+    interface Flecs as flecs
+}
+
+interface Thiserror as thiserror
+
+lexer ..> token
+lexer ..> erro_lexico
+
+parser ..> expressao
+parser ..> instrucao
+parser ..> erro_sintatico
+parser ..> chumsky
+
+interpretador ..> executador
+interpretador ..> instrucao
+interpretador ..> erro_execucao
+
+token -> valor
+
+expressao -> valor
+
+instrucao -> expressao
+
+avaliador .> valor
+avaliador .> expressao
+avaliador .> flecs
+
+executador ..> avaliador
+executador .> valor
+executador .> instrucao
+executador .> flecs
+
+erro_lexico ..|> thiserror
+
+erro_sintatico ..|> thiserror
+
+erro_execucao ..|> thiserror
+
+@enduml

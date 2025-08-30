@@ -35,5 +35,9 @@
 				"build/%DOCFILE%"
 			]
 		}
-	]
+	],
+	"plantuml.exportIncludeFolderHeirarchy": false,
+	"plantuml.exportSubFolder": false,
+	"plantuml.exportFormat": "png",
+	"plantuml.exportOutDir": "diagrams"
 }
