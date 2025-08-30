@@ -1,0 +1,46 @@
+@startebnf diagrama_gramatica
+skinparam packageStyle rectangle
+skinparam shadowing true
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+
+inteiro = ? gerado pelo lexer ? ;
+string = ? gerado pelo lexer ? ;
+identificador = ? gerado pelo lexer ? ;
+
+literal = inteiro | string ;
+
+declaracao_campo = identificador ;
+lista_declaracao_campo = declaracao_campo , { "," , declaracao_campo } , [ "," ] ;
+
+instanciacao_campo = identificador , ":" , expressao ;
+lista_instanciacao_campo = instanciacao_campo , { "," , instanciacao_campo } , [ "," ] ;
+
+declaracao_componente = "component" , identificador , "{" , declaracao_campo_list , "}" ;
+
+instanciacao_componente = identificador , "{" , lista_instanciacao_campo , "}" ;
+
+instanciacao_entidade = "entity" , "(" , lista_expressaoessao , ")" ;
+lista_expressaoessao = expressao , { "," , expressao } , [ "," ] ;
+
+acesso_campo = identificador , "." , identificador ;
+
+expressao = literal | instanciacao_componente | instanciacao_entidade | acesso_campo ;
+
+instrucao_expressao = expressao ;
+
+print = "print" , "(" , lista_expressaoessao , ")" ;
+
+bloco = "{" , { instrucao } , "}" ;
+
+item_query = identificador , ":" , identificador ;
+query = item_query , { "," , item_query } , [ "," ] ;
+
+declaracao_sistema = "system" , identificador , "(" , query , ")" , bloco ;
+
+instrucao = declaracao_componente | instrucao_expressao | declaracao_sistema | print | bloco ;
+
+programa = { instrucao } ;
+
+@endebnf
