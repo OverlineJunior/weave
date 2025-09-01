@@ -5,14 +5,14 @@ skinparam linetype ortho
 skinparam defaultFontName Arial
 skinparam defaultFontSize 12
 
-package "Análise Léxica" {
+package "Análise Léxica" #LightBlue {
     [Lexer] as lexer
     [Token] as token
 	[Valor] as valor
     [Erro Léxico] as erro_lexico
 }
 
-package "Análise Sintática" {
+package "Análise Sintática" #LightGreen {
     [Parser] as parser
     [Expressão] as expressao
     [Instrução] as instrucao
@@ -20,7 +20,7 @@ package "Análise Sintática" {
     interface Chumsky as chumsky
 }
 
-package "Interpretação" {
+package "Interpretação" #LightYellow {
     [Interpretador] as interpretador
     [Executador] as executador
     [Avaliador] as avaliador

@@ -1,0 +1,21 @@
+@startuml diagrama_atividades
+skinparam packageStyle rectangle
+skinparam shadowing true
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+
+|#LightBlue|**Tempo de Compilação**|
+start
+-> Código Fonte;
+://Lexer//; <<procedure>>
+->//Tokens//;
+://Parser//; <<procedure>>
+-> AST;
+
+|#LightGreen|**Tempo de Execução**|
+:Interpretador; <<procedure>>
+-> Código Interpretado;
+end
+
+@enduml
