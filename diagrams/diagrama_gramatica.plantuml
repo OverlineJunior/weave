@@ -30,7 +30,7 @@ expressao = literal | instanciacao_componente | instanciacao_entidade | acesso_c
 
 instrucao_expressao = expressao ;
 
-print = "print" , "(" , lista_expressaoessao , ")" ;
+print = "print" , "(" , lista_expressoes , ")" ;
 
 bloco = "{" , { instrucao } , "}" ;
 
