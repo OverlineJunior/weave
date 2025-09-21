@@ -1,3 +1,5 @@
+#![allow(dead_code, unused_variables)]
+
 use crate::{interpreter::interpret, lexer::tokenize, parser::parser};
 use chumsky::prelude::*;
 
