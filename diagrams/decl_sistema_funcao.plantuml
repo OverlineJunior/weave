@@ -1,0 +1,12 @@
+@startebnf decl_sistema_funcao
+skinparam packageStyle rectangle
+skinparam shadowing true
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+
+declaracao_sistema = "system" , identificador , "(" , query , ")" , bloco ;
+
+declaracao_funcao = "fun" , identificador, "(" , parametros , ")" , bloco ;
+
+@endebnf
