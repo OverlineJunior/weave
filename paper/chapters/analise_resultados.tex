@@ -11,12 +11,16 @@ Saindo do escopo de fases de um interpretador e indo mais a fundo na implementa�
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.45\textheight]{../diagrams/decl_sistema_funcao.png}
-	\caption{Diagrama de sintaxe comparando declaração de sistemas e funções.}
+	\caption{Diagrama de sintaxe comparando declaração de sistemas e de funções.}
 	\fonte{Elaboração própria com PlantUML feita com base no interpretador nosso e no de Jlox \cite{craftinginterpreters}.}
 	\label{fig:decl_sistema_funcao}
 \end{figure}
 
-Fora as semelhanças, as diferenças da linguagem proposta se encontram principalmente na semântica e pragmática, que foram adaptadas para suportar os conceitos de ECS.
+Fora as semelhanças, as diferenças na implementação da linguagem proposta foram encontradas principalmente na semântica e na pragmática \cite{designconceptsinlanguages}, que foram adaptadas para suportar os conceitos de ECS.
+
+Ainda no exemplo de declaração de sistemas, a semântica foi feita de forma que o interpretador reconheça um sistema como uma função que atua sobre entidades e seus componentes de forma automática. Já a pragmática foi feita através da ligação da sua sintaxe com a API da biblioteca de ECS Flecs.
+
+A fim de melhor documentar o processo de desenvolvimento da implementação, a seção seguinte detalha as decisões tomadas e os desafios encontrados durante o desenvolvimento do interpretador de forma exaustiva.
 
 \section{Decisões Tomadas e Desafios Encontrados}
 
