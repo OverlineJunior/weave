@@ -1,8 +1,8 @@
 \chapter{Análise de Resultados} \label{ch:analise_resultados}
 
-Este capítulo apresenta a análise dos resultados obtidos a partir do desenvolvimento da linguagem proposta, organizados com relação aos objetivos específicos estabelecidos na \autoref{sec:objetivos}. Após avaliar como cada objetivo específico foi alcançado, eles serão sintetizados para determinar se o objetivo geral do trabalho foi atingido.
+Este capítulo apresenta a análise dos resultados obtidos a partir do desenvolvimento da linguagem proposta, organizados com relação aos objetivos específicos estabelecidos na \autoref{sec:objetivos}. Ele está dividido em três seções, incluindo a análise geral da implementação, as decisões de desenvolvimento e seus impactos, e por fim, a viabilidade e limitações da solução proposta, determinando se os objetivos do trabalho foram alcançados.
 
-\section{Implementação da Solução}
+\section{Análise Geral da Implementação da Solução}
 
 A implementação do protótipo de interpretador para a linguagem proposta se mostrou muito parecida com a implementação de interpretadores de linguagens tradicionais. Isso se deve ao fato dele possuir todas as fases genéricas de um interpretador tradicional implementadas, já que foi feito com base na primeira metade do livro \textit{Crafting Interpreters}, e consequentemente feito com base em Jlox \cite{craftinginterpreters}.
 
@@ -24,8 +24,26 @@ Fora as semelhanças, as diferenças na implementação da linguagem proposta fo
 
 Ainda no exemplo de declaração de sistemas, a semântica foi feita de forma que o interpretador reconheça um sistema como uma função que atua sobre entidades e seus componentes de forma automática. Já a pragmática foi feita através da ligação da sua sintaxe com a API da biblioteca de ECS Flecs.
 
-A fim de melhor documentar o processo de desenvolvimento da implementação, a seção seguinte detalha as decisões tomadas e os desafios encontrados durante o desenvolvimento do interpretador de forma exaustiva.
+A fim de melhor documentar o processo de desenvolvimento da implementação, a seção seguinte detalha as principais decisões feitas durante o desenvolvimento do interpretador.
 
-\section{Decisões Tomadas e Desafios Encontrados}
+\section{Decisões de Desenvolvimento e seus Impactos}
+
+Esta seção tem a finalidade de documentar as principais decisões tomadas durante o desenvolvimento do interpretador em um só lugar, possivelmente servindo de referência para trabalhos futuros. Para cada decisão, será descrito o objetivo, a decisão em si, o impacto no protótipo, e, caso aplicável, alternativas relevantes.
+
+\subsection{Escolha da Linguagem de Implementação}
+
+\subsection{Escolhas de \textit{Design} da Linguagem}
+
+\subsection{Representação das Abstrações Internas}
+
+\subsection{Estratégia de Análise Léxica}
+
+\subsection{Estratégia de Análise Sintática}
+
+\subsection{Estratégia de Interpretação}
+
+\subsection{Escolha da Biblioteca de ECS}
+
+\subsection{Representação Interna de Entidades, Componentes e Sistemas}
 
 \section{Viabilidade e Limitações da Solução}
