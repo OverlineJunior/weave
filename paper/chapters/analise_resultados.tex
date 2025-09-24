@@ -33,9 +33,9 @@ Esta seção tem a finalidade de documentar as principais decisões tomadas dura
 \subsection{Escolha da Linguagem de Implementação}
 
 \begin{itemize}
-	\item \textbf{Objetivo}:
-	\item \textbf{Decisão}:
-	\item \textbf{Impacto}:
+	\item \textbf{Objetivo}: Escolher uma linguagem de programação adequada para implementar o interpretador, considerando fatores como suporte de bibliotecas, estruturas de dados expressivas e familiaridade do desenvolvedor;
+	\item \textbf{Decisão}: A linguagem escolhida foi Rust, devido ao seu suporte a \textit{Algebraic Data Types} através de \texttt{enums} \cite{rustbook}, seu ecosistema com as bibliotecas necessárias, e a familiaridade do desenvolvedor com a linguagem;
+	\item \textbf{Impacto}: A escolha de Rust tornou o processo de depuração extremamente previsível devido ao seu sistema de tipos rígido, além de permitir abstrações mais expressivas através de \texttt{enums} \cite{rustbook}. Porém, devido a sua tipagem estática, a implementação da ponte entre o interpretador e a biblioteca de ECS exigiu uma estratégia incomum \cite{rustbook}. % TODO! Referenciar a estratégia incomum quando ela for implementada.
 \end{itemize}
 
 \subsection{Escolhas de \textit{Design} da Linguagem}
