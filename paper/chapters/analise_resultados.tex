@@ -59,17 +59,18 @@ Esta seção tem a finalidade de documentar as principais decisões tomadas dura
 \subsection{Estratégia de Análise Léxica}
 
 \begin{itemize}
-	\item \textbf{Objetivo}:
-	\item \textbf{Decisão}:
-	\item \textbf{Impacto}:
+	\item \textbf{Objetivo}: Definir a estratégia de análise léxica para converter o código-fonte em uma sequência de \textit{tokens}. Idealmente, ela deve ser simples de implementar, já que o trabalho se trata de um protótipo.
+	\item \textbf{Decisão}: A estratégia escolhida foi a implementação de um \textit{lexer} manual com \textit{iterators}, inspirado na implementação do Jlox \cite{craftinginterpreters}.
+	\item \textbf{Alternativa}: Utilizar uma biblioteca geradora de \textit{lexers}. Inicialmente, a implementação do \textit{lexer} foi feita com a biblioteca Logos, porém, na época em que foi utilizada, não havia documentação suficiente sobre integração de erros customizados com a biblioteca, o que levou a decisão de implementar um \textit{lexer} manualmente.
+	\item \textbf{Impacto}: A implementação do \textit{lexer} manual foi relativamente simples, com em torno de 180 linhas de código, e permitiu a implementação de erros customizados. Porém, caso a biblioteca Logos tivesse documentação suficiente na época, a implementação poderia ter sido mais simples e com menos linhas de código, como é possivel inferir dos exemplos na documentação da biblioteca \cite{logos}.
 \end{itemize}
 
 \subsection{Estratégia de Análise Sintática}
 
 \begin{itemize}
-	\item \textbf{Objetivo}:
-	\item \textbf{Decisão}:
-	\item \textbf{Impacto}:
+	\item \textbf{Objetivo}: Definir a estratégia de análise sintática para converter a sequência de \textit{tokens} em uma AST. Idealmente, ela deve ser simples de implementar, já que o trabalho se trata de um protótipo.
+	\item \textbf{Decisão}: Diferente do \textit{lexer}, a implementação do \textit{parser} foi feita com uma biblioteca, Chumsky, que expõe uma API para criar \textit{parsers} de forma declarativa \cite{chumsky}.
+	\item \textbf{Impacto}: A implementação do \textit{parser} com Chumsky foi relativamente simples, principalmente quando comparada com a implementação de \textit{parsers} manuais, como o do Jlox \cite{craftinginterpreters}. Devido a natureza declarativa da biblioteca, o código do \textit{parser} ficou extremamente parecido com as regras de produção da gramática, como comentado na \autoref{sec:analise_sintatica}. Isso facilitou a implementação e a depuração do \textit{parser}, que ficou com em torno de 120 linhas de código.
 \end{itemize}
 
 \subsection{Estratégia de Interpretação}
@@ -97,3 +98,26 @@ Esta seção tem a finalidade de documentar as principais decisões tomadas dura
 \end{itemize}
 
 \section{Viabilidade e Limitações da Solução}
+
+% TODO! Escrever esta seção por conta própria. O abaixo é só um rascunho do Gepeto.
+
+% Por fim, esta seção avalia a viabilidade e limitações da solução proposta, determinando se os objetivos do trabalho foram alcançados.
+
+% A implementação do protótipo de interpretador para a linguagem proposta conseguiu atingir todos os objetivos específicos estabelecidos na \autoref{sec:objetivos}. A seguir, cada objetivo específico é revisitado e avaliado:
+
+% \begin{itemize}
+% 	\item \textbf{Objetivo 1}: Pesquisar e analisar conceitos de ECS e linguagens de programação para embasar o desenvolvimento da linguagem proposta.
+% 	\begin{itemize}
+% 		\item \textbf{Avaliação}: Este objetivo foi alcançado através da pesquisa e análise dos conceitos de ECS, linguagens de programação, e interpretadores, conforme documentado na \autoref{ch:fundamentacao_teorica}.
+% 	\end{itemize}
+% 	\item \textbf{Objetivo 2}: Propor um \textit{design} de linguagem que integre os conceitos de ECS de forma simples e intuitiva.
+% 	\begin{itemize}
+% 		\item \textbf{Avaliação}: Este objetivo foi alcançado através do desenvolvimento do \textit{design} da linguagem, conforme documentado na \autoref{ch:design_linguagem}.
+% 	\end{itemize}
+% 	\item \textbf{Objetivo 3}: Implementar um protótipo de interpretador para a linguagem proposta, utilizando uma biblioteca de ECS.
+% 	\begin{itemize}
+% 		\item \textbf{Avaliação}: Este objetivo foi alcançado através da implementação do protótipo de interpretador, conforme documentado na \autoref{ch:implementacao}.
+% 	\end{itemize}
+% \end{itemize}
+
+% Com base na análise acima, conclui-se que a solução proposta é viável e que os objetivos do trabalho foram plenamente alcançados. O protótipo de interpretador desenvolvido demonstra a integração bem-sucedida dos conceitos de ECS na linguagem proposta, atendendo aos requisitos estabelecidos no início do trabalho.
