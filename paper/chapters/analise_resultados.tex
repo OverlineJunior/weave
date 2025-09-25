@@ -50,9 +50,10 @@ Esta seção tem a finalidade de documentar as principais decisões tomadas dura
 \subsection{Representação das Abstrações Internas}
 
 \begin{itemize}
-	\item \textbf{Objetivo}:
-	\item \textbf{Decisão}:
-	\item \textbf{Impacto}:
+	\item \textbf{Objetivo}: Definir as estruturas de dados internas para representar as abstrações da linguagem proposta, como \textit{tokens}, expressões e instruções.
+	\item \textbf{Decisão}: Utilizar \texttt{enums} do Rust para representar as abstrações internas, aproveitando o suporte a \textit{Algebraic Data Types} da linguagem \cite{rustbook}.
+	\item \textbf{Alternativa}: Utilizar \texttt{structs} com campos para representar o tipo de cada abstração, como é feito em Jlox \cite{craftinginterpreters}. Essa alternativa foi descartada devido à superioridade dos \texttt{enums} quanto a código mais robusto.
+	\item \textbf{Impacto}: A escolha de \texttt{enums} tornou o código mais robusto, já que em conjunto com \texttt{match}, o compilador do Rust consegue garantir que todos os casos possíveis de cada abstração sejam tratados \cite{rustbook}.
 \end{itemize}
 
 \subsection{Estratégia de Análise Léxica}
