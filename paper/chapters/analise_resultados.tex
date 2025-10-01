@@ -73,31 +73,41 @@ Esta seção tem a finalidade de documentar as principais decisões tomadas dura
 	\item \textbf{Impacto}: A implementação do \textit{parser} com Chumsky foi relativamente simples, principalmente quando comparada com a implementação de \textit{parsers} manuais, como o do Jlox \cite{craftinginterpreters}. Devido a natureza declarativa da biblioteca, o código do \textit{parser} ficou extremamente parecido com as regras de produção da gramática, como comentado na \autoref{sec:analise_sintatica}. Isso facilitou a implementação e a depuração do \textit{parser}, que ficou com em torno de 120 linhas de código.
 \end{itemize}
 
-\subsection{Estratégia de Interpretação}
+% \subsection{Estratégia de Interpretação}
 
-\begin{itemize}
-	\item \textbf{Objetivo}:
-	\item \textbf{Decisão}:
-	\item \textbf{Impacto}:
-\end{itemize}
+% \begin{itemize}
+% 	\item \textbf{Objetivo}:
+% 	\item \textbf{Decisão}:
+% 	\item \textbf{Impacto}:
+% \end{itemize}
 
-\subsection{Escolha da Biblioteca de ECS}
+% \subsection{Escolha da Biblioteca de ECS}
 
-\begin{itemize}
-	\item \textbf{Objetivo}:
-	\item \textbf{Decisão}:
-	\item \textbf{Impacto}:
-\end{itemize}
+% \begin{itemize}
+% 	\item \textbf{Objetivo}:
+% 	\item \textbf{Decisão}:
+% 	\item \textbf{Impacto}:
+% \end{itemize}
 
-\subsection{Representação Interna de Entidades, Componentes e Sistemas}
+% \subsection{Representação Interna de Entidades, Componentes e Sistemas}
 
-\begin{itemize}
-	\item \textbf{Objetivo}:
-	\item \textbf{Decisão}:
-	\item \textbf{Impacto}:
-\end{itemize}
+% \begin{itemize}
+% 	\item \textbf{Objetivo}:
+% 	\item \textbf{Decisão}:
+% 	\item \textbf{Impacto}:
+% \end{itemize}
 
 \section{Viabilidade e Limitações da Solução}
+
+Por fim, esta seção serve como uma síntese dos resultados obtidos, avaliando a viabilidade e limitações da solução proposta e depois determinando se os objetivos do trabalho foram alcançados.
+
+Foi visto que o protótipo de interpretador conseguiu de fato interpretar programas na linguagem proposta, e que sua implementação se assemelha muito com a implementação de interpretadores tradicionais, salvo a fase de interpretação, que é onde há a ponte entre o interpretador e a biblioteca de ECS.
+
+A respeito de documentar as decisões de \textit{design} e implementação, a seção anterior o fez de forma detalhada, também incluindo os impactos de cada decisão no protótipo. De forma geral, as decisões tomadas durante o desenvolvimento do interpretador se mostraram acertadas, com impactos positivos na implementação.
+
+A respeito de limitações, a mais aparente é a falta de recursos que a linguagem proporciona, como controle de fluxo, funções, entre outros. Isso é intencional, visto que o trabalho propõe fornecer apenas um protótipo funcional, e não uma linguagem completa. Além disso, não houve nenhuma consideração quanto a desempenho, que é um dos principais benefícios do padrão ECS. Isso também foi intencional, de modo a reduzir o escopo do trabalho.
+
+Com o protótipo funcional, um registro das decisões tomadas durante o desenvolvimento, e a avaliação do trabalho como um todo e das decisões tomadas, conclui-se que os objetivos do trabalho foram alcançados.
 
 % TODO! Escrever esta seção por conta própria. O abaixo é só um rascunho do Gepeto.
 
