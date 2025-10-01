@@ -35,7 +35,7 @@ Esta seção tem a finalidade de documentar as principais decisões tomadas dura
 \begin{itemize}
 	\item \textbf{Objetivo}: Escolher uma linguagem de programação adequada para implementar o interpretador, considerando fatores como suporte de bibliotecas, estruturas de dados expressivas e familiaridade do desenvolvedor;
 	\item \textbf{Decisão}: A linguagem escolhida foi Rust, devido ao seu suporte a \textit{Algebraic Data Types} através de \texttt{enums} \cite{rustbook}, seu ecosistema com as bibliotecas necessárias, e a familiaridade do desenvolvedor com a linguagem;
-	\item \textbf{Impacto}: A escolha de Rust tornou o processo de depuração extremamente previsível devido ao seu sistema de tipos rígido, além de permitir abstrações mais expressivas através de \texttt{enums} \cite{rustbook}. Porém, devido a sua tipagem estática, a implementação da ponte entre o interpretador e a biblioteca de ECS exigiu uma estratégia incomum \cite{rustbook}. % TODO! Referenciar a estratégia incomum quando ela for implementada.
+	\item \textbf{Impacto}: A escolha de Rust tornou o processo de depuração extremamente previsível devido ao seu sistema de tipos rígido, além de permitir abstrações mais expressivas através de \texttt{enums} \cite{rustbook}.
 \end{itemize}
 
 \subsection{Escolhas de \textit{Design} da Linguagem}
@@ -73,6 +73,7 @@ Esta seção tem a finalidade de documentar as principais decisões tomadas dura
 	\item \textbf{Impacto}: A implementação do \textit{parser} com Chumsky foi relativamente simples, principalmente quando comparada com a implementação de \textit{parsers} manuais, como o do Jlox \cite{craftinginterpreters}. Devido a natureza declarativa da biblioteca, o código do \textit{parser} ficou extremamente parecido com as regras de produção da gramática, como comentado na \autoref{sec:analise_sintatica}. Isso facilitou a implementação e a depuração do \textit{parser}, que ficou com em torno de 120 linhas de código.
 \end{itemize}
 
+% TODO!
 % \subsection{Estratégia de Interpretação}
 
 % \begin{itemize}
@@ -83,12 +84,13 @@ Esta seção tem a finalidade de documentar as principais decisões tomadas dura
 
 % \subsection{Escolha da Biblioteca de ECS}
 
-% \begin{itemize}
-% 	\item \textbf{Objetivo}:
-% 	\item \textbf{Decisão}:
-% 	\item \textbf{Impacto}:
-% \end{itemize}
+\begin{itemize}
+	\item \textbf{Objetivo}: Escolher uma biblioteca de ECS adequada para integrar com o interpretador, considerando fatores como suporte da linguagem de implementação e documentação extensa;
+	\item \textbf{Decisão}: A biblioteca escolhida foi Flecs, devido ao seu suporte a Rust através de \textit{bindings} e sua documentação extensa \cite{flecs}. Adicionalmente, o autor dessa biblioteca é o mesmo dos vários artigos sobre ECS usados neste trabalho. Além disso, Flecs é uma das poucas bibliotecas de ECS que suporta relacionamento entre entidades, o que será útil para as sugestões de trabalhos futuros \cite{flecs}.
+	\item \textbf{Impacto}: A escolha da biblioteca Flecs facilitou sua integração com o interpretador, devido a sua documentação e artigos relacionados do autor. Porém, pelo fato de seu \textit{binding} para Rust não possuir declaração de componentes de forma dinâmica, a integração exigiu uma estratégia incomum, como descrita na \autoref{sec:interpretacao} \cite{flecs}.
+\end{itemize}
 
+% TODO!
 % \subsection{Representação Interna de Entidades, Componentes e Sistemas}
 
 % \begin{itemize}
