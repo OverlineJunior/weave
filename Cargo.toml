@@ -5,5 +5,5 @@ edition = "2024"
 
 [dependencies]
 chumsky = "0.10.1"
-flecs_ecs = "0.1.3"
+flecs_ecs = { git = "https://github.com/Indra-db/Flecs-Rust.git" }
 thiserror = "2.0.12"

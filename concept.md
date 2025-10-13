@@ -49,8 +49,8 @@ system Foo(bar: Bar) {
 }
 
 component Bar {
-    baz: Int,
-    qux: String,
+    baz,
+    qux,
 }
 
 entity(Bar { baz: 1, qux: "a" })

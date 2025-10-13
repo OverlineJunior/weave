@@ -8,18 +8,13 @@ mod parser;
 mod interpreter;
 
 const SOURCE: &str = r#"
-	component Bar {
-		baz,
-		qux,
-	}
+	component A { f1, f2 }
+	var a = A { f1: 42, f2: "hello" }
+	entity(a)
 
-	var bar = Bar { baz: 1, qux: "a" }
-
-	entity(bar)
-
-	system Foo(bar: Bar) {
-		print bar.baz
-	}
+	component B { g1 }
+	var b = B { g1: "world" }
+	entity(b)
 "#;
 
 fn main() {
