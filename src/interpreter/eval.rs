@@ -16,13 +16,11 @@ pub fn eval(
             Ok(value.clone())
         }
         Expr::FieldGet { name, field } => {
-            // TODO! Lookup variable in environment and get field.
+            // TODO! Find ComponentInst in ecs and get field value.
             Ok(Value::String("field_value".to_string()))
         }
         // ? OK?
         Expr::EntityCons(exprs) => {
-            // TODO! Evaluate expressions and construct entity with id.
-
             let comp_insts = exprs.iter().map(|e| eval(e, env, ecs)).collect::<Result<Vec<_>, _>>()?;
             let entity = ecs.entity_named("user_entity");
 
