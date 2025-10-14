@@ -15,6 +15,10 @@ const SOURCE: &str = r#"
 	component B { g1 }
 	var b = B { g1: "world" }
 	entity(b)
+
+    print a.f1
+    print a.f2
+    print b.g1
 "#;
 
 fn main() {

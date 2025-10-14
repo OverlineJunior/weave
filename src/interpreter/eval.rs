@@ -15,9 +15,17 @@ pub fn eval(
                 .ok_or(format!("Undefined variable: {}", name))?;
             Ok(value.clone())
         }
-        Expr::ComponentFieldGet { type_name, field_name } => {
-            // TODO! Find ComponentInst in ecs and get field value.
-            Ok(Value::String("component_field_value".to_string()))
+        Expr::ComponentFieldGet { lhs, field_name } => {
+            let lhs_value = eval(lhs, env, ecs)?;
+
+            if let Value::ComponentInst { type_name: _, fields, component: _ } = lhs_value {
+                fields.into_iter()
+                    .find(|(f_name, _)| f_name == field_name)
+                    .map(|(_, v)| v)
+                    .ok_or(format!("Field {} not found in component instance", field_name))
+            } else {
+                Err(format!("Expected ComponentInst on LHS of field access, got {:?}", lhs_value))
+            }
         }
         // ? OK?
         Expr::EntityCons(exprs) => {

@@ -88,10 +88,10 @@ where
 
         let var = id.map(|name| Expr::Var { name });
 
-        let field_get = id
+        let field_get = expr
             .then_ignore(just(Token::Dot))
             .then(id)
-            .map(|(type_name, field_name)| Expr::ComponentFieldGet { type_name, field_name });
+            .map(|(lhs, field_name)| Expr::ComponentFieldGet { lhs: Box::new(lhs), field_name });
 
         literal.or(comp_cons).or(entity_cons).or(field_get).or(var)
     });
