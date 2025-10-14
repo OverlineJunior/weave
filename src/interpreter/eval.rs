@@ -15,9 +15,9 @@ pub fn eval(
                 .ok_or(format!("Undefined variable: {}", name))?;
             Ok(value.clone())
         }
-        Expr::FieldGet { name, field } => {
+        Expr::ComponentFieldGet { type_name, field_name } => {
             // TODO! Find ComponentInst in ecs and get field value.
-            Ok(Value::String("field_value".to_string()))
+            Ok(Value::String("component_field_value".to_string()))
         }
         // ? OK?
         Expr::EntityCons(exprs) => {

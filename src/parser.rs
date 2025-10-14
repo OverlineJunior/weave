@@ -91,7 +91,7 @@ where
         let field_get = id
             .then_ignore(just(Token::Dot))
             .then(id)
-            .map(|(name, field)| Expr::FieldGet { name, field });
+            .map(|(type_name, field_name)| Expr::ComponentFieldGet { type_name, field_name });
 
         literal.or(comp_cons).or(entity_cons).or(field_get).or(var)
     });

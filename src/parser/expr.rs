@@ -12,9 +12,9 @@ pub enum Expr {
     },
     EntityCons(Vec<Expr>),
     Var { name: String },
-    FieldGet {
-        name: String,
-        field: String,
+    ComponentFieldGet {
+        type_name: String,
+        field_name: String,
     },
 }
 
@@ -33,8 +33,8 @@ impl Display for Expr {
             Expr::Var { name } => {
                 write!(f, "Var(name: {})", name)
             },
-            Expr::FieldGet { name, field } => {
-                write!(f, "FieldGet(name: {}, field: {})", name, field)
+            Expr::ComponentFieldGet { type_name, field_name } => {
+                write!(f, "ComponentFieldGet(type_name: {}, field_name: {})", type_name, field_name)
             },
         }
     }
