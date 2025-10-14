@@ -76,7 +76,7 @@ where
             .then_ignore(just(Token::LBrace))
             .then(field_list)
             .then_ignore(just(Token::RBrace))
-            .map(|(name, fields)| Expr::ComponentCons { name, fields });
+            .map(|(type_name, fields)| Expr::ComponentCons { type_name, fields });
 
         let expr_list = comma_separated(expr.clone()).boxed();
 

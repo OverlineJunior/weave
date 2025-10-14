@@ -7,7 +7,7 @@ pub type Field = (String, Expr);
 pub enum Expr {
     Literal(Value),
     ComponentCons {
-        name: String,
+        type_name: String,
         fields: Vec<Field>,
     },
     EntityCons(Vec<Expr>),
@@ -24,8 +24,8 @@ impl Display for Expr {
             Expr::Literal(value) => {
                 write!(f, "Literal(value: {:?})", value)
             }
-            Expr::ComponentCons { name, fields } => {
-                write!(f, "ComponentCons(name: {}, fields: {:?})", name, fields)
+            Expr::ComponentCons { type_name, fields } => {
+                write!(f, "ComponentCons(type_name: {}, fields: {:?})", type_name, fields)
             },
             Expr::EntityCons(exprs) => {
                 write!(f, "EntityCons(exprs: {:?})", exprs)

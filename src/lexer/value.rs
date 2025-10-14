@@ -11,6 +11,7 @@ pub enum Value {
     Entity(EntityView<'static>),
 	ComponentType { name: String },
     ComponentInst {
+        type_name: String,
         fields: Vec<(String, Value)>,
         component: UserComponent,
     },
@@ -23,12 +24,12 @@ impl Display for Value {
             Value::String(s) => write!(f, "\"{}\"", s),
             Value::Entity(id) => write!(f, "Entity({})", id),
 			Value::ComponentType { name } => write!(f, "ComponentType({})", name),
-            Value::ComponentInst { fields, component } => {
+            Value::ComponentInst { type_name, fields, component } => {
                 let fields_str: Vec<String> = fields
                     .iter()
                     .map(|(field_name, value)| format!("{}: {}", field_name, value))
                     .collect();
-                write!(f, "ComponentInst({}, {:?})", fields_str.join(", "), component)
+                write!(f, "ComponentInst({}, {}, {:?})", type_name, fields_str.join(", "), component)
             }
         }
     }

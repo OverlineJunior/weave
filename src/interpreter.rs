@@ -15,16 +15,10 @@ pub fn interpret(ast: &Stmt) -> Result<(), String> {
 	println!("Final Environment: {:?}", env);
 	println!("Final ECS: {:?}", ecs.to_json_world(None));
 
-	// let q = w.query::<&(Wildcard, UserComponentType)>().build();
-
-    // q.each_iter(|it, idx, dc| {
-    //     println!("Entity {:?} has UserComponentType with fields {:?}", it.entity(idx), dc.fields);
-    // })
-
 	let q = ecs.query::<&(Wildcard, UserComponent)>().build();
 
 	q.each_iter(|it, idx, uc| {
-		println!("Entity {:?} has UserComponent with fields {:?}", it.entity(idx), uc.fields);
+		println!("Entity {:?} has UserComponent({}) with fields {:?}", it.entity(idx), uc.type_name, uc.fields);
 	});
 
 	Ok(())

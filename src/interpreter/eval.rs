@@ -27,11 +27,11 @@ pub fn eval(
             let entity = ecs.entity_named("user_entity");
 
             comp_insts.into_iter().for_each(|comp_inst| {
-                if let Value::ComponentInst { fields, component } = comp_inst {
+                if let Value::ComponentInst { type_name, fields, component } = comp_inst {
                     // Unnamed so it gets a random id.
                     let aux_entity = ecs.entity();
-                    let id = component.id;
-                    entity.set_id(component, (aux_entity, id));
+                    let instance = component.instance;
+                    entity.set_id(component, (aux_entity, instance));
                 } else {
                     panic!("Expected ComponentInst, got {:?}", comp_inst);
                 }
@@ -40,17 +40,20 @@ pub fn eval(
             Ok(Value::Entity(entity))
         }
         // ? OK?
-        Expr::ComponentCons { name, fields } => {
+        // TODO! Make sure type_name leads to a defined component type and fields match its definition.
+        Expr::ComponentCons { type_name, fields } => {
             let evaluated_fields = fields
                 .iter()
                 .map(|(f_name, f_expr)| eval(f_expr, env, ecs).map(|v| (f_name.clone(), v)))
                 .collect::<Result<Vec<_>, _>>()?;
 
             Ok(Value::ComponentInst {
+                type_name: type_name.clone(),
                 fields: evaluated_fields.clone(),
                 component: UserComponent {
+                    type_name: type_name.clone(),
                     fields: evaluated_fields,
-                    id: ecs.component_named::<UserComponent>(format!("user_component({})", name).as_str()),
+                    instance: ecs.component_named::<UserComponent>(format!("user_component({})", type_name).as_str()),
                 },
             })
         }
