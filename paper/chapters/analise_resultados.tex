@@ -101,25 +101,12 @@ Esta seção tem a finalidade de documentar as principais decisões tomadas dura
 
 \section{Viabilidade e Limitações da Solução}
 
-% TODO! Escrever esta seção por conta própria. O abaixo é só um rascunho do Gepeto.
+Por fim, esta seção serve como uma síntese dos resultados obtidos, avaliando a viabilidade e limitações da solução proposta e depois determinando se os objetivos do trabalho foram alcançados.
 
-% Por fim, esta seção avalia a viabilidade e limitações da solução proposta, determinando se os objetivos do trabalho foram alcançados.
+Foi visto que o protótipo de interpretador conseguiu de fato interpretar programas na linguagem proposta, e que sua implementação se assemelha muito com a implementação de interpretadores tradicionais, salvo a fase de interpretação, que é onde há a ponte entre o interpretador e a biblioteca de ECS.
 
-% A implementação do protótipo de interpretador para a linguagem proposta conseguiu atingir todos os objetivos específicos estabelecidos na \autoref{sec:objetivos}. A seguir, cada objetivo específico é revisitado e avaliado:
+A respeito de documentar as decisões de \textit{design} e implementação, a seção anterior o fez de forma detalhada, também incluindo os impactos de cada decisão no protótipo. De forma geral, as decisões tomadas durante o desenvolvimento do interpretador se mostraram acertadas, com impactos positivos na implementação.
 
-% \begin{itemize}
-% 	\item \textbf{Objetivo 1}: Pesquisar e analisar conceitos de ECS e linguagens de programação para embasar o desenvolvimento da linguagem proposta.
-% 	\begin{itemize}
-% 		\item \textbf{Avaliação}: Este objetivo foi alcançado através da pesquisa e análise dos conceitos de ECS, linguagens de programação, e interpretadores, conforme documentado na \autoref{ch:fundamentacao_teorica}.
-% 	\end{itemize}
-% 	\item \textbf{Objetivo 2}: Propor um \textit{design} de linguagem que integre os conceitos de ECS de forma simples e intuitiva.
-% 	\begin{itemize}
-% 		\item \textbf{Avaliação}: Este objetivo foi alcançado através do desenvolvimento do \textit{design} da linguagem, conforme documentado na \autoref{ch:design_linguagem}.
-% 	\end{itemize}
-% 	\item \textbf{Objetivo 3}: Implementar um protótipo de interpretador para a linguagem proposta, utilizando uma biblioteca de ECS.
-% 	\begin{itemize}
-% 		\item \textbf{Avaliação}: Este objetivo foi alcançado através da implementação do protótipo de interpretador, conforme documentado na \autoref{ch:implementacao}.
-% 	\end{itemize}
-% \end{itemize}
+A respeito de limitações, a mais aparente é a falta de recursos que a linguagem proporciona, como controle de fluxo, funções, entre outros. Isso é intencional, visto que o trabalho propõe fornecer apenas um protótipo funcional, e não uma linguagem completa. Além disso, não houve nenhuma consideração quanto a desempenho, que é um dos principais benefícios do padrão ECS. Isso também foi intencional, de modo a reduzir o escopo do trabalho.
 
-% Com base na análise acima, conclui-se que a solução proposta é viável e que os objetivos do trabalho foram plenamente alcançados. O protótipo de interpretador desenvolvido demonstra a integração bem-sucedida dos conceitos de ECS na linguagem proposta, atendendo aos requisitos estabelecidos no início do trabalho.
+Com o protótipo funcional, um registro das decisões tomadas durante o desenvolvimento, e a avaliação do trabalho como um todo e das decisões tomadas, conclui-se que os objetivos do trabalho foram alcançados.
