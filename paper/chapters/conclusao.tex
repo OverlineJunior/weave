@@ -168,4 +168,30 @@ Baseado na documentação das bibliotecas de ECS Flecs e Bevy, será listado a s
 
 \subsection{Explorar o Conceito de Componentes e Sistemas como Entidades}
 
+Uma sugestão que talvez possa fazer a ideia de um interpretador orientado ao padrão ECS valer mais a pena é explorar como o conceito de componentes e sistemas tratados como entidades pode ser aplicado na linguagem proposta.
+
+Com este conceito aplicado, seria possível atribuir metadados a componentes e sistemas, além de poder criar sistemas que operam sobre outros sistemas ou componentes, permitindo vários tipos de abstrações diferentes sem a necessidade de novas alterações na linguagem, caracterizando assim uma linguagem altamente ortogonal.
+
+A seguir são listadas duas ideias de como esse conceito pode ser aplicado na linguagem proposta:
+
+\begin{itemize}
+    \item \textbf{Modificadores de Componentes}: Permitir que o usuário atribua metadados que alteram o comportamento de componentes\footnote{Este conceito já é utilizado na biblioteca Flecs, lá chamados de \textit{Traits} \cite{flecs}.}, como tornar um componente mutualmente exclusivo com outro;
+    \item \textbf{Agendamento de Sistemas}: Permitir que o usuário defina a ordem de execução de um sistema logo ao lado de sua declaração, ou até mesmo criar sistemas que alteram a ordem de execução de outros sistemas.
+\end{itemize}
+
+Vale notar que, apesar dessas sugestões também poderem ser implementadas em uma biblioteca de ECS tradicional, uma linguagem pode torná-las mais acessíveis e expressivas através de sua sintaxe. O código \autoref{cod:exemplo_futuro} demonstra um exemplo de sintaxe que poderia ser usada para implementar essas duas ideias.
+
+\codigoRust
+\lstinputlisting[
+	language=Rust,
+	label=cod:exemplo_futuro,
+	caption=Exemplo de sintaxe para implementar modificadores de componentes e agendamento de sistemas utilizando o conceito de componentes e sistemas como entidades.
+]{../codes/exemplo_futuro.rs}
+\vspace{-1em}
+\fonte{Elaboração própria.}
+
+No código \autoref{cod:exemplo_futuro}, nota-se a sintaxe que faz uso dos caracteres \texttt{@}, \texttt{(} e \texttt{)}. O caractere \texttt{@} indica uma inserção de componente em tempo de compilação, enquanto os caracteres \texttt{(} e \texttt{)} indicam um relacionamento entre entidades. Com ambos, é possível implementar tanto as ideias sugeridas quanto muitos outros conceitos que possam reutilizar a mesma sintaxe.
+
 \section{Considerações Finais}
+
+Com o protótipo funcional e documentado, foi possível alcançar os objetivos propostos, além de avaliar a viabilidade do projeto e sugerir trabalhos futuros, tornando este trabalho uma base para pesquisas futuras na área de linguagens de programação orientadas ao padrão \textit{Entity Component System}.
