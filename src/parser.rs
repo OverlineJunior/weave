@@ -78,11 +78,9 @@ where
             .then_ignore(just(Token::RBrace))
             .map(|(type_name, fields)| Expr::ComponentCons { type_name, fields });
 
-        let expr_list = comma_separated(expr.clone()).boxed();
-
         let entity_cons = just(Token::Entity)
             .then_ignore(just(Token::LParen))
-            .then(expr_list)
+            .then(comma_separated(expr.clone()).boxed())
             .then_ignore(just(Token::RParen))
             .map(|(_, comps)| Expr::EntityCons(comps));
 
