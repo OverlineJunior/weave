@@ -86,6 +86,8 @@ where
 
         let var = id.map(|name| Expr::Var { name });
 
+        // Tried `lhs` as `expr` in the past, but caused infinite recursion since chumsky doesn't support left recursion.
+        // This is better anyways, since we make the lhs more specific.
         let field_lhs = comp_cons.clone().or(var.clone());
         let comp_field_get = field_lhs
             .then_ignore(just(Token::Dot))
@@ -136,10 +138,6 @@ where
             .then_ignore(just(Token::Assign))
             .then(expr.clone())
             .map(|(name, value)| Stmt::VarDecl { name, value });
-
-        // let print = just(Token::Print)
-        //     .ignore_then(expr.clone())
-        //     .map(Stmt::Print);
 
         let print = just(Token::Print)
             .ignore_then(just(Token::LParen))
