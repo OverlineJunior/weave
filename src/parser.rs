@@ -88,7 +88,8 @@ where
 
         let var = id.map(|name| Expr::Var { name });
 
-        let field_get = expr
+        let field_lhs = comp_cons.clone().or(var.clone());
+        let field_get = field_lhs
             .then_ignore(just(Token::Dot))
             .then(id)
             .map(|(lhs, field_name)| Expr::ComponentFieldGet { lhs: Box::new(lhs), field_name });
