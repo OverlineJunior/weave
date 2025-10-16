@@ -89,12 +89,12 @@ where
         let var = id.map(|name| Expr::Var { name });
 
         let field_lhs = comp_cons.clone().or(var.clone());
-        let field_get = field_lhs
+        let comp_field_get = field_lhs
             .then_ignore(just(Token::Dot))
             .then(id)
             .map(|(lhs, field_name)| Expr::ComponentFieldGet { lhs: Box::new(lhs), field_name });
 
-        literal.or(comp_cons).or(entity_cons).or(field_get).or(var)
+        literal.or(comp_cons).or(entity_cons).or(comp_field_get).or(var)
     });
 
     let stmt = recursive(|stmt| {
