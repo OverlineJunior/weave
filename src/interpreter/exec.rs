@@ -9,7 +9,6 @@ pub fn exec(
 ) -> Result<(), String> {
     match stmt {
         Stmt::ComponentDecl { name, field_decls } => {
-            // TODO! Register component definition in environment.
             env.insert(
                 name.clone(),
                 Value::ComponentType {
