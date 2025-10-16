@@ -29,17 +29,17 @@ comp_cons = id , "{" , data_field_list , "}" ;
 entity_cons = "entity" , "(" , expr_list , ")" ;
 expr_list = expr , { "," , expr } , [ "," ] ;
 
-field_get = id , "." , id ;
+comp_field_get = (comp_cons | var) , "." , id ;
 
 var = id ;
 
-expr = literal | comp_cons | entity_cons | field_get | var ;
+expr = literal | comp_cons | entity_cons | comp_field_get | var ;
 
 expr_stmt = expr ;
 
 var_decl = "var" , id , "=" , expr ;
 
-print = "print" , expr ;
+print = "print" , "(" , expr_list , ")" ;
 
 block = "{" , { stmt } , "}" ;
 
