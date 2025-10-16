@@ -46,7 +46,6 @@ pub fn eval(
             Ok(Value::Entity(entity))
         }
         // ? OK?
-        // TODO! Make sure type_name leads to a defined component type and fields match its definition.
         Expr::ComponentCons { type_name, fields } => {
             let comp_type = env
                 .get(type_name)
