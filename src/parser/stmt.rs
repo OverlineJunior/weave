@@ -10,7 +10,7 @@ pub enum Stmt {
     ComponentDecl { name: String, field_decls: Vec<String> },
     SystemDecl { name: String, query: Vec<QueryItem>, body: Box<Stmt> },
     VarDecl { name: String, value: Expr },
-    Print(Expr),
+    Print(Vec<Expr>),
 }
 
 impl Display for Stmt {
@@ -31,8 +31,8 @@ impl Display for Stmt {
             Stmt::VarDecl { name, value } => {
                 write!(f, "VarDecl(name: {}, value: {})", name, value)
             }
-            Stmt::Print(expr) => {
-                write!(f, "Print(expr: {})", expr)
+            Stmt::Print(exprs) => {
+                write!(f, "Print(exprs: {:?})", exprs)
             }
         }
     }

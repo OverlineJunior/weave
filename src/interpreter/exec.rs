@@ -29,8 +29,10 @@ pub fn exec(
 
             Ok(())
         }
-        Stmt::Print(expr) => {
-            println!("{:?}", eval(expr, env, ecs)?);
+        Stmt::Print(exprs) => {
+            for expr in exprs {
+                println!("{}", eval(expr, env, ecs)?);
+            }
             Ok(())
         }
         Stmt::Block(stmts) => {

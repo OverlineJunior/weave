@@ -16,9 +16,7 @@ const SOURCE: &str = r#"
 	var b = B { g1: "world" }
 	entity(b)
 
-    print a.f1
-    print a.f2
-    print b.g1
+    print(a.f1, a.f2, b.g1)
 "#;
 
 fn main() {

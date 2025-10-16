@@ -139,8 +139,14 @@ where
             .then(expr.clone())
             .map(|(name, value)| Stmt::VarDecl { name, value });
 
+        // let print = just(Token::Print)
+        //     .ignore_then(expr.clone())
+        //     .map(Stmt::Print);
+
         let print = just(Token::Print)
-            .ignore_then(expr.clone())
+            .ignore_then(just(Token::LParen))
+            .ignore_then(comma_separated(expr))
+            .then_ignore(just(Token::RParen))
             .map(Stmt::Print);
 
         comp_decl.or(expr_stmt).or(system_decl).or(var_decl).or(print).boxed()
