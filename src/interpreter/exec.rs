@@ -10,9 +10,13 @@ pub fn exec(
     match stmt {
         Stmt::ComponentDecl { name, field_decls } => {
             // TODO! Register component definition in environment.
-            println!("Defining component {} with fields: {:?}", name, field_decls);
-
-            
+            env.insert(
+                name.clone(),
+                Value::ComponentType {
+                    name: name.clone(),
+                    field_decls: field_decls.clone()
+                }
+            );
 
             Ok(())
         }

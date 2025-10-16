@@ -9,7 +9,10 @@ pub enum Value {
     Int(i64),
     String(String),
     Entity(EntityView<'static>),
-	ComponentType { name: String },
+	ComponentType {
+        name: String,
+        field_decls: Vec<String>,
+    },
     ComponentInst {
         type_name: String,
         fields: Vec<(String, Value)>,
@@ -23,7 +26,7 @@ impl Display for Value {
             Value::Int(n) => write!(f, "{}", n),
             Value::String(s) => write!(f, "\"{}\"", s),
             Value::Entity(id) => write!(f, "Entity({})", id),
-			Value::ComponentType { name } => write!(f, "ComponentType({})", name),
+			Value::ComponentType { name, field_decls } => write!(f, "ComponentType({}, {:?})", name, field_decls),
             Value::ComponentInst { type_name, fields, component } => {
                 let fields_str: Vec<String> = fields
                     .iter()

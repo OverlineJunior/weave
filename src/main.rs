@@ -8,15 +8,9 @@ mod parser;
 mod interpreter;
 
 const SOURCE: &str = r#"
-	component A { f1, f2 }
-	var a = A { f1: 42, f2: "hello" }
-	entity(a)
-
-	component B { g1 }
-	var b = B { g1: "world" }
-	entity(b)
-
-    print(a.f1, a.f2, b.g1)
+component Position { x, y }
+var p = Position { x: 10, y: 20 }
+print(p.x, p.y)
 "#;
 
 fn main() {

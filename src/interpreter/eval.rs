@@ -48,6 +48,21 @@ pub fn eval(
         // ? OK?
         // TODO! Make sure type_name leads to a defined component type and fields match its definition.
         Expr::ComponentCons { type_name, fields } => {
+            let comp_type = env
+                .get(type_name)
+                .ok_or(format!("Undefined component type: {}", type_name))?;
+
+            // Validate fields against component type declaration
+            if let Value::ComponentType { name: _, field_decls } = comp_type {
+                for (f_name, f_value) in fields {
+                    if !field_decls.contains(f_name) {
+                        return Err(format!("Field {} not declared in component type {}", f_name, type_name));
+                    }
+                }
+            } else {
+                return Err(format!("Expected ComponentType for {}, got {:?}", type_name, comp_type));
+            }
+
             let evaluated_fields = fields
                 .iter()
                 .map(|(f_name, f_expr)| eval(f_expr, env, ecs).map(|v| (f_name.clone(), v)))
