@@ -1,11 +1,12 @@
 use crate::{
     lexer::token::Token,
-    parser::{expr::Expr, stmt::Stmt},
+    parser::{expr::Expr, parse_error::ParseError, stmt::Stmt},
 };
 use chumsky::{input::ValueInput, prelude::*};
 
 pub mod expr;
 pub mod stmt;
+pub mod parse_error;
 
 /*
 Grammar (EBNF):
@@ -54,7 +55,7 @@ program = { stmt } ;
 */
 
 #[allow(clippy::let_and_return)]
-pub fn parser<'a, I>() -> impl Parser<'a, I, Stmt, extra::Err<Rich<'a, Token>>>
+pub fn parser<'a, I>() -> impl Parser<'a, I, Stmt, extra::Err<ParseError>>
 where
     I: ValueInput<'a, Token = Token, Span = SimpleSpan>,
 {
@@ -150,15 +151,15 @@ where
 
     let program = stmt.repeated().collect::<Vec<Stmt>>().map(Stmt::Block);
 
-    program
+    program.map_err(|_| ParseError::Other { line: 0 })
 }
 
 fn comma_separated<'a, I, F, O>(
     parser: F,
-) -> impl Parser<'a, I, Vec<O>, extra::Err<Rich<'a, Token>>>
+) -> impl Parser<'a, I, Vec<O>, extra::Err<ParseError>>
 where
     I: ValueInput<'a, Token = Token, Span = SimpleSpan>,
-    F: Parser<'a, I, O, extra::Err<Rich<'a, Token>>>,
+    F: Parser<'a, I, O, extra::Err<ParseError>>,
 {
     parser
         .separated_by(just(Token::Comma))
