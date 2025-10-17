@@ -1,12 +1,13 @@
 use std::collections::HashMap;
 use flecs_ecs::{core::flecs::Wildcard, prelude::*};
-use crate::{interpreter::{ecs::UserComponent, exec::exec}, parser::stmt::Stmt};
+use crate::{interpreter::{ecs::UserComponent, exec::exec, runtime_error::RuntimeError}, parser::stmt::Stmt};
 
 mod eval;
 mod exec;
 pub mod ecs;
+pub mod runtime_error;
 
-pub fn interpret(ast: &Stmt) -> Result<(), String> {
+pub fn interpret(ast: &Stmt) -> Result<(), RuntimeError> {
 	let mut env = HashMap::new();
 	let ecs = Box::leak(Box::new(World::new()));
 

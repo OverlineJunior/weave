@@ -1,18 +1,21 @@
 use std::collections::HashMap;
 use flecs_ecs::prelude::*;
-use crate::{interpreter::ecs::UserComponent, lexer::value::Value, parser::expr::Expr};
+use crate::{interpreter::{ecs::UserComponent, runtime_error::RuntimeError}, lexer::value::Value, parser::expr::Expr};
 
 pub fn eval(
     expr: &Expr,
     env: &mut HashMap<String, Value>,
     ecs: &'static World
-) -> Result<Value, String> {
+) -> Result<Value, RuntimeError> {
     match expr {
         Expr::Literal(v) => Ok(v.clone()),
         Expr::Var { name } => {
             let value = env
                 .get(name)
-                .ok_or(format!("Undefined variable: {}", name))?;
+                .ok_or(RuntimeError::UndefinedVariable {
+                    name: name.clone(),
+                    line: 555,
+                })?;
             Ok(value.clone())
         }
         Expr::ComponentFieldGet { lhs, field_name } => {
@@ -22,9 +25,17 @@ pub fn eval(
                 fields.into_iter()
                     .find(|(f_name, _)| f_name == field_name)
                     .map(|(_, v)| v)
-                    .ok_or(format!("Field {} not found in component instance", field_name))
+                    .ok_or(RuntimeError::UndefinedField {
+                        lhs: format!("{:?}", lhs),
+                        rhs: field_name.clone(),
+                        line: 555,
+                    })
             } else {
-                Err(format!("Expected ComponentInst on LHS of field access, got {:?}", lhs_value))
+                Err(RuntimeError::BadFieldLhs {
+                    expected: "ComponentInst".into(),
+                    found: format!("{:?}", lhs_value),
+                    line: 555,
+                })
             }
         }
         // ? OK?
@@ -49,17 +60,28 @@ pub fn eval(
         Expr::ComponentCons { type_name, fields } => {
             let comp_type = env
                 .get(type_name)
-                .ok_or(format!("Undefined component type: {}", type_name))?;
+                .ok_or(RuntimeError::UndefinedComponentType {
+                    name: type_name.clone(),
+                    line: 555,
+                })?;
 
             // Validate fields against component type declaration
             if let Value::ComponentType { name: _, field_decls } = comp_type {
                 for (f_name, f_value) in fields {
                     if !field_decls.contains(f_name) {
-                        return Err(format!("Field {} not declared in component type {}", f_name, type_name));
+                        return Err(RuntimeError::UndefinedField {
+                            lhs: type_name.clone(),
+                            rhs: f_name.clone(),
+                            line: 555
+                        });
                     }
                 }
             } else {
-                return Err(format!("Expected ComponentType for {}, got {:?}", type_name, comp_type));
+                return Err(RuntimeError::BadFieldLhs {
+                    expected: "ComponentType".into(),
+                    found: format!("{:?}", comp_type),
+                    line: 555
+                });
             }
 
             let evaluated_fields = fields

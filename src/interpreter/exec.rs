@@ -1,4 +1,4 @@
-use crate::{interpreter::eval::eval, lexer::value::Value, parser::stmt::Stmt};
+use crate::{interpreter::{eval::eval, runtime_error::RuntimeError}, lexer::value::Value, parser::stmt::Stmt};
 use std::collections::HashMap;
 use flecs_ecs::prelude::*;
 
@@ -6,7 +6,7 @@ pub fn exec(
     stmt: &Stmt,
     env: &mut HashMap<String, Value>,
     ecs: &'static World,
-) -> Result<(), String> {
+) -> Result<(), RuntimeError> {
     match stmt {
         Stmt::ComponentDecl { name, field_decls } => {
             env.insert(
