@@ -25,8 +25,6 @@ pub fn exec(
             exec(body, env, ecs)
         }
         Stmt::VarDecl { name, value } => {
-            println!("Declaring variable {} with value: {:?}", name, value);
-
 			let evaluated_value = eval(value, env, ecs)?;
 			env.insert(name.clone(), evaluated_value);
 
