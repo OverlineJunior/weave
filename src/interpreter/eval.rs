@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use flecs_ecs::prelude::*;
-use crate::{interpreter::{ecs::UserComponent, runtime_error::RuntimeError}, lexer::value::Value, parser::expr::Expr};
+use crate::{interpreter::{ecs::{UserComponent, UserEntity}, runtime_error::RuntimeError}, lexer::value::Value, parser::expr::Expr};
 
 pub fn eval(
     expr: &Expr,
@@ -45,10 +45,7 @@ pub fn eval(
 
             comp_insts.into_iter().for_each(|comp_inst| {
                 if let Value::ComponentInst { type_name, fields, component } = comp_inst {
-                    // Unnamed so it gets a random id.
-                    let aux_entity = ecs.entity();
-                    let instance = component.instance;
-                    entity.set_id(component, (aux_entity, instance));
+                    entity.set_user_component(component);
                 } else {
                     panic!("Expected ComponentInst, got {:?}", comp_inst);
                 }
