@@ -15,13 +15,19 @@ pub struct UserComponent {
 }
 
 pub trait WorldExt {
-    fn declare_variable(&'static self, name: &str, value: Value) -> Result<(), RuntimeError>;
+    // Variables.
+    fn declare_variable(&'static self, name: &str, value: Value);
     fn get_variable_entity(&self, name: &str) -> Option<EntityView<'static>>;
-    fn get_variable_value(&self, name: &str) -> Option<Value>;
+    fn get_variable(&self, name: &str) -> Option<Value>;
+
+    // Components.
+    fn declare_component(&'static self, name: &str, fields: Vec<(String, Value)>) -> Result<UserComponent, RuntimeError>;
+    fn get_component_entity(&self, name: &str) -> Option<EntityView<'static>>;
+    fn get_component(&self, name: &str) -> Option<UserComponent>;
 }
 
 impl WorldExt for World {
-    fn declare_variable(&'static self, name: &str, value: Value) -> Result<(), RuntimeError> {
+    fn declare_variable(&'static self, name: &str, value: Value) {
         if let Some(e) = self.get_variable_entity(name) {
             e.destruct();
         }
@@ -32,8 +38,6 @@ impl WorldExt for World {
                 name: name.to_string(),
                 value,
             });
-
-        Ok(())
     }
 
     fn get_variable_entity(&self, name: &str) -> Option<EntityView<'static>> {
@@ -43,7 +47,7 @@ impl WorldExt for World {
             .find(|uv| uv.name == name)
     }
 
-    fn get_variable_value(&self, name: &str) -> Option<Value> {
+    fn get_variable(&self, name: &str) -> Option<Value> {
         let entity = self.get_variable_entity(name)?;
         let mut value = None;
 
@@ -52,5 +56,31 @@ impl WorldExt for World {
         });
 
         value
+    }
+
+    fn declare_component(&'static self, name: &str, fields: Vec<(String, Value)>) -> Result<UserComponent, RuntimeError> {
+        Ok(UserComponent {
+            type_name: name.to_string(),
+            fields: fields,
+            instance: self.component_named::<UserComponent>(format!("user_component({name})").as_str()),
+        })
+    }
+
+    fn get_component_entity(&self, name: &str) -> Option<EntityView<'static>> {
+        self
+            .query::<&UserComponent>()
+            .build()
+            .find(|uc| uc.type_name == name)
+    }
+
+    fn get_component(&self, name: &str) -> Option<UserComponent> {
+        let entity = self.get_component_entity(name)?;
+        let mut comp = None;
+
+        entity.get::<&UserComponent>(|uc| {
+            comp = Some(uc.clone());
+        });
+
+        comp
     }
 }
