@@ -1,4 +1,4 @@
-use crate::{interpreter::{eval::eval, runtime_error::RuntimeError}, lexer::value::Value, parser::stmt::Stmt};
+use crate::{interpreter::{ecs::UserWorld, eval::eval, runtime_error::RuntimeError}, lexer::value::Value, parser::stmt::Stmt};
 use std::collections::HashMap;
 use flecs_ecs::prelude::*;
 
@@ -25,9 +25,7 @@ pub fn exec(
             exec(body, env, ecs)
         }
         Stmt::VarDecl { name, value } => {
-			let evaluated_value = eval(value, env, ecs)?;
-			env.insert(name.clone(), evaluated_value);
-
+			ecs.declare_variable(name, eval(value, env, ecs)?);
             Ok(())
         }
         Stmt::Print(exprs) => {

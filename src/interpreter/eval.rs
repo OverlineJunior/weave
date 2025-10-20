@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use flecs_ecs::prelude::*;
-use crate::{interpreter::{ecs::{UserComponent, UserEntity}, runtime_error::RuntimeError}, lexer::value::Value, parser::expr::Expr};
+use crate::{interpreter::{ecs::{UserComponent, UserEntity, UserWorld}, runtime_error::RuntimeError}, lexer::value::Value, parser::expr::Expr};
 
 pub fn eval(
     expr: &Expr,
@@ -10,12 +10,13 @@ pub fn eval(
     match expr {
         Expr::Literal(v) => Ok(v.clone()),
         Expr::Var { name } => {
-            let value = env
-                .get(name)
+            let value = ecs
+                .get_variable(name)
                 .ok_or(RuntimeError::UndefinedVariable {
                     name: name.clone(),
                     line: 555,
                 })?;
+
             Ok(value.clone())
         }
         Expr::ComponentFieldGet { lhs, field_name } => {
