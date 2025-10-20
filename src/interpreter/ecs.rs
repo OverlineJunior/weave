@@ -14,7 +14,7 @@ pub struct UserComponent {
     pub instance: Component<'static, UserComponent>,
 }
 
-pub trait WorldExt {
+pub trait UserWorld {
     // Variables.
     fn declare_variable(&'static self, name: &str, value: Value);
     fn get_variable_entity(&self, name: &str) -> Option<EntityView<'static>>;
@@ -26,7 +26,7 @@ pub trait WorldExt {
     fn get_component(&self, name: &str) -> Option<UserComponent>;
 }
 
-impl WorldExt for World {
+impl UserWorld for World {
     fn declare_variable(&'static self, name: &str, value: Value) {
         if let Some(e) = self.get_variable_entity(name) {
             e.destruct();
