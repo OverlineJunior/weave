@@ -9,6 +9,7 @@ pub fn exec(
 ) -> Result<(), RuntimeError> {
     match stmt {
         Stmt::ComponentDecl { name, field_decls } => {
+            // TODO! Use ecs to declare component instead. Just note that the component structs and related functions are wrong and need rethinking, specially when it comes to component type vs instance.
             env.insert(
                 name.clone(),
                 Value::ComponentType {
