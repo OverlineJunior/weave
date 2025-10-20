@@ -59,6 +59,10 @@ impl UserWorld for World {
     }
 
     fn declare_component(&'static self, name: &str, fields: Vec<(String, Value)>) -> Result<UserComponent, RuntimeError> {
+        if let Some(e) = self.get_component_entity(name) {
+            return Err(RuntimeError::ComponentRedeclaration { name: name.to_string(), line: 555 });
+        }
+
         Ok(UserComponent {
             type_name: name.to_string(),
             fields: fields,
