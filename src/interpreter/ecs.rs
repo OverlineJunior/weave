@@ -97,11 +97,11 @@ impl UserWorld for World {
 }
 
 pub trait UserEntity {
-    fn set_user_component(&'_ self, component: UserComponentType);
+    fn set_user_comp(&'_ self, component: UserComponentType);
 }
 
 impl UserEntity for EntityView<'_> {
-    fn set_user_component(&'_ self, component: UserComponentType) {
+    fn set_user_comp(&'_ self, component: UserComponentType) {
         let world = self.world();
         let aux_entity = world.entity();
         let entity = component.entity;
