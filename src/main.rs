@@ -9,8 +9,8 @@ mod interpreter;
 
 const SOURCE: &str = r#"
 component Position { x, y }
-var p = Position { x: 10, y: 20 }
-print(p.x, p.y)
+var e = entity(Position { x: 10, y: 20 })
+print(e)
 "#;
 
 fn main() {
