@@ -1,12 +1,7 @@
-use std::collections::HashMap;
 use flecs_ecs::prelude::*;
 use crate::{interpreter::{ecs::{UserComponentInst, UserEntity, UserWorld}, runtime_error::RuntimeError}, lexer::value::Value, parser::expr::Expr};
 
-pub fn eval(
-    expr: &Expr,
-    env: &mut HashMap<String, Value>,
-    ecs: &'static World
-) -> Result<Value, RuntimeError> {
+pub fn eval(expr: &Expr, ecs: &'static World) -> Result<Value, RuntimeError> {
     match expr {
         Expr::Literal(v) => Ok(v.clone()),
         Expr::Var { name } => {
@@ -20,7 +15,7 @@ pub fn eval(
             Ok(value.clone())
         }
         Expr::ComponentFieldGet { lhs, field_name } => {
-            let lhs_value = eval(lhs, env, ecs)?;
+            let lhs_value = eval(lhs, ecs)?;
 
             if let Value::Component(comp_inst) = lhs_value {
                 comp_inst.fields
@@ -42,7 +37,7 @@ pub fn eval(
         }
         // ? OK?
         Expr::EntityCons(exprs) => {
-            let values = exprs.iter().map(|e| eval(e, env, ecs)).collect::<Result<Vec<_>, _>>()?;
+            let values = exprs.iter().map(|e| eval(e, ecs)).collect::<Result<Vec<_>, _>>()?;
             let entity = ecs.entity_named("user_entity");
 
             values.into_iter().for_each(|value| {
@@ -77,7 +72,7 @@ pub fn eval(
 
             let evaluated_fields = fields
                 .iter()
-                .map(|(f_name, f_expr)| eval(f_expr, env, ecs).map(|v| (f_name.clone(), v)))
+                .map(|(f_name, f_expr)| eval(f_expr, ecs).map(|v| (f_name.clone(), v)))
                 .collect::<Result<Vec<_>, _>>()?;
 
             let comp_inst = UserComponentInst {
