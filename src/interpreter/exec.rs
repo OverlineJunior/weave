@@ -1,5 +1,5 @@
-use crate::{interpreter::{ecs::UserWorld, eval::eval, runtime_error::RuntimeError}, parser::stmt::Stmt};
-use flecs_ecs::prelude::*;
+use crate::{interpreter::{ecs::{UserComponentInst, UserWorld}, eval::eval, runtime_error::RuntimeError}, parser::stmt::Stmt};
+use flecs_ecs::{core::flecs::Wildcard, prelude::*};
 
 pub fn exec(stmt: &Stmt, ecs: &'static World) -> Result<(), RuntimeError> {
     match stmt {
@@ -23,7 +23,16 @@ pub fn exec(stmt: &Stmt, ecs: &'static World) -> Result<(), RuntimeError> {
                 .collect::<Result<_, _>>()?;
 
             ecs.decl_system(name, resolved_query)?;
-            exec(body, ecs)
+
+            ecs
+                .query::<&(Wildcard, UserComponentInst)>()
+                .build()
+                .each_iter(|it, idx, comp| {
+                    println!("{comp:?}");
+                    exec(body, ecs);
+                });
+
+            Ok(())
         }
         Stmt::VarDecl { name, value } => {
 			ecs.decl_var(name, eval(value, ecs)?);
