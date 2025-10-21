@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use flecs_ecs::{core::flecs::Wildcard, prelude::*};
-use crate::{interpreter::{ecs::UserComponent, exec::exec, runtime_error::RuntimeError}, parser::stmt::Stmt};
+use crate::{interpreter::{ecs::UserComponentInst, exec::exec, runtime_error::RuntimeError}, parser::stmt::Stmt};
 
 mod eval;
 mod exec;
@@ -16,7 +16,7 @@ pub fn interpret(ast: &Stmt) -> Result<(), RuntimeError> {
 	println!("Final Environment: {:?}", env);
 	println!("Final ECS: {:?}", ecs.to_json_world(None));
 
-	let q = ecs.query::<&(Wildcard, UserComponent)>().build();
+	let q = ecs.query::<&(Wildcard, UserComponentInst)>().build();
 
 	q.each_iter(|it, idx, uc| {
 		println!("Entity {:?} has UserComponent({}) with fields {:?}", it.entity(idx), uc.type_name, uc.fields);

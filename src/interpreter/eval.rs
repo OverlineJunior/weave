@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use flecs_ecs::prelude::*;
-use crate::{interpreter::{ecs::{UserComponent, UserEntity, UserWorld}, runtime_error::RuntimeError}, lexer::value::Value, parser::expr::Expr};
+use crate::{interpreter::{ecs::{UserComponentInst, UserEntity, UserWorld}, runtime_error::RuntimeError}, lexer::value::Value, parser::expr::Expr};
 
 pub fn eval(
     expr: &Expr,
@@ -22,8 +22,9 @@ pub fn eval(
         Expr::ComponentFieldGet { lhs, field_name } => {
             let lhs_value = eval(lhs, env, ecs)?;
 
-            if let Value::ComponentInst { type_name: _, fields, component: _ } = lhs_value {
-                fields.into_iter()
+            if let Value::Component(comp_inst) = lhs_value {
+                comp_inst.fields
+                    .into_iter()
                     .find(|(f_name, _)| f_name == field_name)
                     .map(|(_, v)| v)
                     .ok_or(RuntimeError::UndefinedField {
@@ -41,14 +42,14 @@ pub fn eval(
         }
         // ? OK?
         Expr::EntityCons(exprs) => {
-            let comp_insts = exprs.iter().map(|e| eval(e, env, ecs)).collect::<Result<Vec<_>, _>>()?;
+            let values = exprs.iter().map(|e| eval(e, env, ecs)).collect::<Result<Vec<_>, _>>()?;
             let entity = ecs.entity_named("user_entity");
 
-            comp_insts.into_iter().for_each(|comp_inst| {
-                if let Value::ComponentInst { type_name, fields, component } = comp_inst {
-                    entity.set_user_component(component);
+            values.into_iter().for_each(|value| {
+                if let Value::Component(comp_inst) = value {
+                    entity.set_user_comp(comp_inst);
                 } else {
-                    panic!("Expected ComponentInst, got {:?}", comp_inst);
+                    panic!("Expected ComponentInst, got {:?}", value);
                 }
             });
 
@@ -56,31 +57,22 @@ pub fn eval(
         }
         // ? OK?
         Expr::ComponentCons { type_name, fields } => {
-            // TODO! Use ecs to construct component instead. Just note that the component structs and related functions are wrong and need rethinking, specially when it comes to component type vs instance.
-            let comp_type = env
-                .get(type_name)
+            let comp_type = ecs
+                .get_comp_type(type_name)
                 .ok_or(RuntimeError::UndefinedComponentType {
                     name: type_name.clone(),
                     line: 555,
                 })?;
 
             // Validate fields against component type declaration
-            if let Value::ComponentType { name: _, field_decls } = comp_type {
-                for (f_name, f_value) in fields {
-                    if !field_decls.contains(f_name) {
-                        return Err(RuntimeError::UndefinedField {
-                            lhs: type_name.clone(),
-                            rhs: f_name.clone(),
-                            line: 555
-                        });
-                    }
+            for (f_name, f_value) in fields {
+                if !comp_type.field_decls.contains(f_name) {
+                    return Err(RuntimeError::UndefinedField {
+                        lhs: type_name.clone(),
+                        rhs: f_name.clone(),
+                        line: 555
+                    });
                 }
-            } else {
-                return Err(RuntimeError::BadFieldLhs {
-                    expected: "ComponentType".into(),
-                    found: format!("{:?}", comp_type),
-                    line: 555
-                });
             }
 
             let evaluated_fields = fields
@@ -88,15 +80,13 @@ pub fn eval(
                 .map(|(f_name, f_expr)| eval(f_expr, env, ecs).map(|v| (f_name.clone(), v)))
                 .collect::<Result<Vec<_>, _>>()?;
 
-            Ok(Value::ComponentInst {
+            let comp_inst = UserComponentInst {
                 type_name: type_name.clone(),
                 fields: evaluated_fields.clone(),
-                component: UserComponent {
-                    type_name: type_name.clone(),
-                    fields: evaluated_fields,
-                    instance: ecs.component_named::<UserComponent>(format!("user_component({})", type_name).as_str()),
-                },
-            })
+                entity: ecs.component_named::<UserComponentInst>(format!("user_component_inst({})", type_name).as_str()),
+            };
+
+            Ok(Value::Component(comp_inst))
         }
     }
 }
