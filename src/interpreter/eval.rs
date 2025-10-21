@@ -11,7 +11,7 @@ pub fn eval(
         Expr::Literal(v) => Ok(v.clone()),
         Expr::Var { name } => {
             let value = ecs
-                .get_variable(name)
+                .get_var(name)
                 .ok_or(RuntimeError::UndefinedVariable {
                     name: name.clone(),
                     line: 555,

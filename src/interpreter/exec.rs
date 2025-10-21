@@ -18,7 +18,7 @@ pub fn exec(
             exec(body, env, ecs)
         }
         Stmt::VarDecl { name, value } => {
-			ecs.declare_variable(name, eval(value, env, ecs)?);
+			ecs.decl_var(name, eval(value, env, ecs)?);
             Ok(())
         }
         Stmt::Print(exprs) => {

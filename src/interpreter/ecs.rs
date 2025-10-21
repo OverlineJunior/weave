@@ -22,9 +22,9 @@ pub struct UserComponentInst {
 
 pub trait UserWorld {
     // Variables.
-    fn declare_variable(&'static self, name: &str, value: Value);
-    fn get_variable_entity(&self, name: &str) -> Option<EntityView<'static>>;
-    fn get_variable(&self, name: &str) -> Option<Value>;
+    fn decl_var(&'static self, name: &str, value: Value);
+    fn get_var_entity(&self, name: &str) -> Option<EntityView<'static>>;
+    fn get_var(&self, name: &str) -> Option<Value>;
 
     // Component types.
     fn decl_comp_type(&'static self, name: &str, field_decls: Vec<String>) -> Result<(), RuntimeError>;
@@ -33,8 +33,8 @@ pub trait UserWorld {
 }
 
 impl UserWorld for World {
-    fn declare_variable(&'static self, name: &str, value: Value) {
-        if let Some(e) = self.get_variable_entity(name) {
+    fn decl_var(&'static self, name: &str, value: Value) {
+        if let Some(e) = self.get_var_entity(name) {
             e.destruct();
         }
 
@@ -46,15 +46,15 @@ impl UserWorld for World {
             });
     }
 
-    fn get_variable_entity(&self, name: &str) -> Option<EntityView<'static>> {
+    fn get_var_entity(&self, name: &str) -> Option<EntityView<'static>> {
         self
             .query::<&UserVariable>()
             .build()
             .find(|uv| uv.name == name)
     }
 
-    fn get_variable(&self, name: &str) -> Option<Value> {
-        let entity = self.get_variable_entity(name)?;
+    fn get_var(&self, name: &str) -> Option<Value> {
+        let entity = self.get_var_entity(name)?;
         let mut value = None;
 
         entity.get::<&UserVariable>(|uv| {
