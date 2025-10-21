@@ -8,10 +8,17 @@ pub struct UserVariable {
 }
 
 #[derive(Component, Debug, Clone, PartialEq)]
-pub struct UserComponent {
+pub struct UserComponentType {
+    pub name: String,
+    pub field_decls: Vec<(String, Value)>,
+    pub entity: Component<'static, UserComponentType>,
+}
+
+#[derive(Component, Debug, Clone, PartialEq)]
+pub struct UserComponentInst {
     pub type_name: String,
     pub fields: Vec<(String, Value)>,
-    pub instance: Component<'static, UserComponent>,
+    pub entity: Component<'static, UserComponentInst>,
 }
 
 pub trait UserWorld {
@@ -20,10 +27,10 @@ pub trait UserWorld {
     fn get_variable_entity(&self, name: &str) -> Option<EntityView<'static>>;
     fn get_variable(&self, name: &str) -> Option<Value>;
 
-    // Components.
-    fn declare_component(&'static self, name: &str, fields: Vec<(String, Value)>) -> Result<UserComponent, RuntimeError>;
-    fn get_component_entity(&self, name: &str) -> Option<EntityView<'static>>;
-    fn get_component(&self, name: &str) -> Option<UserComponent>;
+    // Component types.
+    fn decl_comp_type(&'static self, name: &str, fields: Vec<(String, Value)>) -> Result<UserComponentType, RuntimeError>;
+    fn get_comp_type_entity(&self, name: &str) -> Option<EntityView<'static>>;
+    fn get_comp_type(&self, name: &str) -> Option<UserComponentType>;
 }
 
 impl UserWorld for World {
@@ -58,30 +65,30 @@ impl UserWorld for World {
         value
     }
 
-    fn declare_component(&'static self, name: &str, fields: Vec<(String, Value)>) -> Result<UserComponent, RuntimeError> {
-        if let Some(e) = self.get_component_entity(name) {
+    fn decl_comp_type(&'static self, name: &str, fields: Vec<(String, Value)>) -> Result<UserComponentType, RuntimeError> {
+        if let Some(e) = self.get_comp_type_entity(name) {
             return Err(RuntimeError::ComponentRedeclaration { name: name.to_string(), line: 555 });
         }
 
-        Ok(UserComponent {
-            type_name: name.to_string(),
-            fields: fields,
-            instance: self.component_named::<UserComponent>(format!("user_component({name})").as_str()),
+        Ok(UserComponentType {
+            name: name.to_string(),
+            field_decls: fields,
+            entity: self.component_named::<UserComponentType>(format!("user_component({name})").as_str()),
         })
     }
 
-    fn get_component_entity(&self, name: &str) -> Option<EntityView<'static>> {
+    fn get_comp_type_entity(&self, name: &str) -> Option<EntityView<'static>> {
         self
-            .query::<&UserComponent>()
+            .query::<&UserComponentType>()
             .build()
-            .find(|uc| uc.type_name == name)
+            .find(|uc| uc.name == name)
     }
 
-    fn get_component(&self, name: &str) -> Option<UserComponent> {
-        let entity = self.get_component_entity(name)?;
+    fn get_comp_type(&self, name: &str) -> Option<UserComponentType> {
+        let entity = self.get_comp_type_entity(name)?;
         let mut comp = None;
 
-        entity.get::<&UserComponent>(|uc| {
+        entity.get::<&UserComponentType>(|uc| {
             comp = Some(uc.clone());
         });
 
@@ -90,14 +97,14 @@ impl UserWorld for World {
 }
 
 pub trait UserEntity {
-    fn set_user_component(&'_ self, component: UserComponent);
+    fn set_user_component(&'_ self, component: UserComponentType);
 }
 
 impl UserEntity for EntityView<'_> {
-    fn set_user_component(&'_ self, component: UserComponent) {
+    fn set_user_component(&'_ self, component: UserComponentType) {
         let world = self.world();
         let aux_entity = world.entity();
-        let instance = component.instance;
-        aux_entity.set_id(component, (aux_entity, instance));
+        let entity = component.entity;
+        self.set_id(component, (aux_entity, entity));
     }
 }
