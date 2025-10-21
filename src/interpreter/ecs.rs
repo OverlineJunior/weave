@@ -10,7 +10,7 @@ pub struct UserVariable {
 #[derive(Component, Debug, Clone, PartialEq)]
 pub struct UserComponentType {
     pub name: String,
-    pub field_decls: Vec<(String, Value)>,
+    pub field_decls: Vec<String>,
     pub entity: Component<'static, UserComponentType>,
 }
 
@@ -28,7 +28,7 @@ pub trait UserWorld {
     fn get_variable(&self, name: &str) -> Option<Value>;
 
     // Component types.
-    fn decl_comp_type(&'static self, name: &str, fields: Vec<(String, Value)>) -> Result<UserComponentType, RuntimeError>;
+    fn decl_comp_type(&'static self, name: &str, field_decls: Vec<String>) -> Result<UserComponentType, RuntimeError>;
     fn get_comp_type_entity(&self, name: &str) -> Option<EntityView<'static>>;
     fn get_comp_type(&self, name: &str) -> Option<UserComponentType>;
 }
@@ -65,14 +65,14 @@ impl UserWorld for World {
         value
     }
 
-    fn decl_comp_type(&'static self, name: &str, fields: Vec<(String, Value)>) -> Result<UserComponentType, RuntimeError> {
+    fn decl_comp_type(&'static self, name: &str, field_decls: Vec<String>) -> Result<UserComponentType, RuntimeError> {
         if let Some(e) = self.get_comp_type_entity(name) {
             return Err(RuntimeError::ComponentRedeclaration { name: name.to_string(), line: 555 });
         }
 
         Ok(UserComponentType {
             name: name.to_string(),
-            field_decls: fields,
+            field_decls,
             entity: self.component_named::<UserComponentType>(format!("user_component({name})").as_str()),
         })
     }
