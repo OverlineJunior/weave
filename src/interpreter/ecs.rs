@@ -70,7 +70,7 @@ impl UserWorld for World {
         }
 
         self
-            .entity_named(format!("ComponentType({name})").as_str())
+            .entity_named(format!("component_type({name})").as_str())
             .set(UserComponentType {
                 name: name.to_string(),
                 field_decls,
@@ -106,7 +106,7 @@ impl UserEntity for EntityView<'_> {
     fn set_user_comp(&'_ self, comp_inst: UserComponentInst) {
         let world = self.world();
         let aux_entity = world.entity();
-        let entity = comp_inst.entity;
-        self.set_id(comp_inst, (aux_entity, entity));
+        let comp_entity = comp_inst.entity;
+        self.set_id(comp_inst, (aux_entity, comp_entity));
     }
 }
