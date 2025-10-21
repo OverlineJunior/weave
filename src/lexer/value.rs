@@ -2,22 +2,14 @@ use std::fmt::{self, Display, Formatter};
 
 use flecs_ecs::core::EntityView;
 
-use crate::interpreter::ecs::UserComponent;
+use crate::interpreter::ecs::UserComponentInst;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Value {
     Int(i64),
     String(String),
     Entity(EntityView<'static>),
-	ComponentType {
-        name: String,
-        field_decls: Vec<String>,
-    },
-    ComponentInst {
-        type_name: String,
-        fields: Vec<(String, Value)>,
-        component: UserComponent,
-    },
+    Component(UserComponentInst),
 }
 
 impl Display for Value {
@@ -26,13 +18,12 @@ impl Display for Value {
             Value::Int(n) => write!(f, "{}", n),
             Value::String(s) => write!(f, "\"{}\"", s),
             Value::Entity(id) => write!(f, "Entity({})", id),
-			Value::ComponentType { name, field_decls } => write!(f, "ComponentType({}, {:?})", name, field_decls),
-            Value::ComponentInst { type_name, fields, component } => {
-                let fields_str: Vec<String> = fields
+            Value::Component(comp) => {
+                let fields_str: Vec<String> = comp.fields
                     .iter()
                     .map(|(field_name, value)| format!("{}: {}", field_name, value))
                     .collect();
-                write!(f, "ComponentInst({}, {}, {:?})", type_name, fields_str.join(", "), component)
+                write!(f, "Component({}, {}, {})", comp.type_name, fields_str.join(", "), comp.entity)
             }
         }
     }
