@@ -8,8 +8,21 @@ pub fn exec(stmt: &Stmt, ecs: &'static World) -> Result<(), RuntimeError> {
             Ok(())
         }
         Stmt::SystemDecl { name, query, body } => {
-            // TODO! Register system definition in ecs.
-            println!("Defining system {} with query: {:?}", name, query);
+            // Maps the query's component type names to actual component types.
+            let resolved_query = query
+                .iter()
+                .map(|(_, comp_name)| {
+                    ecs
+                        .get_comp_type(comp_name)
+                        .map(|comp_type| (comp_name.clone(), comp_type))
+                        .ok_or(RuntimeError::UndefinedComponentType {
+                            name: comp_name.clone(),
+                            line: 555,
+                        })
+                })
+                .collect::<Result<_, _>>()?;
+
+            ecs.decl_system(name, resolved_query)?;
             exec(body, ecs)
         }
         Stmt::VarDecl { name, value } => {

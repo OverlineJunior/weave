@@ -20,6 +20,12 @@ pub struct UserComponentInst {
     pub entity: Component<'static, UserComponentInst>,
 }
 
+#[derive(Component, Debug, Clone, PartialEq)]
+pub struct UserSystem {
+    pub name: String,
+    pub query: Vec<(String, UserComponentType)>,
+}
+
 pub trait UserWorld {
     // Variables.
     fn decl_var(&'static self, name: &str, value: Value);
@@ -30,9 +36,16 @@ pub trait UserWorld {
     fn decl_comp_type(&'static self, name: &str, field_decls: Vec<String>) -> Result<(), RuntimeError>;
     fn get_comp_type_entity(&self, name: &str) -> Option<EntityView<'static>>;
     fn get_comp_type(&self, name: &str) -> Option<UserComponentType>;
+
+    // Systems.
+    fn decl_system(&'static self, name: &str, query: Vec<(String, UserComponentType)>) -> Result<(), RuntimeError>;
+    fn get_system_entity(&self, name: &str) -> Option<EntityView<'static>>;
+    fn get_system(&self, name: &str) -> Option<UserSystem>;
 }
 
 impl UserWorld for World {
+    // --- Variables ---
+
     fn decl_var(&'static self, name: &str, value: Value) {
         if let Some(e) = self.get_var_entity(name) {
             e.destruct();
@@ -64,9 +77,11 @@ impl UserWorld for World {
         value
     }
 
+    // --- Component types ---
+
     fn decl_comp_type(&'static self, name: &str, field_decls: Vec<String>) -> Result<(), RuntimeError> {
         if let Some(e) = self.get_comp_type_entity(name) {
-            return Err(RuntimeError::ComponentRedeclaration { name: name.to_string(), line: 555 });
+            return Err(RuntimeError::CannotRedeclare { prefix: "component".to_string(), name: name.to_string(), line: 555 });
         }
 
         self
@@ -95,6 +110,38 @@ impl UserWorld for World {
         });
 
         comp
+    }
+
+    // --- Systems ---
+
+    fn decl_system(&'static self, name: &str, query: Vec<(String, UserComponentType)>) -> Result<(), RuntimeError> {
+        if let Some(e) = self.get_system_entity(name) {
+            return Err(RuntimeError::CannotRedeclare { prefix: "system".to_string(), name: name.to_string(), line: 555 });
+        }
+
+        self
+            .entity_named(format!("system({name})").as_str())
+            .set(UserSystem { name: name.to_string(), query });
+
+        Ok(())
+    }
+
+    fn get_system_entity(&self, name: &str) -> Option<EntityView<'static>> {
+        self
+            .query::<&UserSystem>()
+            .build()
+            .find(|us| us.name == name)
+    }
+
+    fn get_system(&self, name: &str) -> Option<UserSystem> {
+        let entity = self.get_system_entity(name)?;
+        let mut system = None;
+
+        entity.get::<&UserSystem>(|us| {
+            system = Some(us.clone());
+        });
+
+        system
     }
 }
 

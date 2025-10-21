@@ -8,9 +8,13 @@ mod parser;
 mod interpreter;
 
 const SOURCE: &str = r#"
-component Position { x, y }
-var e = entity(Position { x: 10, y: 20 })
-print(e)
+    component Position { x, y }
+
+    entity(Position { x: 10, y: 20 })
+
+    system log(pos: Position) {
+        
+    }
 "#;
 
 fn main() {

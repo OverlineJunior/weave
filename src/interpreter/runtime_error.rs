@@ -35,8 +35,9 @@ pub enum RuntimeError {
         line: usize,
     },
 
-    #[error("[line {line}] Cannot redeclare component `{name}`")]
-    ComponentRedeclaration {
+    #[error("[line {line}] Cannot redeclare `{prefix}` `{name}`")]
+    CannotRedeclare {
+        prefix: String,
         name: String,
         line: usize,
     },
