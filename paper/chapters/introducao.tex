@@ -1,12 +1,12 @@
-\chapter{Introdução}\label{ch:introducao}
+\chapter{Introdução} \label{ch:introducao}
 
-Nos últimos anos, as empresas têm adotado novas abordagens para o desenvolvimento de software, especialmente as metodologias ágeis. Sabendo que tais metodologias favorecem a flexibilidade ao invés de planejamento rígido \cite{agile}, vem a necessidade de um modelo arquitetural que permite uma adaptação rápida a novas demandas. Um dos modelos que atendem esses requisitos é o padrão arquitetural \textit{Entity Component System} (ECS).
+O \textit{Entity Component System} (ECS) é um padrão arquitetural muito adotado em desenvolvimento de jogos, uma área que exige flexibilidade para criar mecânicas complexas e modularidade para implementar novas funcionalidades com agilidade — características centrais do padrão \cite{ecsfaq}. Embora sua popularidade tenha surgido nos jogos, a organização orientada a dados e o desacoplamento entre entidades, componentes e sistemas têm se mostrado úteis também em simulações e outros contextos que demandam rápida iteração. % TODO! Usar pelo menos 2 exemplos de projetos não relacionados a jogos que usam ECS e citar.
 
-O padrão ECS surgiu na área de desenvolvimento de jogos, com um dos fatores sendo a alta necessidade de adaptação rápida na indústria. Por mais que ECS continue sendo majoritariamente aplicado em jogos, sua utilidade expande para qualquer aplicação que dependa fortemente de rápida iteração de desenvolvimento, flexibilidade ou desempenho \cite{flightdynamics}.
+Devido à complexidade de implementar o padrão ECS internamente \cite{ecsstorageinpics}, ele é frequentemente abstraído por meio de bibliotecas para linguagens específicas, como é o caso das bibliotecas Bevy e Flecs, dos ecossistemas Rust e C++, respectivamente \cite{bevy, flecs}. No entanto, essa abordagem pode impor limitações à expressividade do desenvolvedor, uma vez que a linguagem subjacente pode não fornecer construções ideais para representar os conceitos do ECS naturalmente.
 
-Frequentemente, o padrão ECS é abstraído em forma de biblioteca, em uma determinada linguagem de programação. Isso é devido ao fato de que a implementação do padrão, principalmente de forma eficiente, é composta de vários detalhes técnicos, como a organização dos dados na memória (Mertens, 2024). Muitas vezes, tais detalhes são irrelevantes para o desenvolvedor, e por isso eles são ocultados pela interface da biblioteca.
+Dada essa limitação, este trabalho propõe abstrair o ECS de uma forma diferente: por meio da implementação de um protótipo de interpretador para uma linguagem de programação que trata o ECS como um conceito de primeira classe. Com essa abordagem, é possível moldar a linguagem para atender aos requisitos específicos do padrão ECS, permitindo a exploração de abstrações que seriam difíceis ou impossíveis de serem implementadas em bibliotecas tradicionais.
 
-Dado isso, o projeto visa abstrair o padrão ECS através de um método diferente — um protótipo para uma linguagem de programação orientada a ECS. Será abordado desde as escolhas de \textit{design} da linguagem até a implementação do interpretador, por fim examinando, de forma qualitativa, se foi possível alcançar os objetivos determinados.
+Porém, devido à complexidade de criar tanto o \textit{design} quanto a implementação de um interpretador para uma linguagem de programação, este trabalho se limita ao último. Assim, o objetivo principal deste trabalho é explorar a implementação de um protótipo de interpretador funcional para uma linguagem de programação orientada a ECS, registrando as decisões tomadas e os desafios encontrados ao longo do processo.
 
 \section{Pergunta Problema}
 
@@ -14,7 +14,7 @@ Como projetar e desenvolver um protótipo de interpretador para uma linguagem de
 
 \section{Objetivos} \label{sec:objetivos}
 
-\subsection{Objetivo Geral}\label{sec:obj_geral}
+\subsection{Objetivo Geral} \label{sec:obj_geral}
 
 Investigar como o \textit{design} e a implementação de um protótipo de interpretador para uma linguagem de programação orientada a ECS podem ser efetuados.
 
