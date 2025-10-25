@@ -29,8 +29,10 @@ Projetar e documentar um protótipo de interpretador para uma linguagem de progr
 
 \section{Justificativa} \label{sec:justificativa}
 
-Com o crescimento da adoção de metodologias ágeis pelas empresas, vem a demanda por arquiteturas que promovam flexibilidade no desenvolvimento de software \cite{flightdynamics}. O padrão ECS tem se destacado por atender tais demandas, especialmente nas áreas de desenvolvimento de jogos e simulações.
+Com a alta taxa de adoção de metodologias ágeis pelas empresas modernas, vem a demanda por arquiteturas que permitam alta iterabilidade, permitindo que novas funcionalidades sejam implementadas rapidamente e com baixo custo \cite{17thstateofagile, agile}. O padrão ECS se destaca nesse cenário por sua modularidade e flexibilidade, características que facilitam a adaptação e evolução de sistemas complexos \cite{ecsfaq}.
 
-A maioria das abstrações feitas sobre ECS estão no formato de bibliotecas específicas para determinadas linguagens de programação, limitando a expressividade do desenvolvedor no processo de abstração.
+É extremamente comum que o padrão seja abstraído por meio de bibliotecas para linguagens específicas — por exemplo, só o ecossistema Rust possui pelo menos 16 bibliotecas que implementam o ECS \cite{arewegameyet}. Porém, a ideia de abstrair o ECS por meio de uma linguagem de programação é muito pouco explorada, principalmente de forma acadêmica.
 
-Dado isso, este trabalho propõe uma rota alternativa: a criação do \textit{design} e implementação de uma linguagem de programação orientada a ECS. Com a capacidade de moldar a linguagem diante dos requisitos específicos do padrão ECS, essa rota propõe investigar e implementar abstrações que são difíceis ou até mesmo impossíveis de serem aplicadas em bibliotecas.
+Sabendo que o padrão ECS tem o seu lugar no mercado e que há uma lacuna na exploração de abstrações do padrão por meio de linguagens de programação, este trabalho propõe investigar a implementação de um protótipo de interpretador para uma linguagem orientada ao ECS.
+
+Com o protótipo finalizado, espera-se que este trabalho sirva como base para futuras pesquisas e desenvolvimentos na área, incentivando a exploração de novas formas de abstração do padrão ECS por meio de linguagens de programação.
