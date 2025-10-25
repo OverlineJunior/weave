@@ -31,7 +31,7 @@ Projetar e documentar um protótipo de interpretador para uma linguagem de progr
 
 Com a alta taxa de adoção de metodologias ágeis pelas empresas modernas, vem a demanda por arquiteturas que permitam alta iterabilidade, permitindo que novas funcionalidades sejam implementadas rapidamente e com baixo custo \cite{17thstateofagile, agile}. O padrão ECS se destaca nesse cenário por sua modularidade e flexibilidade, características que facilitam a adaptação e evolução de sistemas complexos \cite{ecsfaq}.
 
-É extremamente comum que o padrão seja abstraído por meio de bibliotecas para linguagens específicas — por exemplo, só o ecossistema Rust possui pelo menos 16 bibliotecas que implementam o ECS \cite{arewegameyet}. Porém, a ideia de abstrair o ECS por meio de uma linguagem de programação é muito pouco explorada, principalmente de forma acadêmica.
+É extremamente comum que o padrão seja abstraído por meio de bibliotecas para linguagens específicas — por exemplo, só o ecossistema Rust possui pelo menos 16 bibliotecas que implementam o ECS \cite{arewegameyet}. Porém, a ideia de abstrair o ECS por meio de uma linguagem de programação é muito pouco explorada\footnote{Foram encontradas apenas duas amostras: Flecs Script e Ecsact. Porém, ambas não possuem documentação acadêmica detalhando o processo de desenvolvimento, e Ecsact não é uma linguagem completa, precisando do auxílio de outra linguagem, como C\# \cite{flecsscript, ecsact}.}, principalmente de forma acadêmica.
 
 Sabendo que o padrão ECS tem o seu lugar no mercado e que há uma lacuna na exploração de abstrações do padrão por meio de linguagens de programação, este trabalho propõe investigar a implementação de um protótipo de interpretador para uma linguagem orientada ao ECS.
 
