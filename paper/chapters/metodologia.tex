@@ -1,22 +1,22 @@
 \chapter{Metodologia}\label{ch:metodologia}
 
-Este capítulo apresenta os procedimentos e métodos adotados para a realização do projeto. Aqui serão detalhados o tipo e a abordagem da pesquisa, o contexto no qual o estudo se encontra, a população e a amostra analisadas, e por fim as técnicas de coleta e análise de dados utilizadas.
+Este capítulo apresenta os procedimentos e métodos adotados para a realização do trabalho. Aqui serão detalhados o tipo e a abordagem da pesquisa, o contexto no qual o estudo se encontra, a população e a amostra analisadas, e por fim as técnicas de coleta e análise de dados utilizadas.
 
 \section{Tipo e Abordagem de Pesquisa}
 
-Este projeto consiste de uma pesquisa aplicada e exploratória, visando compreender melhor o tema de linguagem de programação baseada em ECS, que ainda é pouco abordado, e assim prover um protótipo com aplicações práticas como base para pesquisas futuras.
+Este trabalho consiste de uma pesquisa aplicada e exploratória, visando compreender melhor o tema de linguagem de programação baseada em ECS, que ainda é pouco abordado, e assim prover um protótipo com aplicações práticas como base para pesquisas futuras.
 
-O projeto busca investigar o \textit{design} e a implementação da linguagem com uma abordagem focada em aspectos qualitativos, como usabilidade, modularidade e segurança, descartando qualquer aspecto quantitativo, como o desempenho. Essa abordagem será aplicada no estudo e análise de todas as etapas do projeto, desde a definição do \textit{design} da linguagem até a implementação do protótipo de interpretador.
+O trabalho busca investigar o \textit{design} e a implementação da linguagem com uma abordagem focada em aspectos qualitativos, como usabilidade, modularidade e segurança, descartando qualquer aspecto quantitativo, como o desempenho. Essa abordagem será aplicada no estudo e análise de todas as etapas do trabalho, desde a definição do \textit{design} da linguagem até a implementação do protótipo de interpretador.
 
 \section{Contexto}
 
-O projeto se encontra no contexto dado pela intersecção da área de desenvolvimento de linguagens de programação e do padrão arquitetural \textit{Entity Component System} (ECS). O ECS guia o \textit{design} e a implementação da linguagem de programação proposta de forma a facilitar o uso do padrão.
+O trabalho se encontra no contexto dado pela intersecção da área de desenvolvimento de linguagens de programação e do padrão arquitetural \textit{Entity Component System} (ECS). O ECS guia o \textit{design} e a implementação da linguagem de programação proposta de forma a facilitar o uso do padrão.
 
 \section{Delimitação do Estudo}
 
-Com a finalidade de manter o foco do projeto em seus objetivos centrais, serão estabelecidas algumas delimitações. O escopo do \textit{design} e da implementação do projeto estará estritamente concentrado na linguagem de programação e em sua biblioteca padrão (do inglês, \textit{standard library}).
+Com a finalidade de manter o foco do trabalho em seus objetivos centrais, serão estabelecidas algumas delimitações. O escopo do \textit{design} e da implementação do trabalho estará estritamente concentrado na linguagem de programação e em sua biblioteca padrão (do inglês, \textit{standard library}).
 
-Dessa forma, o projeto não abordará aspectos relacionados ao ecosistema de desenvolvimento, como \textit{syntax highlighting} e \textit{Language Server Protocol} (LSP).
+Dessa forma, o trabalho não abordará aspectos relacionados ao ecosistema de desenvolvimento, como \textit{syntax highlighting} e \textit{Language Server Protocol} (LSP).
 
 \section{População e Amostra}
 
@@ -43,14 +43,14 @@ A análise dos dados coletados será realizada de forma qualitativa, por meio da
 
 \section{Procedimentos Metodológicos}
 
-O procedimento metodológico adotado para o desenvolvimento deste trabalho será dividido em etapas auto-contidas, ou seja, cada etapa será realizada de forma independente, mas todas interligadas para alcançar o objetivo final do projeto. As etapas são as seguintes:
+O procedimento metodológico adotado para o desenvolvimento deste trabalho será dividido em etapas auto-contidas, ou seja, cada etapa será realizada de forma independente, mas todas interligadas para alcançar o objetivo final do trabalho. As etapas são as seguintes:
 
 \begin{enumerate}
     \item \textbf{MVP Fundacional da Linguagem}: inclui os conceitos de entidade, componente e sistema, representando um mínimo produto viável (do inglês, \textit{minimum viable product} — MVP). A conclusão desta etapa não segere uma linguagem pronta para uso prático, mas sim um protótipo funcional que pode ser utilizado para provar a viabilidade da fundação do trabalho;
     \item \textbf{Operações Envolvendo Entidades}: inclui as operações essenciais da linguagem, como a criação e remoção de entidades, além da adição e remoção de componentes.
     \item \textbf{Inserção de Componentes em Tempo de Compilação}: inclui a operação de inserção de componentes em entidades durante o tempo de compilação. Esta etapa é essencial para a etapa seguinte, que fará uso da operação implementada nesta;
     \item \textbf{Agendamento de Sistemas}: inclui o agendamento de sistemas, permitindo que o programador defina a ordem de execução deles. Esta etapa fará uso da operação de inserção de componentes em tempo de compilação implementada na etapa anterior;
-    \item \textbf{\textit{Querying} de Entidades}: inclui a operação de \textit{querying} de entidades dentro de sistemas, permitindo que o programador consulte entidades com base em seus componentes. Esta é a etapa final do projeto, onde todos os conceitos terão sido implementados e analisados.
+    \item \textbf{\textit{Querying} de Entidades}: inclui a operação de \textit{querying} de entidades dentro de sistemas, permitindo que o programador consulte entidades com base em seus componentes. Esta é a etapa final do trabalho, onde todos os conceitos terão sido implementados e analisados.
 \end{enumerate}
 
 Todas as etapas do trabalho serão compostas de três subetapas cronológicas: planejamento, implementação e análise, respectivamente. Elas são descritas a seguir:
