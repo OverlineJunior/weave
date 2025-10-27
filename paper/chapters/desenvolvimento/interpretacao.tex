@@ -1,3 +1,28 @@
-\section{Implementação da Interpretação} \label{sec:interpretacao}
+\section{Formalização da Interpretação} \label{sec:interpretacao}
 
+Devido a restrições de tempo, a fase de interpretação não pôde ser integrada ao interpretador desenvolvido. No entanto, foram realizadas pesquisas e experimentos que podem servir como base teórica para sua implementação futura. Por isso, nesta seção será apresentado o que foi aprendido na fase de interpretação e como sua implementação pode ser abordada.
 
+\subsection{Componentes Estáticos vs. Dinâmicos}
+
+Ao decorrer do desenvolvimento da fase de interpretação, foi identificado que a principal dificuldade em implementar o interpretador proposto estava na representação dos componentes.
+
+Componentes estáticos são aqueles cujo tipo é conhecido em tempo de compilação, e por isso, é necessário que o programador defina previamente todos os tipos de componentes que serão utilizados. Isso pode ser problemático em um interpretador, onde os tipos de componentes podem variar dependendo do programa que está sendo interpretado.
+
+Em contrapartida, componentes dinâmicos permitem que os tipos sejam definidos em tempo de execução, oferecendo maior flexibilidade. Isso é especialmente útil em um interpretador, onde os tipos de componentes podem ser determinados através do código fonte que está sendo interpretado.
+
+\subsection{Componentes Dinâmicos em Rust}
+
+Embora componentes dinâmicos tenham sido identificados como a solução ideal, sua implementação em Rust apresentou desafios significativos. Rust é uma linguagem fortemente tipada, o que a torna menos flexível para a manipulação de tipos dinâmicos em comparação com outras linguagens.
+
+Por outro lado, existem bibliotecas como Flecs que oferecem suporte a componentes dinâmicos em Rust. No entanto, a integração dessas bibliotecas com o interpretador exigiu um entendimento profundo de suas APIs relacionadas, que ainda não estavam completamente documentadas na época do desenvolvimento.
+
+Para tornar concreto a diferença entre componentes estáticos e dinâmicos em Rust com Flecs, o \autoref{cod:comp_dyn_static} apresenta um exemplo simples de como criar o mesmo componente, tanto de forma estática quanto dinâmica.
+
+\codigoRust
+\lstinputlisting[
+	language=Rust,
+	label=cod:comp_dyn_static,
+	caption={Exemplo de criação de componentes estático e dinâmico em Rust com Flecs.},
+]{../codes/comp_dyn_static.rs}
+\vspace{-1em}
+\fonte{Elaboração própria com base em \citeonline{flecs}.}
