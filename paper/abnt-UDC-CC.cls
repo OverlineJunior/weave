@@ -60,7 +60,7 @@
 
 \ProvidesClass{abnt-UDC-CC}
 
-\PassOptionsToClass{pagestart=firstchapter,chapter=TITLE,section=TITLE,sumario=abnt-6727-2012,10pt,oneside,a4paper,brazil}{abntex2}
+\PassOptionsToClass{pagestart=firstchapter,chapter=TITLE,section=TITLE,sumario=abnt-6727-2012,12pt,oneside,a4paper,brazil}{abntex2}
 \LoadClass{abntex2}
 
 
