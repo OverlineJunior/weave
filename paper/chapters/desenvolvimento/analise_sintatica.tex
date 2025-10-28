@@ -9,7 +9,7 @@ A implementação da análise sintática começou com a representação da AST p
 	caption={Versão simplificada do código que define \texttt{Expr} e suas variantes.},
 ]{../codes/expr_enum.rs}
 \vspace{-1em}
-\fonte{Elaboração própria.}
+\fonte{Elaboração própria disponível em \url{https://github.com/OverlineJunior/weave/blob/master/src/parser/expr.rs}.}
 
 Sabendo que expressão é qualquer construto que retorna um valor \cite{craftinginterpreters}, a enumeração \texttt{Expr} foi definida para representar os diferentes tipos de expressões que a linguagem suporta. Junto das instruções, que são representadas pela enumeração \texttt{Stmt} ilustrada no \autoref{cod:stmt_enum}, esses dois tipos representam a AST em sua totalidade através da composição de suas variantes.
 
@@ -22,7 +22,7 @@ Diferente de expressões, instruções não retornam valores, e por isso, costum
 	caption={Versão simplificada do código que define \texttt{Stmt} e suas variantes.},
 ]{../codes/stmt_enum.rs}
 \vspace{-1em}
-\fonte{Elaboração própria.}
+\fonte{Elaboração própria disponível em \url{https://github.com/OverlineJunior/weave/blob/master/src/parser/stmt.rs}.}
 
 Vale notar a aparente contradição da variante \texttt{Stmt::Expr} no \autoref{cod:stmt_enum}. Ela existe para permitir que certas expressões sejam usadas como instruções, já que a gramática da linguagem define um programa como um conjunto de instruções. Assim, expressões como \texttt{Expr::EntityCons} podem ser tratadas como instruções quando necessário.
 
@@ -48,7 +48,7 @@ Com a gramática definida, o próximo passo foi a implementação do \textit{par
 	caption={Versão simplificada do código que compõe o \textit{parser}.},
 ]{../codes/parser.rs}
 \vspace{-1em}
-\fonte{Elaboração própria com o uso de Chumsky \cite{chumsky}.}
+\fonte{Elaboração própria com o uso de Chumsky \cite{chumsky}. Disponível em \url{https://github.com/OverlineJunior/weave/blob/master/src/parser.rs}.}
 
 Como é possível observar no \autoref{cod:parser}, as regras de produção da gramática foram traduzidas para o código de forma quase literal, salvo diferenças de sintaxe e o mapeamento das produções para as variantes das enumerações \texttt{Expr} e \texttt{Stmt}.
 

@@ -9,7 +9,7 @@ A implementação do \textit{lexer} começou com a definição de \textit{token}
 	caption={Versão simplificada do código que define \texttt{Token} e suas variantes.},
 ]{../codes/token_enum.rs}
 \vspace{-1em}
-\fonte{Elaboração própria.}
+\fonte{Elaboração própria disponível em \url{https://github.com/OverlineJunior/weave/blob/master/src/lexer/token.rs}.}
 
 No \autoref{cod:token_enum}, pode-se observar que as variantes \texttt{Int} e \texttt{String} carregam um valor do tipo \texttt{Value}. Esse tipo é outra enumeração, dessa vez responsável por representar os tipos de dados primitivos da linguagem, como mostrado no \autoref{cod:value_enum}.
 
@@ -20,7 +20,7 @@ No \autoref{cod:token_enum}, pode-se observar que as variantes \texttt{Int} e \t
 	caption={Versão simplificada do código que define \texttt{Value} e suas variantes.},
 ]{../codes/value_enum.rs}
 \vspace{-1em}
-\fonte{Elaboração própria.}
+\fonte{Elaboração própria disponível em \url{https://github.com/OverlineJunior/weave/blob/master/src/lexer/value.rs}.}
 
 A escolha de representar \texttt{Token} e \texttt{Value} como enumerações (\texttt{enum}), e não como estruturas (\texttt{struct}) com um campo que indica a variante, foi motivada principalmente pelo fato de que, em Rust, \textit{pattern matching} com \texttt{match} é exaustivo, garantindo que todas as variantes sejam tratadas. Isso reduz a probabilidade de erros, como esquecer de tratar um tipo específico de \textit{token} ou valor.
 
@@ -37,6 +37,6 @@ O \autoref{cod:lexer} ilustra uma versão simplificada do código que compõe o 
 	caption={Versão simplificada do código que compõe o \textit{lexer}.},
 ]{../codes/lexer.rs}
 \vspace{-1em}
-\fonte{Elaboração própria com base no \textit{lexer} implementado em Crafting Interpreters \citeonline{craftinginterpreters}.}
+\fonte{Elaboração própria com base no \textit{lexer} implementado em Crafting Interpreters \citeonline{craftinginterpreters}. Disponível em \url{https://github.com/OverlineJunior/weave/blob/master/src/lexer.rs}.}
 
 Com o \textit{lexer} implementado, se tornou possível transformar o código-fonte em uma sequência de \textit{tokens}, que serão utilizados na próxima etapa do processo de interpretação: a análise sintática.
