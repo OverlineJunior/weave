@@ -2,7 +2,7 @@
 
 Um interpretador é um programa que executa diretamente o código fonte de uma linguagem de programação, linha por linha. No caso deste trabalho, será utilizada a variante \textit{tree-walking}, que simplifica o método de execução do interpretador ao custo de desempenho \cite{craftinginterpreters}. Esta variante se adequa ao objetivo do trabalho, que visa a implementação de um protótipo simples, sem preocupações com desempenho.
 
-A \autoref{fig:mapa_interpretador} ilustra uma montanha fazendo analogia a alguns dos principais caminhos que a implementação de uma linguagem de programação pode seguir. Como será implementado um interpretador \textit{tree-walking} neste trabalho, o caminho pela montanha será o da fase de análise léxica, análise sintática, análise semântica e, por fim, evitando a descida pela montanha, a interpretação direta da representação intermediária gerada pela análise semântica.
+A \autoref{fig:mapa_interpretador} ilustra uma montanha fazendo analogia a alguns dos principais caminhos que a implementação de uma linguagem de programação pode seguir. Como será implementado um interpretador \textit{tree-walking} neste trabalho, o caminho pela montanha será o da fase de análise léxica, análise sintática e, por fim, evitando a descida pela montanha, a interpretação direta dos dados gerados pelas fases anteriores.
 
 \begin{figure}[H]
 	\centering
@@ -42,25 +42,9 @@ A \autoref{fig:analise_sintatica} ilustra a lista de \textit{tokens} sendo mapea
 	\label{fig:analise_sintatica}
 \end{figure}
 
-\subsubsection{Análise Semântica}
-
-A análise semântica é uma fase opcional\footnote{Neste trabalho, a análise semântica será implementada.} do processo de interpretação, que visa verificar a consistência e validade do código fonte, além de anotar a AST com informações adicionais, como o tipo de cada expressão \cite{craftinginterpreters}.
-
-Durante esta fase, o interpretador analisa a AST gerada na fase de análise sintática para garantir que as operações e expressões estejam corretas de acordo com as regras da linguagem \cite{craftinginterpreters}. Por exemplo, pode verificar se variáveis foram declaradas antes de serem usadas ou se os tipos de dados são compatíveis.
-
-A \autoref{fig:analise_semantica} ilustra a AST sendo anotada com informações adicionais, como o tipo de cada expressão, resultando em uma AST com mais conhecimento sobre o código fonte.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[height=0.27\textheight]{analise_semantica}
-	\caption{AST sendo anotada com informações adicionais pela análise semântica.}
-	\fonte{Elaboração própria com base em \citeonline{craftinginterpreters}.}
-	\label{fig:analise_semantica}
-\end{figure}
-
 \subsubsection{Interpretação}
 
-A interpretação é a última fase do processo de interpretação. Nesta fase, a AST gerada na fase de análise sintática e modificada pela análise semântica é percorrida e executada. Durante esta fase, o interpretador avalia expressões, atualiza o estado do programa e executa funções \cite{craftinginterpreters}.
+A interpretação é a última fase do processo de interpretação. Nesta fase, a AST gerada na fase de análise sintática é percorrida e executada. Durante esta fase, o interpretador avalia expressões, atualiza o estado do programa e executa funções \cite{craftinginterpreters}.
 
 A \autoref{fig:interpretacao} ilustra o processo de interpretação, onde a AST é percorrida e executada pelo interpretador, resultando no número 10.
 
