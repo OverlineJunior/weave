@@ -2,9 +2,7 @@
 
 Usando como base os critérios e características do \textit{design} de linguagens de programação descritos na seção \ref{sec:design_linguagem}, o planejamento da solução foi dado pela definição de alto nível da sintaxe e semântica da linguagem, além da escolha das tecnologias a serem utilizadas na implementação do protótipo.
 
-Já na implementação, o foco foi a construção do interpretador da linguagem proposta no planejamento, iniciando pela criação dos analisadores léxico e sintático, seguidos pelo analisador semântico e, por fim, a implementação do interpretador propriamente dito. Como base para a implementação, foi principalmente utilizado o livro \textit{Crafting Interpreters} \cite{craftinginterpreters}, além de artigos sobre ECS escritos por Sander Mertens e documentação de bibliotecas de ECS, como Flecs \cite{flecs} e Bevy \cite{bevy}.
-
-% De modo a permitir uma visão ampla sobre a implementação e a conexão entre suas partes, a \autoref{fig:diagrama_componentes} apresenta o diagrama geral do protótipo de interpretador proposto pelo trabalho. Nele, nota-se a divisão entre as diferentes fases do interpretador e como elas se conectam em um fluxo linear de dados, desde a geração dos \textit{tokens} até a ampliação da AST.
+Já na implementação, o foco foi a construção do interpretador da linguagem proposta no planejamento, iniciando pela criação dos analisadores léxico e sintático, seguidos pela formalização da fase de interpretação. Como base para a implementação, foi principalmente utilizado o livro \textit{Crafting Interpreters} \cite{craftinginterpreters}, além de artigos sobre ECS escritos por Sander Mertens, autor da biblioteca Flecs, e documentação de bibliotecas de ECS, como Flecs \cite{flecs} e Bevy \cite{bevy}.
 
 De modo a permitir uma visão ampla do fluxo de dados do interpretador, desde o código fonte até sua interpretação, a \autoref{fig:diagrama_atividades} apresenta o diagrama de atividades do protótipo proposto pelo trabalho.
 
