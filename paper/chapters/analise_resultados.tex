@@ -44,7 +44,6 @@ Esta seção tem a finalidade de documentar as principais decisões tomadas dura
 	\item \textbf{Objetivo}: Integrar o ECS no \textit{design} da linguagem da forma mais simples e intuitiva possível, visto que o foco do trabalho está na implementação do interpretador;
 	\item \textbf{Decisão}: O \textit{design} da linguagem foi feito adaptando a sintaxe de linguagens imperativas tradicionais para suportar os conceitos base de ECS: entidades, componentes e sistemas. Adicionalmente, a semântica e pragmática também seguem os conceitos de ECS.
 	\item \textbf{Impacto}: Toda a sintaxe proposta pelo \textit{design} foi implementada e conseguiu servir de base para a semântica e pragmática necessárias para a integração com a biblioteca de ECS.
-	% Como analisado na \autoref{tab:caracteristicas_nosso_design}, que compara \textit{design} da linguagem proposta com a biblioteca Flecs, nota-se que nosso \textit{design} marca todas as características relacionadas ao critério de legibilidade, porém não marca nenhuma característica relacionada aos critérios de facilidade de escrita e de confiabilidade.
 \end{itemize}
 
 \subsection{Representação das Abstrações Internas}
@@ -70,43 +69,26 @@ Esta seção tem a finalidade de documentar as principais decisões tomadas dura
 \begin{itemize}
 	\item \textbf{Objetivo}: Definir a estratégia de análise sintática para converter a sequência de \textit{tokens} em uma AST. Idealmente, ela deve ser simples de implementar, já que o trabalho se trata de um protótipo.
 	\item \textbf{Decisão}: Diferente do \textit{lexer}, a implementação do \textit{parser} foi feita com uma biblioteca, Chumsky, que expõe uma API para criar \textit{parsers} de forma declarativa \cite{chumsky}.
-	\item \textbf{Impacto}: A implementação do \textit{parser} com Chumsky foi relativamente simples, principalmente quando comparada com a implementação de \textit{parsers} manuais, como o do Jlox \cite{craftinginterpreters}. Devido a natureza declarativa da biblioteca, o código do \textit{parser} ficou extremamente parecido com as regras de produção da gramática, como comentado na \autoref{sec:analise_sintatica}. Isso facilitou a implementação e a depuração do \textit{parser}, que ficou com em torno de 120 linhas de código.
+	\item \textbf{Impacto}: A implementação do \textit{parser} com Chumsky foi relativamente simples, principalmente quando comparada com a implementação de \textit{parsers} manuais, como o de Jlox \cite{craftinginterpreters}. Devido a natureza declarativa da biblioteca, o código do \textit{parser} ficou extremamente parecido com as regras de produção da gramática, como comentado na \autoref{sec:analise_sintatica}. Isso facilitou a implementação e a depuração do \textit{parser}, que ficou com em torno de 120 linhas de código.
 \end{itemize}
 
-% TODO!
-% \subsection{Estratégia de Interpretação}
-
-% \begin{itemize}
-% 	\item \textbf{Objetivo}:
-% 	\item \textbf{Decisão}:
-% 	\item \textbf{Impacto}:
-% \end{itemize}
-
-\subsection{Escolha da Biblioteca de ECS}
+\subsection{Estratégia de Interpretação}
 
 \begin{itemize}
-	\item \textbf{Objetivo}: Escolher uma biblioteca de ECS adequada para integrar com o interpretador, considerando fatores como suporte da linguagem de implementação e documentação extensa;
-	\item \textbf{Decisão}: A biblioteca escolhida foi Flecs, devido ao seu suporte a Rust através de \textit{bindings} e sua documentação extensa \cite{flecs}. Adicionalmente, o autor dessa biblioteca é o mesmo dos vários artigos sobre ECS usados neste trabalho. Além disso, Flecs é uma das poucas bibliotecas de ECS que suporta relacionamento entre entidades, o que será útil para as sugestões de trabalhos futuros \cite{flecs}.
-	\item \textbf{Impacto}: A escolha da biblioteca Flecs facilitou sua integração com o interpretador, devido a sua documentação e artigos relacionados do autor. Porém, pelo fato de seu \textit{binding} para Rust não possuir declaração de componentes de forma dinâmica, a integração exigiu uma estratégia incomum, como descrita na \autoref{sec:interpretacao} \cite{flecs}.
+	\item \textbf{Objetivo}: Definir a estratégia de interpretação da AST, integrando-a com a biblioteca de ECS escolhida.
+	\item \textbf{Decisão}: Por mais que a fase de interpretação não tenha sido implementada, foi determinado que é necessário utilizar componentes dinâmicos para representar os componentes definidos pelo usuário, conforme discutido na \autoref{sec:interpretacao}.
+	\item \textbf{Impacto}: A tentativa de implementação com componentes dinâmicos em Rust com Flecs apresentou desafios significativos, que em conjunto com restrições de tempo, impediram a integração da fase de interpretação com o interpretador desenvolvido.
+	\item \textbf{Alternativa}: Utilizar uma biblioteca de ECS que dê melhor suporte a componentes dinâmicos em Rust, ou utilizar uma linguagem de implementação com tipagem dinâmica\footnote{Essa é uma escolha que troca a expressividade na representação de tipos que Rust proporciona por maior facilidade na implementação da ponte entre o interpretador e a biblioteca de ECS. Ou seja, é necessário escolher entre maior qualidade nas fases de análise léxica e sintática, que fizeram grande uso da tipagem expressiva, e maior facilidade na implementação da fase de interpretação.}, como Python \cite{python}.
 \end{itemize}
-
-% TODO!
-% \subsection{Representação Interna de Entidades, Componentes e Sistemas}
-
-% \begin{itemize}
-% 	\item \textbf{Objetivo}:
-% 	\item \textbf{Decisão}:
-% 	\item \textbf{Impacto}:
-% \end{itemize}
 
 \section{Viabilidade e Limitações da Solução} \label{sec:viabilidade_limitacoes}
 
 Por fim, esta seção serve como uma síntese dos resultados obtidos, avaliando a viabilidade e limitações da solução proposta e depois determinando se os objetivos do trabalho foram alcançados.
 
-Foi visto que o protótipo de interpretador conseguiu de fato interpretar programas na linguagem proposta, e que sua implementação se assemelha muito com a implementação de interpretadores tradicionais, salvo a fase de interpretação, que é onde há a ponte entre o interpretador e a biblioteca de ECS.
+Foi visto que o protótipo de interpretador conseguiu analisar programas escritos na linguagem proposta, gerando uma AST que representa todos os dados que a fase de interpretação precisa. Porém, não foi possível implementar a fase de interpretação devido a restrições de tempo e falta de documentação a respeito de componentes dinâmicos.
 
 A respeito de documentar as decisões de \textit{design} e implementação, a seção anterior o fez de forma detalhada, também incluindo os impactos de cada decisão no protótipo. De forma geral, as decisões tomadas durante o desenvolvimento do interpretador se mostraram acertadas, com impactos positivos na implementação.
 
 A respeito de limitações, a mais aparente é a falta de recursos que a linguagem proporciona, como controle de fluxo, funções, entre outros. Isso é intencional, visto que o trabalho propõe fornecer apenas um protótipo funcional, e não uma linguagem completa. Além disso, não houve nenhuma consideração quanto a desempenho, que é um dos principais benefícios do padrão ECS. Isso também foi intencional, de modo a reduzir o escopo do trabalho.
 
-Com o protótipo funcional, um registro das decisões tomadas durante o desenvolvimento, e a avaliação do trabalho como um todo e das decisões tomadas, conclui-se que os objetivos do trabalho foram alcançados.
+Com o protótipo parcialmente funcional, um registro das decisões tomadas durante o desenvolvimento, e a avaliação do trabalho como um todo e das decisões tomadas, conclui-se que os objetivos do trabalho foram parcialmente alcançados, salvo a implementação da fase de interpretação.
