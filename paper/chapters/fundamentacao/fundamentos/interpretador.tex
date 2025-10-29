@@ -2,7 +2,7 @@
 
 Um interpretador é um programa que executa diretamente o código fonte de uma linguagem de programação, linha por linha. No caso deste trabalho, será utilizada a variante \textit{tree-walking}, que simplifica o método de execução do interpretador ao custo de desempenho \cite{craftinginterpreters}. Esta variante se adequa ao objetivo do trabalho, que visa a implementação de um protótipo simples, sem preocupações com desempenho.
 
-A \autoref{fig:mapa_interpretador} ilustra uma montanha fazendo analogia a alguns dos principais caminhos que a implementação de uma linguagem de programação pode seguir. Como será implementado um interpretador \textit{tree-walking} neste trabalho, o caminho pela montanha será o da fase de análise léxica, análise sintática e, por fim, evitando a descida pela montanha, a interpretação direta dos dados gerados pelas fases anteriores.
+A \autoref{fig:mapa_interpretador} ilustra uma montanha fazendo analogia a alguns dos principais caminhos que a implementação de uma linguagem de programação pode seguir. Como será implementado um interpretador \textit{tree-walking} neste trabalho, o caminho pela montanha será o da fase de análise léxica, análise sintática e, por fim, evitando a descida pela montanha, a interpretação direta da AST gerada pela análise sintática.
 
 \begin{figure}[H]
 	\centering
@@ -12,11 +12,11 @@ A \autoref{fig:mapa_interpretador} ilustra uma montanha fazendo analogia a algun
 	\label{fig:mapa_interpretador}
 \end{figure}
 
-A seguir, serão definidas em detalhe cada uma das quatro principais fases de um interpretador.
+A seguir, serão definidas em detalhe cada uma das três fases que o interpretador proposto utilizará, mostrando como o código fonte é processado até sua execução final.
 
 \subsubsection{Análise Léxica}
 
-A análise léxica, também conhecida como \textit{lexer}, é a primeira fase do processo de interpretação. Nesta fase, o código fonte é lido e dividido em unidades chamadas \textit{tokens}. Cada \textit{token} representa uma palavra ou símbolo da linguagem de programação, como palavras-chave e operadores. Além disso, cada \textit{token} costuma conter informações adicionais a respeito da palavra, como sua localização ou valor agregado, caso ela possua algum \cite{craftinginterpreters}.
+A análise léxica, cuja implementação é chamada de \textit{lexer}, é a primeira fase do processo de interpretação. Nesta fase, o código fonte é lido e dividido em unidades chamadas \textit{tokens} \cite{craftinginterpreters}. Cada \textit{token} representa uma palavra ou símbolo da linguagem de programação, como palavras-chave e operadores. Além disso, cada \textit{token} costuma conter informações adicionais a respeito da palavra, como sua localização ou valor agregado, caso ela possua algum \cite{craftinginterpreters}.
 
 A \autoref{fig:analise_lexica} ilustra o código fonte \texttt{8 + 4 / 2} sendo mapeado para uma lista de \textit{tokens}, onde cada um representa sua determinada palavra do código fonte.
 
@@ -30,7 +30,7 @@ A \autoref{fig:analise_lexica} ilustra o código fonte \texttt{8 + 4 / 2} sendo 
 
 \subsubsection{Análise Sintática}
 
-A análise sintática, também conhecida como \textit{parser}, é a segunda fase do processo de interpretação. Nesta fase, os \textit{tokens} gerados na fase de análise léxica são organizados em uma estrutura hierárquica chamada árvore sintática abstrata (do inglês, \textit{abstract syntax tree} — AST). A AST representa a estrutura do código fonte de acordo com as regras gramaticais da linguagem de programação \cite{craftinginterpreters}.
+A análise sintática, cuja implementação é chamada de \textit{parser}, é a segunda fase do processo de interpretação. Nesta fase, os \textit{tokens} gerados na fase de análise léxica são organizados em uma estrutura hierárquica chamada árvore sintática abstrata (do inglês, \textit{abstract syntax tree} — AST). A AST representa a estrutura do código fonte de acordo com as regras gramaticais da linguagem de programação \cite{craftinginterpreters}.
 
 A \autoref{fig:analise_sintatica} ilustra a lista de \textit{tokens} sendo mapeada para uma AST, assim gerando a ordem de procedência dos operadores.
 
@@ -44,7 +44,7 @@ A \autoref{fig:analise_sintatica} ilustra a lista de \textit{tokens} sendo mapea
 
 \subsubsection{Interpretação}
 
-A interpretação é a última fase do processo de interpretação. Nesta fase, a AST gerada na fase de análise sintática é percorrida e executada. Durante esta fase, o interpretador avalia expressões, atualiza o estado do programa e executa funções \cite{craftinginterpreters}.
+A interpretação, cuja implementação é chamada de \cite{interpreter}, é a última fase do processo de interpretação. Nesta fase, a AST gerada na fase de análise sintática é percorrida e executada. Durante esta fase, o interpretador avalia expressões, atualiza o estado do programa e executa funções \cite{craftinginterpreters}.
 
 A \autoref{fig:interpretacao} ilustra o processo de interpretação, onde a AST é percorrida e executada pelo interpretador, resultando no número 10.
 
@@ -56,4 +56,4 @@ A \autoref{fig:interpretacao} ilustra o processo de interpretação, onde a AST 
 	\label{fig:interpretacao}
 \end{figure}
 
-É importante ressaltar que é na interpretação que o tempo de execução (do inglês, \textit{runtime}) do programa é determinado, pois é quando as expressões são avaliadas e os resultados são produzidos. Em contrapartida, a análise léxica, sintática e semântica são fases de preparação, caracterizando o tempo de compilação (do inglês, \textit{compile time}) do programa.
+É importante ressaltar que é na interpretação que o tempo de execução (do inglês, \textit{runtime}) do programa é determinado, pois é quando as expressões são avaliadas e os resultados são produzidos. Em contrapartida, as fases de análise léxica e sintática são fases de preparação, caracterizando o tempo de compilação (do inglês, \textit{compile time}) do programa.

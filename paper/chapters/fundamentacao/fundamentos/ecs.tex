@@ -11,9 +11,9 @@ Neste trabalho, o padrão ECS será um dos principais fundamentos para o \textit
 Pode-se dizer que o ECS é separado em três elementos fundamentais: entidades, componentes e sistemas \cite{ecsfaq}. Cada um desses elementos desempenha um papel específico na aplicação:
 
 \begin{itemize}
-	\item \textbf{Entidades}: identificadores únicos que representam os vários conceitos de uma aplicação. Sozinhas, as entidades não contêm dados nem funcionalidade;
-	\item \textbf{Componentes}: estruturas de dados que armazenam informações específicas. Uma entidade pode ter múltiplos componentes diferentes, definindo suas características;
-	\item \textbf{Sistemas}: funções responsáveis por processar sobre entidades com um determinado conjunto de componentes — processo denominado \textit{querying}.
+	\item \textbf{Entidades}: identificadores únicos que representam os vários conceitos de uma aplicação. Sozinhas, as entidades não contêm dados nem funcionalidade \cite{ecsfaq};
+	\item \textbf{Componentes}: estruturas de dados que armazenam informações específicas. Uma entidade pode ter múltiplos componentes diferentes, definindo suas características \cite{ecsfaq};
+	\item \textbf{Sistemas}: funções responsáveis por processar sobre entidades com um determinado conjunto de componentes — processo denominado \textit{querying} \cite{ecsfaq}.
 \end{itemize}
 
 Como ilustrado na \autoref{fig:diagrama_ecs}, o estado da aplicação é dado por um conjunto de entidades, cada uma com seus respectivos componentes. Os sistemas são responsáveis pela transformação do estado da aplicação, processando as entidades que possuem os componentes necessários para a execução do sistema.
@@ -22,7 +22,7 @@ Como ilustrado na \autoref{fig:diagrama_ecs}, o estado da aplicação é dado po
 	\centering
 	\includegraphics[width=0.35\textheight]{diagrama_ecs}
 	\caption{Relação entre entidades, componentes e sistemas.}
-	\fonte{Elaboração própria.}
+	\fonte{Elaboração própria com base em \citeonline{ecsfaq}.}
 	\label{fig:diagrama_ecs}
 \end{figure}
 
@@ -43,7 +43,7 @@ Fora a definição de ECS e seus três elementos fundamentais, o padrão ainda p
 
 \subsubsection{Agendador}
 
-O agendador é um construto com a finalidade de executar todos os sistemas da aplicação, podendo determinar a ordem e frequência de execução de forma declarativa, resolvendo dependência entre sistemas e tornando o ciclo de atualização da aplicação mais previsível \cite{bevy}. Pode-se dizer que, dentre os conceitos mais experimentais, o agendador é o mais próximo de uma formalização.
+O agendador é um construto com a finalidade de executar todos os sistemas da aplicação, podendo determinar a ordem e frequência de execução de forma declarativa, resolvendo dependência entre sistemas e tornando o ciclo de atualização da aplicação mais previsível \cite{bevy}. Pode-se dizer que, dentre os conceitos mais experimentais, o agendador é o mais próximo de uma formalização devido a sua presença em diversas bibliotecas de ECS, como Bevy, Flecs e EnTT \cite{bevy, flecs, entt}.
 
 A \autoref{fig:diagrama_agendador} ilustra o agendador executando os sistemas de forma cíclica e sequencial, onde cada sistema é executado uma vez por ciclo. O agendador pode ser configurado para executar sistemas em diferentes momentos do ciclo, como antes ou depois de outros sistemas.
 
@@ -51,7 +51,7 @@ A \autoref{fig:diagrama_agendador} ilustra o agendador executando os sistemas de
 	\centering
 	\includegraphics[width=0.3\textheight]{diagrama_agendador}
 	\caption{Agendador executando os sistemas de forma cíclica e sequencial.}
-	\fonte{Elaboração própria.}
+	\fonte{Elaboração própria com base em \citeonline{flecs, bevy}.}
 	\label{fig:diagrama_agendador}
 \end{figure}
 
@@ -59,7 +59,7 @@ A \autoref{fig:diagrama_agendador} ilustra o agendador executando os sistemas de
 
 Independente da aplicação, é muito comum a necessidade de relacionar diferentes conceitos entre si. Exemplo disso são os sistemas de arquivos, onde pastas podem conter arquivos, uma relação pai-filho.
 
-Relacionamento de entidades (do inglês, \textit{entity relationship}) é um conceito que supre essa necessidade, permitindo que entidades se relacionem entre si. O autor da biblioteca Flecs, \citeonline{flecs}, explica o conceito fazendo uma paralela com o simples ato de adicionar um componente a uma entidade, como ilustrado na \autoref{fig:entidade_posicao}.
+Relacionamento de entidades (do inglês, \textit{entity relationship}) é um conceito que supre essa necessidade, permitindo que entidades se relacionem entre si. \citeonline{flecs} explica o conceito fazendo uma paralela com o ato de adicionar um componente a uma entidade, como ilustrado na \autoref{fig:entidade_posicao}.
 
 \begin{figure}[H]
 	\centering
