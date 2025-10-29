@@ -114,21 +114,22 @@
 
 \chapter{Conclusão} \label{ch:conclusao}
 
-Este trabalho projetou e implementou um protótipo de interpretador para uma linguagem orientada ao padrão \textit{Entity Component System}, cumprindo os objetivos inicialmente propostos: implementar o interpretador, documentar as decisões tomadas e determinar a viabilidade do trabalho.
+Este trabalho projetou e implementou de forma parcial um protótipo de interpretador para uma linguagem orientada ao padrão \textit{Entity Component System}, cumprindo a maioria dos objetivos inicialmente propostos, salvo a implementação completa da fase de interpretação.
 
-O escopo incluiu a implementação das fases de análise léxica, sintática e de interpretação, aonde foram detalhadas as escolhas de técnicas e bibliotecas utilizadas ao longo do desenvolvimento. Com o protótipo funcional e a documentação de decisões tomadas completa, foi possível avaliar a viabilidade do trabalho, identificando tanto os pontos fortes quanto as limitações encontradas.
+O escopo incluiu a implementação das fases de análise léxica e sintática, além da formalização da fase de interpretação e do registro de escolhas de técnicas e bibliotecas utilizadas ao longo do desenvolvimento. Com o protótipo parcialmente funcional e a documentação de decisões tomadas completa, foi possível avaliar a viabilidade do trabalho, identificando tanto os pontos fortes quanto as limitações encontradas.
 
 \section{Principais Resultados e Contribuições}
 
-Como analisado no capítulo \ref{ch:analise_resultados}, o protótipo de interpretador conseguiu interpretar programas na linguagem proposta, e sua implementação se assemelha muito com a implementação de interpretadores tradicionais, salvo a fase de interpretação, que é onde há a ponte entre o interpretador e a biblioteca de ECS.
+Como analisado no capítulo \ref{ch:analise_resultados}, o protótipo de interpretador conseguiu transformar o código fonte em uma AST completa, e identificado que sua implementação se assemelha muito com a implementação do interpretador Jlox, salvo a fase de interpretação, que é onde há a ponte entre o interpretador e a biblioteca de ECS.
 
-A contribuição mais significativa deste trabalho é a implementação do protótipo de interpretador, que, atendendo aos objetivos propostos, serve como base para trabalhos futuros. Isso se deve pelo fato de que, assim como comentado na seção \ref{sec:justificativa}, a proposta deste trabalho não só é incomum, como também peca por não haver artigos e documentação sobre o assunto, tornando trabalhos futuros mais difíceis de serem feitos.
+A contribuição mais significativa deste trabalho é a implementação do protótipo de interpretador, que, atendendo a maioria dos objetivos propostos, serve como base para trabalhos futuros. Isso se deve pelo fato de que, assim como comentado na seção \ref{sec:justificativa}, a proposta deste trabalho não só é incomum, como também peca por não haver artigos e documentação sobre o assunto, tornando trabalhos futuros mais difíceis de serem feitos.
 
 \section{Viabilidade e Limitações}
 
-Assim como discutido na seção \ref{sec:viabilidade_limitacoes}, a implementação do protótipo de interpretador se mostrou viável, já que ele segue as fases genéricas de um interpretador tradicional, e a integração com a biblioteca de ECS foi possível através do uso de relacionamentos entre entidades.
+Assim como discutido na seção \ref{sec:viabilidade_limitacoes}, a implementação do protótipo de interpretador se mostrou viável quanto as fases de análise léxica e sintática. Porém, a implementação da fase de interpretação se mostrou inviável dentro do tempo disponível devido à dificuldade de representar tipos dinâmicos em
+Rust e à falta de documentação sobre componentes dinâmicos na biblioteca de ECS escolhida.
 
-Contudo, também na seção \ref{sec:viabilidade_limitacoes}, foi visto que o protótipo possui limitações, como a falta de recursos proporcionados pela linguagem e a ausência de considerações quanto a desempenho. Por mais que intencionais, essas limitações restringem o uso do protótipo a fins educacionais e de pesquisa, não sendo adequado para aplicações práticas.
+Além disso, também na seção \ref{sec:viabilidade_limitacoes}, foi visto que o protótipo possui outras limitações, como a falta de recursos proporcionados pela linguagem e a ausência de considerações quanto a desempenho. Por mais que intencionais, essas limitações restringem o uso do protótipo a fins educacionais e de pesquisa, não sendo adequado para aplicações práticas.
 
 \section{Sugestões para Trabalhos Futuros}
 
@@ -147,9 +148,13 @@ Contudo, também na seção \ref{sec:viabilidade_limitacoes}, foi visto que o pr
 
 Sabendo que o escopo deste trabalho foi propositalmente limitado, e que o objetivo era fornecer uma base para trabalhos futuros, há uma ênfase em sugestões para trabalhos futuros. As sugestões mais relevantes são listadas a seguir:
 
+\subsection{Devidamente Implementar a Fase de Interpretação}
+
+A sugestão mais óbvia é implementar a fase de interpretação que não pôde ser integrada ao interpretador devido a restrições de tempo. Com isso, o protótipo se tornaria funcional por completo, permitindo que programas escritos na linguagem proposta sejam efetivamente interpretados.
+
 \subsection{Explorar Otimizações e Analisar o Desempenho}
 
-A sugestão mais previsível é explorar otimizações relacionadas a um interpretador orientado ao padrão ECS, também fazendo análises de desempenho. Isso se deve ao fato de que desempenho foi a motivação inicial por trás do ECS, e é muito provável que um interpretador como o deste trabalho possa se beneficiar de otimizações específicas relacionadas ao padrão.
+Explorar otimizações relacionadas a um interpretador orientado ao padrão ECS, também fazendo análises de desempenho. Isso se deve ao fato de que desempenho foi a motivação inicial por trás do ECS, e é muito provável que um interpretador como o deste trabalho possa se beneficiar de otimizações específicas relacionadas ao padrão.
 
 Adicionalmente, muitos dos artigos autorados por Sander Mertens, autor muito citado neste trabalho, discutem otimizações relacionadas ao ECS, como a aplicação do \textit{design} orientado a dados ao ECS e a organização interna de entidades e componentes \cite{ecsfaq, ecsstorageinpics}. Esses artigos podem servir de base para trabalhos futuros que busquem explorar otimizações dentro do contexto deste trabalho.
 
@@ -183,9 +188,9 @@ Vale notar que, apesar dessas sugestões também poderem ser implementadas em um
 
 \codigoRust
 \lstinputlisting[
-	language=Rust,
-	label=cod:exemplo_futuro,
-	caption=Exemplo de sintaxe para implementar modificadores de componentes e agendamento de sistemas utilizando o conceito de componentes e sistemas como entidades.
+    language=Rust,
+    label=cod:exemplo_futuro,
+    caption=Exemplo de sintaxe para implementar modificadores de componentes e agendamento de sistemas utilizando o conceito de componentes e sistemas como entidades.
 ]{../codes/exemplo_futuro.rs}
 \vspace{-1em}
 \fonte{Elaboração própria.}
