@@ -5,66 +5,75 @@
 
 = Introdução e Motivação
 
-#pagebreak()
+// ---
 
-#align(center)[#grid(
-	columns: (1fr, 1fr),
-	rows: (2em, 1fr),
-	[Modelo Cascata],
-	[Modelo Ágil],
-	figura_legendada(
-		image("../../images/modelo_cascata.png", height: 10em),
-		[Fonte: elaboração própria.],
-	),
-	figura_legendada(
-		image("../../images/modelo_agil.png", height: 10em),
-		[Fonte: elaboração própria.],
-	),
-)]
+// #align(center)[#grid(
+// 	columns: (1fr, 1fr),
+// 	rows: (2em, 1fr),
+// 	[Modelo Cascata],
+// 	[Modelo Ágil],
+// 	figura_legendada(
+// 		image("../../images/modelo_cascata.png", height: 10em),
+// 		[Fonte: elaboração própria.],
+// 	),
+// 	figura_legendada(
+// 		image("../../images/modelo_agil.png", height: 10em),
+// 		[Fonte: elaboração própria.],
+// 	),
+// )]
 
-#pagebreak()
+---
 
 // Explicar superficialmente o ECS antes da definição formal.
-O padrão de arquitetura *_Entity Component System_* (ECS) é uma abordagem que se adequa ao modelo ágil por ser *flexível* e *adaptável*.
+O *_Entity Component System_* (ECS) é um padrão de arquitetura com origens no desenvolvimento de jogos @ecsfaq;
 
 #pause
 #line(length: 100%)
 
-// Citar como o ECS costuma ser abstraído quase sempre como uma biblioteca.
-Porém ainda não existem muitos estudos exploratórios sobre o tema. // Por ser um padrão relativamente novo e específico.
+Por mais que já usado fora de jogos, sua implementação é majoritariamente feita via *bibliotecas* ou *_frameworks_* @arewegameyet;
 
 #pause
 #line(length: 100%)
 
-Com base nisso, este trabalho busca explorar o padrão ECS imbutido em uma *linguagem de programação*.
+Por isso, este trabalho explora a implementação de uma *linguagem de programação* que torna o ECS um conceito de primeira classe.
 
-#pagebreak()
+---
 
 = Objetivos
 
-#pagebreak()
+---
 
 == Objetivo Geral
 
-#grid(
-	columns: (1fr, 1fr),
-	rows: 1,
-	column-gutter: 30pt,
-	[Explorar a viabilidade de projetar e implementar uma linguagem de programação orientada ao padrão ECS.],
-	figura_legendada(
-		image("../../images/interseccao_ecs_linguagem.png"),
-		[Fonte: elaboração própria.],
-	),
-)
+Projetar e documentar um protótipo de interpretador para uma linguagem de programação orientada ao ECS.
 
-#pagebreak()
+// #grid(
+// 	columns: (1fr, 1fr),
+// 	rows: 1,
+// 	column-gutter: 30pt,
+// 	[Projetar e documentar um protótipo de interpretador para uma linguagem de programação orientada ao ECS.],
+// 	figura_legendada(
+// 		image("../../images/interseccao_ecs_linguagem.png"),
+// 		[Fonte: elaboração própria.],
+// 	),
+// )
+
+---
 
 == Objetivos Específicos
 
-+ Definir os requisitos e princípios de design da linguagem
+- Implementar as fases de análise léxica e sintática do interpretador a fim de tornar o ECS primeira classe na linguagem;
 
-+ Implementar um protótipo de interpretador funcional
+#pause
 
-+ Avaliar o impacto e a viabilidade do trabalho
+- Especificar conceitualmente a fase de interpretação do interpretador (mapeamento AST -> Flecs);
 
-#pagebreak()
+#pause
+
+- Levantar decisões de implementação e desafios encontrados para auxiliar trabalhos futuros;
+
+#pause
+
+- Identificar limitações do protótipo e propor oportunidades de continuidade.
+
+---

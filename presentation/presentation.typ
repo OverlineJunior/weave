@@ -1,8 +1,8 @@
 #import "style.typ": style
 
-#let title = "Design e Implementação de um Protótipo para uma Linguagem de Programação Orientada ao Entity Component System"
+#let title = "Implementação de um Protótipo para uma Linguagem de Programação Orientada ao Entity Component System"
 #let student = "Francisco Sebastiany Junior"
-#let advisor = "Prof. Me. Luciano S. Cardoso"
+#let advisor = "Prof. Me. Luciano Santos Cardoso"
 
 #show: style.with(title, student, advisor)
 

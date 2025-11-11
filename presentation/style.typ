@@ -2,7 +2,7 @@
 #import themes.simple: *
 
 #let style(title, student, advisor, body) = [
-  #show: simple-theme.with(aspect-ratio: "16-9")
+  #show: simple-theme.with(aspect-ratio: "16-9", primary: black)
 
   #show raw: set text(size: 18pt)
 
@@ -12,6 +12,7 @@
     #grid(
       columns: 1,
       rows: (1fr, 1fr, 1fr),
+
       align(top)[#grid(
         columns: (1fr, 5fr, 1fr),
         rows: 1,
@@ -22,12 +23,28 @@
           CURSO DE CIÊNCIA DA COMPUTAÇÃO
         ],
       )],
-      align(horizon)[== #title],
-      align(bottom + left)[#text(size: 0.8em)[
-        *Aluno* #student
 
-        *Orientador* #advisor
-      ]],
+      align(horizon)[== #title],
+
+      align(bottom)[
+        #set text(size: 0.8em)
+
+        #grid(
+          columns: (2fr, 1fr),
+
+          align(left)[
+            *Acadêmico*: #student
+
+            *Orientador*: #advisor
+          ],
+
+          align(right, [
+            Foz do Iguaçu, PR
+
+            #datetime.today().year()
+          ]),
+        )
+      ],
     )
   ]
 

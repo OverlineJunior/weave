@@ -1,4 +1,65 @@
-# https://github.com/typst/hayagriva/blob/main/docs/file-format.md
+flightdynamics:
+  type: Thesis
+  title: Two Published Flight Dynamics Models Rewritten in Rust and Structures as an ECS
+  author: Chad A. Willis
+  date: 2021
+  institution: Air Force Institute of Technology
+  address: Wright-Patterson Air Force Base, Ohio
+  degree: MS Thesis
+
+agile:
+  type: Web
+  title: The Agile Manifesto
+  author: Agile Alliance
+  date: 2001
+  url:
+    value: https://www.agilealliance.org/agile101/the-agile-manifesto/
+    date: 2025-02-22
+
+reactivex:
+  type: Repository
+  title: "RxJS: Reactive Extensions for JavaScript"
+  author: Microsoft
+  date: 2009
+  url:
+    value: https://reactivex.io/
+    date: 2025-06-13
+
+flecs:
+  type: Repository
+  title: "Flecs: Fast Entity Component System"
+  author: Sander Mertens
+  date: 2019
+  url:
+    value: https://github.com/SanderMertens/flecs
+    date: 2025-02-23
+
+flecsexplorer:
+  type: Repository
+  title: Flecs Explorer
+  author: Sander Mertens
+  date: 2021
+  url:
+    value: https://github.com/flecs-hub/explorer
+    date: 2025-05-15
+
+bevy:
+  type: Repository
+  title: "Bevy: A refreshingly simple data-driven game engine built in Rust"
+  author: Bevy Foundation
+  date: 2020
+  url:
+    value: https://github.com/bevyengine/bevy
+    date: 2025-04-14
+
+entt:
+  type: Repository
+  title: "EnTT: Gaming Meets Modern C++"
+  author: Michele Caini
+  date: 2017
+  url:
+    value: https://github.com/skypjack/entt
+    date: 2025-10-29
 
 logos:
   type: Repository
@@ -20,6 +81,42 @@ chumsky:
     value: https://github.com/zesterer/chumsky
     date: 2025-05-17
 
+thiserror:
+  type: Repository
+  title: thiserror
+  author: David Tolnay
+  date: 2019
+  url:
+    value: https://github.com/dtolnay/thiserror
+    date: 2025-04-30
+
+ecsact:
+  type: Repository
+  title: Ecsact
+  author: Ezekiel Warren
+  date: 2022
+  url:
+    value: https://github.com/ecsact-dev
+    date: 2025-07-08
+
+flecsscript:
+  type: Reference
+  title: Flecs Script
+  author: Sander Mertens
+  date: 2021
+  url:
+    value: https://www.flecs.dev/flecs/md_docs_2FlecsScript.html
+    date: 2025-07-08
+
+python:
+  type: Reference
+  title: Python Language Reference
+  author: Guido van Rossum and Python Software Foundation
+  date: 2024
+  url:
+    value: https://docs.python.org/3/reference/
+    date: 2025-10-29
+
 ecsfaq:
   type: Repository
   title: Entity Component System FAQ
@@ -36,6 +133,129 @@ craftinginterpreters:
   date: 2021
   publisher: Genever Benning
 
+rustbook:
+  type: Book
+  title: The Rust Programming Language
+  author:
+    - Steve Klabnik
+    - Carol Nichols
+  date: 2022
+  edition: 2nd
+  publisher: No Starch Press
+  address: San Francisco, California
+
+pragmaticprogrammer:
+  type: Book
+  title: "The Pragmatic Programmer: Your Journey To Mastery"
+  author:
+    - David Thomas
+    - Andrew Hunt
+  date: 2019
+  edition: 20th Anniversary Edition
+  publisher: Addison-Wesley
+  address: Boston, Massachusetts
+
+fundsoftwarearchitecture:
+  type: Book
+  title: "Fundamentals of Software Architecture: An Engineering Approach"
+  author:
+    - Mark Richards
+    - Neal Ford
+  date: 2020
+  publisher: O'Reilly Media
+  address: Sebastopol, California
+
+headfirstdesignpatterns:
+  type: Book
+  title: "Head First Design Patterns: A Brain-Friendly Guide"
+  author:
+    - Eric Freeman
+    - Elisabeth Robson
+    - Bert Bates
+  date: 2004
+  publisher: O'Reilly Media
+  address: Sebastopol, California
+
+gang4designpatterns:
+  type: Book
+  title: "Design Patterns: Elements of Reusable Object-Oriented Software"
+  author:
+    - Erich Gamma
+    - Richard Helm
+    - Ralph Johnson
+    - John Vlissides
+  date: 1994
+  edition: 1st
+  publisher: Addison-Wesley
+  address: Boston, Massachusetts
+
+designconceptsinlanguages:
+  type: Book
+  title: Design Concepts in Programming Languages
+  author:
+    - Franklyn A. Turbak
+    - David K. Gifford
+  date: 2008
+  isbn: 0262201755
+  publisher: The MIT Press
+
+conceptsoflanguages:
+  type: Book
+  title: Concepts of Programming Languages
+  author: Robert W. Sebesta
+  date: 2012
+  edition: 10th
+  isbn: 0273769103
+  publisher: Pearson
+
+paradigmsfordummies:
+  type: Article
+  title: "Programming Paradigms for Dummies: What Every Programmer Should Know"
+  author: Peter Van Roy
+  date: 2012
+  institution: Université catholique de Louvain
+
+mechanicalevaluationexpressions:
+  type: Article
+  title: The mechanical evaluation of expressions
+  author: Peter J. Landin
+  date: 1964
+  journal: The Computer Journal
+  volume: 6
+  number: 4
+  pages: 308-320
+  doi: 10.1093/comjnl/6.4.308
+  url:
+    value: https://doi.org/10.1093/comjnl/6.4.308
+    date: 2025-08-06
+
+ecsstorageinpics:
+  type: Blog
+  title: ECS Storage in Pictures
+  author: Sander Mertens
+  date: 2024
+  url:
+    value: https://ajmmertens.medium.com/building-an-ecs-storage-in-pictures-642b8bfd6e04
+    date: 2025-02-22
+
+ecsparadigm:
+  type: Blog
+  title: "ECS: From Tool to Paradigm"
+  author: Sander Mertens
+  date: 2021
+  url:
+    value: https://ajmmertens.medium.com/ecs-from-tool-to-paradigm-350587cdf216
+    date: 2025-05-18
+
+entityrelationships:
+  type: Blog
+  title: Building Games in ECS with Entity Relationships
+  author: Sander Mertens
+  date: 2022
+  url:
+    value: https://ajmmertens.medium.com/building-games-in-ecs-with-entity-relationships-657275ba2c6c
+    date: 2025-05-19
+
 whatsprogrammingparadigm:
   type: Blog
   title: What is a Programming Paradigm?
@@ -43,6 +263,15 @@ whatsprogrammingparadigm:
   date: 2023
   url:
     value: https://medium.com/@Ariobarxan/what-is-a-programming-paradigm-ec6c5879952b
+    date: 2025-05-18
+
+programmingparadigmsionos:
+  type: Article
+  title: "Programming paradigms: What are the principles of programming?"
+  author: IONOS
+  date: 2020
+  url:
+    value: https://www.ionos.com/digitalguide/websites/web-development/programming-paradigms/
     date: 2025-05-18
 
 refactoringguru:
@@ -54,19 +283,83 @@ refactoringguru:
     value: https://refactoring.guru/design-patterns
     date: 2025-04-30
 
-wikipediamvc:
+merriamwebster:
   type: Reference
-  title: Model-view-controller
-  author: Wikipedia contributors
+  title: Merriam-Webster
+  author: Merriam-Webster, Inc.
   url:
-    value: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
-    date: 2025-06-30
+    value: https://www.merriam-webster.com/
+    date: 2025-05-18
 
-entityrelationships:
+mdnmvc:
   type: Reference
-  title: Building Games in ECS with Entity Relationships
-  author: Mertens, Sander
-  year: 2022
+  title: MVC
+  author: Mozilla Developer Network
+  date: 2025-07-11
   url:
-    value: https://ajmmertens.medium.com/building-games-in-ecs-with-entity-relationships-657275ba2c6c
-    date: 2025-05-19
+    value: https://developer.mozilla.org/en-US/docs/Glossary/MVC
+    date: 2025-11-11
+
+17thstateofagile:
+  type: Report
+  title: 17th State of Agile Report
+  author: Digital.ai
+  date: 2024
+  url:
+    value: https://info.digital.ai/rs/981-LQX-968/images/RE-SA-17th-Annual-State-Of-Agile-Report.pdf
+    date: 2025-07-08
+
+arewegameyet:
+  type: Web
+  title: Are We Game Yet?
+  author: Claudia Doppioslash
+  url:
+    value: https://arewegameyet.rs/
+    date: 2025-10-24
+
+howdevsspendtime:
+  type: Thesis
+  title: I Know What You Did Last Summer - An Investigation of How Developers Spend Their Time
+  author:
+    - Roberto Minelli
+    - Andrea Mocci
+    - Michele Lanza
+  date: 2015
+  pages: 25-35
+  doi: 10.1109/ICPC.2015.12
+
+ecsiotbrokers:
+  type: Thesis
+  title: Entity Component System Architecture for Scalable, Modular, and Power-Efficient IoT-Brokers
+  author:
+    - Franc Pouhela
+    - Dennis Krummacker
+    - Hans D. Schotten
+  date: 2023
+  booktitle: 2023 IEEE 21st International Conference on Industrial Informatics (INDIN)
+  pages: 1-6
+  doi: 10.1109/INDIN51400.2023.10218094
+  keywords:
+    - IoT
+    - Scalability
+    - Power-Efficiency
+    - ECS
+    - Energy measurement
+    - Data privacy
+
+ecscomputergraphics:
+  type: Thesis
+  title: "Project Elements: A computational entity-component-system in a scene-graph pythonic framework, for a neural, geometric computer graphics curriculum"
+  author:
+    - George Papagiannakis
+    - Manos Kamarianakis
+    - Antonis Protopsaltis
+    - Dimitris Angelis
+    - Paul Zikas
+  date: 2023
+  archive: arXiv
+  identifier: 2302.07691
+  category: cs.GR
+  url:
+    value: https://arxiv.org/abs/2302.07691
+    date: 2025-10-23
