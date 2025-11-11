@@ -5,23 +5,6 @@
 
 = Introdução e Motivação
 
-// ---
-
-// #align(center)[#grid(
-// 	columns: (1fr, 1fr),
-// 	rows: (2em, 1fr),
-// 	[Modelo Cascata],
-// 	[Modelo Ágil],
-// 	figura_legendada(
-// 		image("../../images/modelo_cascata.png", height: 10em),
-// 		[Fonte: elaboração própria.],
-// 	),
-// 	figura_legendada(
-// 		image("../../images/modelo_agil.png", height: 10em),
-// 		[Fonte: elaboração própria.],
-// 	),
-// )]
-
 ---
 
 // Explicar superficialmente o ECS antes da definição formal.
