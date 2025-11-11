@@ -183,31 +183,20 @@ Biblioteca de análise sintática baseada no paradigma declarativo @chumsky.
 
 ---
 
-=== AST e _Parser_ para uma Linguagem de Aritmética com Chumsky
-
-```rust
-enum Expr<'a> {
-	Int(i64),
-	Neg(Box<Expr<'a>>),
-}
-```
+=== _Parser_ para Declaração de Componentes
 
 #figura_legendada(
 	```rust
-	fn parser<'a>() -> impl Parser<'a, &'a str, Expr<'a>> {
-		let op = |c| just(c).padded()
-
-		// int -> regex([0-9]+)
-		let int = text::int(10)
-			.map(|s: &str| Expr::Int(s.parse().unwrap()));
-
-		// unary -> int | '-' unary
-		let unary = op('-')
-			.repeated()
-			.foldr(int, |_op, rhs| Expr::Neg(Box::new(rhs)));
-
-		unary
-	}
+	// component Animal { especie, idade }
+	let comp_decl = just(Token::Component)
+		.ignore_then(id)
+		.then_ignore(just(Token::LBrace))
+		.then(field_decl_list)
+		.then_ignore(just(Token::RBrace))
+		.map(|(name, field_decls)| Stmt::ComponentDecl {
+			name,
+			field_decls,
+		});
 	```,
-	[Fonte: adaptado de #cite(<chumsky>, form: "prose").],
+	[Fonte: elaboração própria com base na implementação do interpretador.],
 )

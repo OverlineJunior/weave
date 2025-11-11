@@ -43,20 +43,9 @@ Por isso, este trabalho explora a implementação de uma *linguagem de programa�
 
 ---
 
-== Objetivo Geral
+== Objetivo
 
 Projetar e documentar um protótipo de interpretador para uma linguagem de programação orientada ao ECS.
-
-// #grid(
-// 	columns: (1fr, 1fr),
-// 	rows: 1,
-// 	column-gutter: 30pt,
-// 	[Projetar e documentar um protótipo de interpretador para uma linguagem de programação orientada ao ECS.],
-// 	figura_legendada(
-// 		image("../../images/interseccao_ecs_linguagem.png"),
-// 		[Fonte: elaboração própria.],
-// 	),
-// )
 
 ---
 

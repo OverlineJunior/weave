@@ -4,38 +4,32 @@
 
 = Metodologia
 
-== Tipo e Abordagem de Pesquisa
-
-- Pesquisa aplicada;
-
-- Pesquisa exploratória;
-
-- Abordagem qualitativa.
-
-== Contexto
+== Características da Pesquisa
 
 #grid(
-	columns: (1fr, 1fr),
-	rows: 1,
-	column-gutter: 30pt,
-	[
-		- Desenvolvimento de linguagens de programação;
+  columns: (1fr, 1fr),
+  [
+    - Pesquisa *aplicada* e *exploratória*;
 
-		- Padrão arquitetural _Entity Component System_ (ECS).
-	],
-	figura_legendada(
-		image("../../images/interseccao_ecs_linguagem.png"),
-		[Fonte: elaboração própria.],
-	),
+    - Abordagem *qualitativa*;
+
+    - Contexto em *Linguagens de Programação ∩ ECS*.
+  ],
+  figura_legendada(
+    image("../../images/interseccao_ecs_linguagem.png"),
+    [Fonte: elaboração própria.],
+  ),
 )
 
 == População e Amostra
 
-- *População*: linguagens de programação e bibliotecas que implementam ou dão suporte ao ECS;
+- *População*: linguagens de programação e bibliotecas que implementam o ECS;
 
-- *Amostra*: Rust, Flecs e Bevy.
+- *Amostra*: Rust, Jlox, Flecs e Bevy.
 
-== Técnicas de Coleta de Dados
+== Técnicas
+
+=== Coleta de Dados
 
 - Pesquisa bibliográfica;
 
@@ -43,7 +37,9 @@
 
 - Pesquisa experimental.
 
-== Técnicas de Análise de Dados
+#pause
+
+=== Análise de Dados
 
 - Análise documental e bibliográfica;
 
@@ -51,10 +47,8 @@
 
 == Procedimentos Metodológicos
 
-+ *Design da Linguagem:* como será a sintaxe, tipagem e tratamento de erros? Qual será o paradigma?
-#pause
-+ *Análise do Design:* quais problemas o design resolve? Quão possível é a implementação dele?
-#pause
-+ *Implementação do Interpretador:* qual será a metodologia de desenvolvimento? Como o ECS será representado internamente? Como será feito o _lexer_ e o _parser_?
-#pause
-+ *Análise do Interpretador:* ele pode cumprir com o design proposto? Quais foram as dificuldades enfrentadas?
++ *Visão Geral da Solução*: planejamento macro;
+
++ *Planejamento*: planejamento micro;
+
++ *Implementação*: organizada com base nas fases tradicionais de um interpretador _tree-walking_.
