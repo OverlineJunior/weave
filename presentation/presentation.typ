@@ -6,20 +6,23 @@
 
 #show: style.with(title, student, advisor)
 
-// ≈ 4 minutos
+// ≈ 2 minutos
 #include "chapters/introducao.typ"
 
 // ≈ 8 minutos
 #include "chapters/fundamentacao.typ"
 
-// ≈ 4 minutos
+// ≈ 2 minutos
 #include "chapters/metodologia.typ"
 
 // ≈ 8 minutos
 #include "chapters/desenvolvimento.typ"
 
-// ≈ 4 minutos
+// ≈ 6 minutos
 #include "chapters/resultados.typ"
+
+// ≈ 2 minutos
+#include "chapters/conclusao.typ"
 
 // ≈ 2 minutos
 // Demonstração do protótipo
