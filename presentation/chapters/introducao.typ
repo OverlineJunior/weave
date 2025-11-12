@@ -3,7 +3,7 @@
 
 // ≈ 3-4 minutos
 
-= Introdução e Motivação
+= Introdução
 
 ---
 
@@ -22,18 +22,11 @@ Por isso, este trabalho explora a implementação de uma *linguagem de programa�
 
 ---
 
-= Objetivos
-
----
-
-== Objetivo
+== Objetivo Geral
 
 Projetar e documentar um protótipo de interpretador para uma linguagem de programação orientada ao ECS.
 
----
-
 == Objetivos Específicos
-
 - Implementar as fases de análise léxica e sintática do interpretador a fim de tornar o ECS primeira classe na linguagem;
 
 #pause

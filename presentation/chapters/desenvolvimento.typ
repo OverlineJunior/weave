@@ -138,5 +138,5 @@
       .add_id_unchecked(dyn_comp);
   }
   ```,
-  [Elaboração própria com base em #cite(form: "prose", <flecs>).],
+  [Fonte: elaboração própria com base em #cite(form: "prose", <flecs>).],
 )

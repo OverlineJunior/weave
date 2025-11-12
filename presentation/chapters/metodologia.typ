@@ -31,24 +31,22 @@
 
 === Coleta de Dados
 
-- Pesquisa bibliográfica;
-
-- Pesquisa documental;
-
-- Pesquisa experimental.
+- Bibliográfica;
+- Documental;
+- Experimental.
 
 #pause
 
 === Análise de Dados
 
-- Análise documental e bibliográfica;
-
-- Análise comparativa.
+- Documental;
+- Bibliográfica;
+- Comparativa.
 
 == Procedimentos Metodológicos
 
-+ *Visão Geral da Solução*: planejamento macro;
++ *Visão Geral da Solução*: familiarizar o leitor com o escopo do trabalho;
 
-+ *Planejamento*: planejamento micro;
++ *Planejamento*: definição das características da linguagem;
 
 + *Implementação*: organizada com base nas fases tradicionais de um interpretador _tree-walking_.

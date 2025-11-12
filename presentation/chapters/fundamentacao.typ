@@ -14,8 +14,8 @@
 	[Solução reutilizável para um problema recorrente no design de software.],
 	figura_legendada_titulada(
 		[Exemplo: _Observer_],
-		image("../../images/observer.png", height: 75%),
-		[Fonte: #cite(form: "prose", <refactoringguru>)],
+		image("../../images/observer.png", height: 62%),
+		[Fonte: elaboração própria com base em #cite(form: "prose", <headfirstdesignpatterns>)],
 	),
 )
 
@@ -79,7 +79,7 @@ Conjunto de conceitos e princípios que orientam o desenvolvimento de software.
 
 - Permite a atribuição de metadados aos componentes e sistemas da aplicação.
 
-- Pode tornar a linguagem homoicônica.
+- Pode tornar a linguagem mais ortogonal.
 
 ---
 
@@ -98,11 +98,11 @@ Permite o relacionamento entre entidades e componentes, tornando possível a rep
 
 #pause
 
-- _Tree-Walking_ é uma variante de interpretador que executa a árvore de sintaxe (AST) diretamente, tornando o processo mais simples de implementar @craftinginterpreters.
+- _Tree-Walking_ é uma variante de interpretador que executa a árvore de sintaxe (AST) diretamente.
 
 #pause
 
-- Pode ser separado em quatro fases: _análise léxica_, _análise sintática_, _análise semântica_ e _interpretação_ @craftinginterpreters.
+- Pode ser separado em três fases: _análise léxica_, _análise sintática_, e _interpretação_ @craftinginterpreters.
 
 ---
 

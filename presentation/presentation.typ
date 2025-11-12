@@ -1,4 +1,5 @@
-#import "style.typ": style
+#import "style.typ": *
+#import "@preview/cades:0.3.1": qr-code
 
 #let title = "Implementação de um Protótipo para uma Linguagem de Programação Orientada ao Entity Component System"
 #let student = "Francisco Sebastiany Junior"
@@ -27,11 +28,21 @@
 // ≈ 2 minutos
 // Demonstração do protótipo
 
-= Obrigado!
+#empty-slide[
+	#set align(center + horizon)
+
+	#text(size: 1.25em)[*Obrigado pela atenção!*]
+
+	#v(1.5em)
+
+	#qr-code("https://github.com/OverlineJunior/weave/blob/master/presentation/bibliography.yml")
+
+	*Referências*
+]
 
 = Referências
 
-#pagebreak()
+#set text(size: 0.48em)
 
 #bibliography(
 	"./bibliography.yml",
