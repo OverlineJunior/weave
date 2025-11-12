@@ -4,7 +4,7 @@
 
 ---
 
-== Escolha da Linguagem de Implementação (Rust)
+== Escolha da Linguagem de Implementação
 
 === Objetivo
 
