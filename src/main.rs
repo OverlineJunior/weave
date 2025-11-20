@@ -8,17 +8,17 @@ mod parser;
 mod interpreter;
 
 const SOURCE: &str = r#"
-	component Bar {
-		baz,
-		qux,
+	component Position {
+		x,
+		y,
 	}
 
-	var bar = Bar { baz: 1, qux: "a" }
+	var position = Position { x: 10, y: 20 }
 
-	entity(bar)
+	entity(position)
 
-	system Foo(bar: Bar) {
-		print bar.baz
+	system Move(position: Position) {
+		print position.x
 	}
 "#;
 
