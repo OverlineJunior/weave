@@ -13,29 +13,4 @@ Ao usar a biblioteca para construir um \textit{parser}, nota-se a influência do
 \vspace{-1em}
 \fonte{Adaptado de \citeonline{chumsky}.}
 
-De acordo com a classificação do teste de desempenho da biblioteca e seus competidores localizada na \autoref{tab:chumsky_benchmark}, Chumsky tem a capacidade de ser a biblioteca de análise sintática mais rápida para Rust.
-
-\FloatBarrier
-
-\begin{table}[H]
-	\centering
-	\caption{Classificação do teste de desempenho da biblioteca Chumsky e competidores.}
-	{
-		\begin{tabular}{lll}
-			\hline
-			\textbf{Classificação} & \textbf{Biblioteca}  & \textbf{Tempo de Execução} \\ \hline
-			1                      & chumsky (check-only) & 140.77 µs                  \\
-			2                      & winnow               & 178.91 µs                  \\
-			3                      & chumsky              & 210.43 µs                  \\
-			4                      & sn                   & 237.94 µs                  \\
-			5                      & serde\_json          & 477.41 µs                  \\
-			6                      & nom                  & 526.52 µs                  \\
-			7                      & pest                 & 1.9706 ms                  \\
-			8                      & pom                  & 13.730 ms                  \\ \hline
-		\end{tabular}
-	}
-	\fonte{Adaptado de \citeonline{chumsky}.}
-	\label{tab:chumsky_benchmark}
-\end{table}
-
 Por fim, o uso da biblioteca Chumsky estará na implementação da análise sintática, e será utilizada em conjunto com a biblioteca Logos na implementação do interpretador como um todo. Assim como foi o caso com Logos, a escolha de Chumsky se deve à sua maturidade.

@@ -32,18 +32,18 @@ Além disso, nota-se a dependência dos três componentes principais de outros c
 
 Até então, pode-se notar como foram utilizados termos como \textit{lexer} e \textit{parser} ao invés de analisador léxico e analisador sintático, respectivamente. Isso se deve ao fato de que, a partir deste ponto, esses serão os termos utilizados para se referir mais especificamente aos componentes do interpretador, enquanto os termos em português serão utilizados para se referir às fases que caracterizam estes componentes. A \autoref{tab:terminologia_fases} ilustra a diferença de uso entre os termos.
 
-\begin{table}[h]
+\begin{quadro}[h]
 	\centering
 	\caption{Terminologia utilizada para se referir às fases do interpretador e seus componentes.}
 	{
-		\begin{tabular}{ll}
+		\begin{tabular}{|l|l|}
 			\hline
 			\textbf{Fase}     & \textbf{Componente}  \\ \hline
-			Análise Léxica    & \textit{Lexer}       \\
-			Análise Sintática & \textit{Parser}      \\
+			Análise Léxica    & \textit{Lexer}       \\ \hline
+			Análise Sintática & \textit{Parser}      \\ \hline
 			Interpretação     & \textit{Interpreter} \\ \hline
 		\end{tabular}
 	}
 	\fonte{Elaboração própria com base na terminologia usada em \citeonline{craftinginterpreters}.}
 	\label{tab:terminologia_fases}
-\end{table}
+\end{quadro}
