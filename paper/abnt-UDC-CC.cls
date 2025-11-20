@@ -40,14 +40,40 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% $Log: cvs-id.def,v $
-%% Revision 1.3  2019/10/26 11:36:00  mdmatrakas
-%% Atualização das definições de classe, e correções de formatação de títulos
+%% Revision 1.8  2025/11/13 18:11  mdmatrakas
+%% - Remoção do caracter de indicação de continuação da linha no lstset nas
+%%   configurações de ambiente de código - configuração do pacote listings
+%% - Ajustes na formatação das legendas e lista de quadros
 %%
-%% Revision 1.2  2018/06/24 00:00:00  mdmatrakas
-%% Ajustes de formatação
+%% Revision 1.7  2024/12/02 16:56  mdmatrakas
+%% - Ajustes na formatação das URL longas que parecem nas bibliografias, com
+%%   a inclusão do pacote breakurl, e configura dos pacotes hyperlink e Url
+%% - Alterado o espaçamento entre os nomes dos membros da banca na folha de
+%%   aprovação
 %%
-%% Revision 1.1  2017/06/10 00:00:00  mdmatrakas
+%% Revision 1.6  2022/11/29 21:56  mdmatrakas
+%% - Inclusão dos pacotes capt-of e pdflanscape, para possibilitar a elaboração
+%%   de tabelas e quadros longos, em mais de uma página
+%%
+%% Revision 1.5  2022/11/16 11:30  mdmatrakas
+%% - Inclusão da lista de quadros como elemento pré-textual, e correção dos
+%%   comandos correspondentes
+%%
+%% Revision 1.4  2021/07/06 18:14  mdmatrakas
+%% Ajuste na definição de macros para referência de Anexos
+%% Os pacotes Babel, e Abntex2 entram em conflito, defido a existência
+%%   apenas de Appendix no pacote Memoir. A solução foi publicada como um
+%%   workarround, até que se chegue a uma solução definitiva no pacote Abntex2
+%% Para referenciar anexos no texto é necessário utilizar '\refanexo' no lugar
+%%   de '\autoref'
+%%
+%% Revision 1.3  2019/10/26 11:36  mdmatrakas
+%% - Atualização das definições de classe, e correções de formatação de títulos
+%%
+%% Revision 1.2  2018/06/24 00:00  mdmatrakas
+%% - Ajustes de formatação
+%%
+%% Revision 1.1  2017/06/10 00:00  mdmatrakas
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -60,7 +86,16 @@
 
 \ProvidesClass{abnt-UDC-CC}
 
-\PassOptionsToClass{pagestart=firstchapter,chapter=TITLE,section=TITLE,sumario=abnt-6727-2012,12pt,oneside,a4paper,brazil}{abntex2}
+\PassOptionsToClass{
+	pagestart=firstchapter,
+	chapter=TITLE,
+	section=TITLE,
+	sumario=abnt-6727-2012,
+	12pt,
+	oneside,
+	a4paper,
+	brazil
+}{abntex2}
 \LoadClass{abntex2}
 
 
@@ -72,12 +107,31 @@
 \RequirePackage{color}		% Controle das cores
 \RequirePackage{lastpage}	% Usado pela Ficha catalográfica
 \RequirePackage{lmodern}    % Usa a font Latin Modern
+\RequirePackage{cmap}		% Mapear caracteres especiais no PDF
+\RequirePackage[T1]{fontenc}% Selecao de codigos de fonte.
+\RequirePackage[utf8]{inputenc}	% Codificacao do documento (conversão automática dos acentos)
+\RequirePackage{indentfirst}% Indenta o primeiro parágrafo de cada seção.
+\RequirePackage{color}		% Controle das cores
+\RequirePackage{graphicx}	% Inclusão de gráficos
+\RequirePackage{amsmath}	% Definições da Sociedade Americana de Matemática
+\RequirePackage{amssymb}	% Definições da Sociedade Americana de Matemática
+\RequirePackage{amsthm}		% Definições da Sociedade Americana de Matemática
+\RequirePackage{hyphenat}	% comandos para separação silábica
+\RequirePackage[alf,abnt-emphasize=bf,bibjustif]{abntex2cite} % Citações padrão ABNT
+\RequirePackage{capt-of} % captions for non-floating elements
+\RequirePackage{pdflscape}
+\RequirePackage{url}		% Formatação de URLs - quebra de linha nas referências
+\RequirePackage{breakurl}
+
+%\RequirePackage[portuguese]{babel}
+%\RequirePackage[brazil]{babel}
 
 \RequirePackage{ifthen}
 \RequirePackage{perpage}
-\PassOptionsToPackage{hyperindex=false}{hyperref}
+%\PassOptionsToPackage{hyperindex=false}{hyperref}
 \usepackage[a4paper,left=30mm,right=20mm,top=30mm,bottom=30mm]{geometry} % tamanho atual em uso
 \usepackage{framed}
+\usepackage[portuguese,algoruled,longend,linesnumbered]{algorithm2e}
 
 \makeatletter	%Para que se entenda o @
 
@@ -97,12 +151,24 @@
 \providecommand{\imprimirdatabanca}{}
 \newcommand{\databanca}[1]{\renewcommand{\imprimirdatabanca}{#1}}
 
+% Comandos de dados - titulo do professor orientador
+\providecommand{\imprimirorientadortitulo}{}
+\newcommand{\orientadortitulo}[1]{\renewcommand{\imprimirorientadortitulo}{#1}}
+% Comandos de dados - titulo do professor coorientador
+\providecommand{\imprimircoorientadortitulo}{}
+\newcommand{\coorientadortitulo}[1]{\renewcommand{\imprimircoorientadortitulo}{#1}}
 % Comandos de dados - primeiro convidado para banca
 \providecommand{\imprimirprofbancaum}{}
 \newcommand{\profbancaum}[1]{\renewcommand{\imprimirprofbancaum}{#1}}
+% Comandos de dados - titulo do primeiro convidado para banca
+\providecommand{\imprimirprofbancaumtitulo}{}
+\newcommand{\profbancaumtitulo}[1]{\renewcommand{\imprimirprofbancaumtitulo}{#1}}
 % Comandos de dados - segundo convidado para banca
 \providecommand{\imprimirprofbancadois}{}
 \newcommand{\profbancadois}[1]{\renewcommand{\imprimirprofbancadois}{#1}}
+% Comandos de dados - titulo do segundo convidado para banca
+\providecommand{\imprimirprofbancadoistitulo}{}
+\newcommand{\profbancadoistitulo}[1]{\renewcommand{\imprimirprofbancadoistitulo}{#1}}
 % Comandos de dados - instituição do primeiro convidado para banca
 \providecommand{\imprimirinstituicaoprofum}{}
 \newcommand{\instituicaoprofum}[1]{\renewcommand{\imprimirinstituicaoprofum}{#1}}
@@ -178,118 +244,193 @@
 % CAPA
 % ---
 \renewcommand{\imprimircapa}{%
-  \begin{capa} \makeatletter
-    \center
-	{\textbf{ \large{ \MakeUppercase{\imprimirinstituicao} } } }
+	\begin{capa} \makeatletter
+		\center
+		{\textbf{ \large{ \MakeUppercase{\imprimirinstituicao} } } }
 
-    { \normalsize\MakeUppercase{\imprimirautor } }
+		\vspace{-\baselineskip}
 
-    \ifnotempty{\imprimirsegundoautor}{{ \normalsize\MakeUppercase{\imprimirsegundoautor } }
+		{ \textbf{ \large{ \MakeUppercase{ Curso de \imprimircurso } } } } % conforme modelo disponibilizado pela UDC
 
-    \ifnotempty{\imprimirterceiroautor}{ \normalsize\MakeUppercase{\imprimirterceiroautor } }
-	}
+		\vspace*{4cm}
 
-    \vspace*{8cm}
+		{ \normalsize\MakeUppercase{\imprimirautor } } % conforme modelo utilizado pelo curso de CC
 
-    { \ABNTEXchapterfont\bfseries\large\MakeUppercase{\imprimirtitulo} }
-    \vfill
+		\ifnotempty{\imprimirsegundoautor}{{ \normalsize\MakeUppercase{\imprimirsegundoautor } }
 
-    { \normalfont\small\MakeUppercase{\imprimirlocal} }
+			\ifnotempty{\imprimirterceiroautor}{ \normalsize\MakeUppercase{\imprimirterceiroautor } }
+		}
 
-    { \normalfont\small\imprimirdata }
+		\vspace*{4cm}
 
-    \vspace*{1cm}
-    \makeatother
-  \end{capa}
+		{ \ABNTEXchapterfont\bfseries\large\MakeUppercase{\imprimirtitulo} }
+		\vfill
+
+		{ \normalfont\small\MakeUppercase{\imprimirlocal} }
+
+		{ \normalfont\small\imprimirdata }
+
+		\vspace*{1cm}
+		\makeatother
+	\end{capa}
+}
+\newcommand{\imprimircapaCursoCC}{%
+	\begin{capa} \makeatletter
+		\center
+		{\textbf{ \large{ \MakeUppercase{\imprimirinstituicao} } } }
+
+
+		{ \normalsize\MakeUppercase{\imprimirautor } } % conforme modelo utilizado pelo curso de CC
+
+		\ifnotempty{\imprimirsegundoautor}{{ \normalsize\MakeUppercase{\imprimirsegundoautor } }
+
+			\ifnotempty{\imprimirterceiroautor}{ \normalsize\MakeUppercase{\imprimirterceiroautor } }
+		}
+
+		\vspace*{8cm}
+
+		{ \ABNTEXchapterfont\bfseries\large\MakeUppercase{\imprimirtitulo} }
+		\vfill
+
+		{ \normalfont\small\MakeUppercase{\imprimirlocal} }
+
+		{ \normalfont\small\imprimirdata }
+
+		\vspace*{1cm}
+		\makeatother
+	\end{capa}
 }
 
 % ---
 % FOLHA DE ROSTO
 % ---
 \renewcommand{\folhaderostocontent}{
-		\center
-		{ \normalsize\MakeUppercase{\imprimirautor} }
+	\center
+	{ \normalsize\MakeUppercase{\imprimirautor} }
 
-		\ifnotempty{\imprimirsegundoautor}{{ \normalsize\MakeUppercase{\imprimirsegundoautor } }
+	\ifnotempty{\imprimirsegundoautor}{{ \normalsize\MakeUppercase{\imprimirsegundoautor } }
 
 		\ifnotempty{\imprimirterceiroautor}{ \normalsize\MakeUppercase{\imprimirterceiroautor } }
-		}
+	}
 
-	    \vspace*{8cm}
+	\vspace*{8cm}
 
-		{\large\MakeUppercase{\imprimirtitulo}}
+	{\large\MakeUppercase{\imprimirtitulo}}
 
-		\vspace*{3cm}
+	\vspace*{3cm}
 
-		\abntex@ifnotempty{\imprimirpreambulo}{
-			\hspace{.45\textwidth}
-			\begin{minipage}{.5\textwidth}
-				{ \footnotesize \SingleSpacing
-				  \imprimirpreambulo
-				  \SingleSpacing
-				  {\imprimirorientadorRotulo~\imprimirorientador\par }
-				  \SingleSpacing
-		          \abntex@ifnotempty{\imprimircoorientador}{
-		              {\imprimircoorientadorRotulo~\imprimircoorientador} }
-	            }
-			\end{minipage}
+	\abntex@ifnotempty{\imprimirpreambulo}{
+		\hspace{.45\textwidth}
+		\begin{minipage}{.5\textwidth}
+			{ \footnotesize \SingleSpacing
+				\imprimirpreambulo
+				\SingleSpacing
+				{\imprimirorientadorRotulo ~\imprimirorientadortitulo ~\imprimirorientador\par }
+				\SingleSpacing
+				\abntex@ifnotempty{\imprimircoorientador}{
+					{\imprimircoorientadorRotulo ~\imprimircoorientadortitulo ~\imprimircoorientador} }
+			}
+		\end{minipage}
 
-			\vspace*{\fill}
-		}
+		\vspace*{\fill}
+	}
 
-		{\normalfont\small\MakeUppercase{\imprimirlocal}}
+	{\normalfont\small\MakeUppercase{\imprimirlocal}}
 
-		{\normalfont\small\imprimirdata}
+	{\normalfont\small\imprimirdata}
+	\makeatother
 }
-\makeatother
+\newcommand{\folhaderostocontentCursoCC}{
+	\center
+	{ \normalsize\MakeUppercase{\imprimirautor} }
 
+	\ifnotempty{\imprimirsegundoautor}{{ \normalsize\MakeUppercase{\imprimirsegundoautor } }
+
+		\ifnotempty{\imprimirterceiroautor}{ \normalsize\MakeUppercase{\imprimirterceiroautor } }
+	}
+
+	\vspace*{8cm}
+
+	{\large\MakeUppercase{\imprimirtitulo}}
+
+	\vspace*{3cm}
+
+	\abntex@ifnotempty{\imprimirpreambulo}{
+		\hspace{.45\textwidth}
+		\begin{minipage}{.5\textwidth}
+			{ \footnotesize \SingleSpacing
+				\imprimirpreambulo
+				\SingleSpacing
+				{\imprimirorientadorRotulo~\imprimirorientador\par }
+				\SingleSpacing
+				\abntex@ifnotempty{\imprimircoorientador}{
+					{\imprimircoorientadorRotulo~\imprimircoorientador} }
+			}
+		\end{minipage}
+
+		\vspace*{\fill}
+	}
+
+	{\normalfont\small\MakeUppercase{\imprimirlocal}}
+
+	{\normalfont\small\imprimirdata}
+	\makeatother
+}
 
 % ---
 % FICHA CATALOGRAFICA
 % ---
 \newcommand{\imprimirfichacatalografica}{
-		\
+	\
 
-		\vfill
+	\vfill
 
-		%\noident
-		\fbox{
-			\begin{minipage}[t]{2cm}
+	\fbox{	 %{\SingleSpacing
+		\begin{minipage}[t]{2cm} \SingleSpacing
 			\center \imprimircodigoautor %\hspace{1cm}
-			\end{minipage}
-			\begin{minipage}[t]{11cm}  %  Largura
-				\imprimirautorcitado{\ifnotempty{\imprimirsegundoautorcitado}{; \imprimirsegundoautorcitado \ifnotempty{\imprimirterceiroautorcitado}{; \imprimirterceiroautorcitado} }} % Nome de referência. Por ex. Silva, João Paulo
+		\end{minipage}
+		\begin{minipage}[t]{11cm}  %  Largura
+			\SingleSpacing
 
-				\vspace{0.5cm}
+			\imprimirautorcitado{\ifnotempty{\imprimirsegundoautorcitado}{; \imprimirsegundoautorcitado \ifnotempty{\imprimirterceiroautorcitado}{; \imprimirterceiroautorcitado} }} % Nome de referência. Por ex. Silva, João Paulo
 
-				\hspace{0.5cm}  \imprimirtitulo~/~\imprimirautor \ifnotempty{\imprimirsegundoautor}{, \imprimirsegundoautor \ifnotempty{\imprimirterceiroautor}{, \imprimirterceiroautor}}. \imprimirlocal,  \imprimirdata.
+			%\vspace{0.5cm}
 
-				\pageref{LastPage} fls.
+			\hspace{0.5cm}  \textbf{\imprimirtitulo}.~\imprimirautor \ifnotempty{\imprimirsegundoautor}{, \imprimirsegundoautor \ifnotempty{\imprimirterceiroautor}{, \imprimirterceiroautor}}. \imprimirlocal,  \imprimirdata.
 
-				\hspace{0.5cm}  \imprimirorientadorRotulo ~\imprimirorientador
+			\pageref{LastPage} fls.
 
-				\ifnotempty{\imprimircoorientador}{%
-					\hspace{0.5cm}  \imprimircoorientadorRotulo ~\imprimircoorientador }
+			\vspace{0.5cm}
+			%\hspace{0.5cm}
+			\imprimirorientadorRotulo ~\imprimirorientadortitulo ~\imprimirorientador
 
-				\hspace{0.5cm}  \imprimirtipotrabalho
+			\ifnotempty{\imprimircoorientador}{%
+				%\hspace{0.5cm}
+				\imprimircoorientadorRotulo ~\imprimircoorientadortitulo ~\imprimircoorientador }
 
-				\hspace{0.5cm}  \imprimirinstituicao ~(\imprimirinstituicaoSigla)
+			%\hspace{0.5cm}
+			\imprimirtipotrabalho
 
-				\hspace{0.5cm}
-				\ifnotempty{\imprimirpalavrachaveum}{%
+			%\hspace{0.5cm}
+			\imprimirinstituicao ~(\imprimirinstituicaoSigla)
+
+			\vspace{0.5cm}
+			%\hspace{0.5cm}
+			\ifnotempty{\imprimirpalavrachaveum}{%
 				1.  \imprimirpalavrachaveum.
 				\ifnotempty{\imprimirpalavrachavedois}{%
-				2.  \imprimirpalavrachavedois.
-				\ifnotempty{\imprimirpalavrachavetres}{%
-				3.  \imprimirpalavrachavetres.
-				\ifnotempty{\imprimirpalavrachavequatro}{%
-				4.  \imprimirpalavrachavequatro.
-				}}}}
+					2.  \imprimirpalavrachavedois.
+					\ifnotempty{\imprimirpalavrachavetres}{%
+						3.  \imprimirpalavrachavetres.
+						\ifnotempty{\imprimirpalavrachavequatro}{%
+							4.  \imprimirpalavrachavequatro.
+			}}}}
 
-				\hspace{7.75cm}  \imprimircodigopublicacao   %CDU 02:141:005.7
+			\hspace{7.75cm}  \imprimircodigopublicacao   %CDU 02:141:005.7
 
-			\end{minipage}
+		\end{minipage}
 	}
+
 	\pagebreak
 }
 
@@ -299,11 +440,11 @@
 \newcommand{\imprimirfolhadeaprovacao}{
 	\begin{center}
 		\vspace*{1cm}
-		{ \normalsize\MakeUppercase{\imprimirautor} }
+		{ \large\MakeUppercase{\imprimirautor} }
 
-		\ifnotempty{\imprimirsegundoautor}{{ \normalsize\MakeUppercase{\imprimirsegundoautor } }
+		\ifnotempty{\imprimirsegundoautor}{{ \large\MakeUppercase{\imprimirsegundoautor } }
 
-			\ifnotempty{\imprimirterceiroautor}{ \normalsize\MakeUppercase{\imprimirterceiroautor } }
+			\ifnotempty{\imprimirterceiroautor}{ \large\MakeUppercase{\imprimirterceiroautor } }
 		}
 
 		\vspace*{1cm}
@@ -317,11 +458,11 @@
 	\vspace*{1cm}
 
 	\begin{flushright}
-	\vspace*{1cm}{{\imprimirorientador}\\{\small \imprimirinstituicao\\(Orientador)}}
+		\vspace*{1.5cm}{{\imprimirorientadortitulo ~\imprimirorientador}\\ {\small \imprimirinstituicao\\ (Orientador)}}
 
-	\vspace*{1cm}{{\imprimirprofbancaum}\\{\small\imprimirinstituicaoprofum}}
+		\vspace*{3cm}{{\imprimirprofbancaumtitulo ~\imprimirprofbancaum}\\ {\small\imprimirinstituicaoprofum}}
 
-	\vspace*{1cm}{{\imprimirprofbancadois}\\{\small\imprimirinstituicaoprofdois}}
+		\vspace*{3cm}{{\imprimirprofbancadoistitulo ~\imprimirprofbancadois}\\ {\small\imprimirinstituicaoprofdois}}
 	\end{flushright}
 
 	\vfill
@@ -337,23 +478,32 @@
 % ---
 \newcommand{\imprimirdedicatoria}{
 	\vspace*{\fill}
-	\begin{flushright}
-		\textit{\imprimirtextodedicatoria}
-	\end{flushright}
+
+	\abntex@ifnotempty{\imprimirpreambulo}{
+		\hspace{.45\textwidth}
+		\begin{minipage}{.5\textwidth}
+			{ 	\SingleSpacing
+				\begin{flushright}
+					\imprimirtextodedicatoria
+				\end{flushright}
+			}
+		\end{minipage}
+	}
+
 	\pagebreak
 }
 % ---
 % EPÍGRAFE
 % ---
 \newcommand{\imprimirepigrafe}{
-\begin{epigrafe}
-	\vspace*{\fill}
-	\begin{flushright}
-		\textit{
-			\imprimirtextoepigrafe
-		}
-	\end{flushright}
-\end{epigrafe}
+	\begin{epigrafe}
+		\vspace*{\fill}
+		\begin{flushright}
+			\textit{
+				\imprimirtextoepigrafe
+			}
+		\end{flushright}
+	\end{epigrafe}
 }
 
 % ---
@@ -362,7 +512,7 @@
 \newcommand{\imprimiragradecimento}{
 	\vspace*{1cm}
 	\begin{center}
-	{ \normalsize\bfseries\MakeUppercase{AGRADECIMENTOS} }
+		{ \normalsize\bfseries\MakeUppercase{Agradecimentos} }
 	\end{center}
 	\vspace*{1cm}
 
@@ -387,8 +537,8 @@
 	\noindent
 	\textbf{Palavras-chaves}: \ifnotempty{\imprimirpalavrachaveum}{\imprimirpalavrachaveum.
 		\ifnotempty{\imprimirpalavrachavedois}{\ \imprimirpalavrachavedois.
-		\ifnotempty{\imprimirpalavrachavetres}{\ \imprimirpalavrachavetres.
-		\ifnotempty{\imprimirpalavrachavequatro}{\ \imprimirpalavrachavequatro.
+			\ifnotempty{\imprimirpalavrachavetres}{\ \imprimirpalavrachavetres.
+				\ifnotempty{\imprimirpalavrachavequatro}{\ \imprimirpalavrachavequatro.
 	}}}}
 	% 4 palavras separadas por . (ponto)
 
@@ -411,8 +561,8 @@
 	\noindent
 	\textbf{Keywords}: \ifnotempty{\imprimirkeywordum}{\imprimirkeywordum.
 		\ifnotempty{\imprimirkeyworddois}{\ \imprimirkeyworddois.
-		\ifnotempty{\imprimirkeywordtres}{\ \imprimirkeywordtres.
-		\ifnotempty{\imprimirkeywordquatro}{\ \imprimirkeywordquatro.
+			\ifnotempty{\imprimirkeywordtres}{\ \imprimirkeywordtres.
+				\ifnotempty{\imprimirkeywordquatro}{\ \imprimirkeywordquatro.
 	}}}}
 	% 4 palavras separadas por . (ponto)
 
@@ -420,7 +570,7 @@
 }
 
 \newcommand{\imprimirlistafiguras}{
-	\pdfbookmark[0]{\listfigurename}{lof}		% inserir lista de ilustrações
+	\pdfbookmark[0]{\listfigurename}{lof}		% inserir lista de figuras
 	\listoffigures*
 	\cleardoublepage
 }
@@ -431,11 +581,30 @@
 	\cleardoublepage
 }
 
+\newcommand{\imprimirlistaquadros}{
+	\pdfbookmark[0]{\listofquadros}{loqd}	% inserir lista de quadros
+%	\counterwithout{listofquadros}{chapter}
+	\begin{KeepFromToc}
+		\listofquadros
+	\end{KeepFromToc}
+	\cleardoublepage
+}
+
+
 \newcommand{\imprimirlistacodigos}{
 	\pdfbookmark[0]{\lstlistlistingname}{lol}	% inserir lista de códigos
 	\counterwithout{lstlisting}{chapter}
 	\begin{KeepFromToc}
 		\lstlistoflistings
+	\end{KeepFromToc}
+	\cleardoublepage
+}
+
+\newcommand{\imprimirlistaalgoritmos}{
+	\pdfbookmark[0]{\listofalgorithms}{loalg}	% inserir lista de algoritmos
+	\counterwithout{listofalgorithms}{chapter}
+	\begin{KeepFromToc}
+		\listofalgorithms
 	\end{KeepFromToc}
 	\cleardoublepage
 }
@@ -456,6 +625,13 @@
 %==============================================================================
 % outras configurações
 %==============================================================================
+
+%==============================================================================
+% FORMATAÇÃO DE URL NO TEXTO
+%==============================================================================
+
+\def\UrlBreaks{\do\/\do-}
+\hypersetup{breaklinks=true}
 
 %==============================================================================
 % CONFIGURAÇÕES DA APARENCIA DO PDF FINAL
@@ -496,13 +672,13 @@
 %-----------------------------------------------------------------------------
 %%criar um novo estilo de cabeçalhos e rodapés
 \makepagestyle{abnt_CC-UDC}
-  %%cabeçalhos
-  \makeevenhead{abnt_CC-UDC}{\ABNTEXfontereduzida\thepage}{}{}
-  \makeoddhead{abnt_CC-UDC}{}{}{\ABNTEXfontereduzida\thepage}
-  %\makeheadrule{textualCC-Anglo}{\textwidth}{\normalrulethickness} %linha
-  %% rodapé
-  \makeevenfoot{abnt_CC-UDC}{}{}{}
-  \makeoddfoot{abnt_CC-UDC}{}{}{}
+%%cabeçalhos
+\makeevenhead{abnt_CC-UDC}{\ABNTEXfontereduzida\thepage}{}{}
+\makeoddhead{abnt_CC-UDC}{}{}{\ABNTEXfontereduzida\thepage}
+%\makeheadrule{textualCC-Anglo}{\textwidth}{\normalrulethickness} %linha
+%% rodapé
+\makeevenfoot{abnt_CC-UDC}{}{}{}
+\makeoddfoot{abnt_CC-UDC}{}{}{}
 \pagestyle{abnt_CC-UDC}
 
 
@@ -534,29 +710,27 @@
 % CONFIGURACAO DO SUMARIO
 %-----------------------------------------------------------------------------
 % Modifica as fontes do sumário
-\renewcommand*{\cftpartfont}{\normalfont\bfseries\Large}
-\renewcommand*{\cftchapterfont}{\normalfont\bfseries\large}
+\renewcommand*{\cftpartfont}{\normalfont\bfseries\large}
+\renewcommand*{\cftchapterfont}{\normalfont\bfseries}
 \renewcommand*{\cftsectionfont}{\normalfont\bfseries}
 \renewcommand*{\cftsubsectionfont}{\normalfont}
 \renewcommand*{\cftsubsubsectionfont}{\normalfont\itshape}
 \renewcommand*{\cftparagraphfont}{\normalfont}
-%\makeatletter
-%	\settocpreprocessor{part}{%
-%		\let\tempf@rtoc\f@rtoc%
-%		\def\f@rtoc{%
-%			\texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@rtoc}}%
-%	}
-%	\settocpreprocessor{chapter}{%
-%	\let\tempf@rtoc\f@rtoc%
-%	\def\f@rtoc{%
-%		\texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@rtoc}}%
-%}
-%	\settocpreprocessor{section}{%
-%	\let\tempf@rtoc\f@rtoc%
-%	\def\f@rtoc{%
-%		\texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@rtoc}}%
-%}
-%\makeatother
+
+
+\makeatletter\settocpreprocessor{part}{%
+	\let\tempf@rtoc\f@rtoc%
+	\def\f@rtoc{%
+		\texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@rtoc}}%
+}
+\makeatother
+\makeatletter\settocpreprocessor{chapter}{%
+	\let\tempf@rtoc\f@rtoc%
+	\def\f@rtoc{%
+		\texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@rtoc}}%
+}
+\makeatother
+
 
 % Modifica o espaçamento no sumário
 % Nao ha espacos, exceto para as entradas de capitulos
@@ -566,7 +740,9 @@
 \setlength{\cftbeforesubsubsectionskip}{0pt}
 \setlength{\cftbeforeparagraphskip}{0pt}
 
-
+% configura as enumerações para utilizar sequencias alfabeticas, com )
+\setlist[enumerate,1]{label=\textbf{\alph*)}}
+\setlist[enumerate,2]{label=\textbf{\roman*)}}
 
 %----------------------------------------------------------------------------
 % CONFIGURAÇÃO DE LISTAS DE CONTEÚDO
@@ -575,19 +751,20 @@
 % -
 \newcommand{\graficoname}{GR{\'A}FICO}
 \newcommand{\graficoautorefname}{Gr{\'a}fico}
-\newcommand{\listofgraficosname}{LISTA DE GR{\' A}FICOS}
+\newcommand{\listofgraficosname}{LISTA DE GR{\'A}FICOS}
 \newfloat[chapter]{grafico}{logr}{\graficoname}
 \newlistof{listofgraficos}{logr}{\listofgraficosname}
 \newlistentry{grafico}{logr}{0}
 \counterwithout{grafico}{chapter}		% atende às regras da ABNT em listas
 \renewcommand{\cftgraficoname}{\graficoname\space}
-\renewcommand*{\cftgraficoaftersnum}{\hfill--\hfill}
+\renewcommand*{\cftgraficoaftersnum}{\hfill\textendash\hfill}
 
 % lista de códigos
 % -
 \renewcommand{\lstlistingname}{C{\'O}DIGO}
 \renewcommand{\lstlistlistingname}{LISTA DE C{\'O}DIGOS}
 \newcommand{\lstnumberautorefname}{C{\'o}digo}
+
 % Adicionado por Francisco.
 % Corrige referência automática resultando em "CÓDIGO 1", e não "Código 1.
 \newcommand{\lstlistingautorefname}{Código}
@@ -595,27 +772,96 @@
 % configurações para atender às regras da ABNT em listas
 \begingroup\makeatletter
 \let\newcounter\@gobble\let\setcounter\@gobbletwo
-  \globaldefs\@ne \let\c@loldepth\@ne
-  \newlistof{listings}{lol}{\lstlistlistingname}
-  \newlistentry{lstlisting}{lol}{0}
+\globaldefs\@ne \let\c@loldepth\@ne
+\newlistof{listings}{lol}{\lstlistlistingname}
+\newlistentry{lstlisting}{lol}{0}
 \endgroup
 
-\renewcommand{\cftlstlistingaftersnum}{\hfill--\hfill}
+\renewcommand{\cftlstlistingname}{\lstlistingname\space}
+\renewcommand*{\cftlstlistingaftersnum}{\hfill\textendash\hfill}
 
-\let\oldlstlistoflistings\lstlistoflistings
-\renewcommand{\lstlistoflistings}{%
-   \begingroup%
-   \let\oldnumberline\numberline%
-   \renewcommand{\numberline}{\lstlistingname\space\oldnumberline}%
-   \oldlstlistoflistings%
-   \endgroup}
+%\let\oldlstlistoflistings\lstlistoflistings
+%\renewcommand{\lstlistoflistings}{%
+%	\begingroup%
+%	\let\oldnumberline\numberline%
+%	\renewcommand{\numberline}{\lstlistingname\space\oldnumberline}%
+%	\oldlstlistoflistings%
+%	\endgroup}
 
+% lista de quadros
+% -
+\newcommand{\quadroname}{QUADRO}
+\newcommand{\listofquadros}{QUADRO}
+\newcommand{\quadroautorefname}{Quadro}
+\newcommand{\quadronumberautorefname}{Quadro}
+\newcommand{\listofquadrosname}{LISTA DE QUADROS}
+%\newcommand{\quadronumberautorefname}{Quadro}
+%\newcommand{\quadroautorefname}{Quadro}
+\newfloat[chapter]{quadro}{loqd}{\quadroname}
+\newlistof{listofquadros}{loqd}{\listofquadrosname}
+\newlistentry{quadro}{loqd}{0}
+\counterwithout{quadro}{chapter}		% atende às regras da ABNT em listas
+\renewcommand{\cftquadroname}{\quadroname\space}
+\renewcommand*{\cftquadroaftersnum}{\hfill\textendash\hfill}
+
+% configurações para atender às regras da ABNT em listas
+\begingroup\makeatletter
+	\let\newcounter\@gobble\let\setcounter\@gobbletwo
+	\globaldefs\@ne \let\c@loqddepth\@ne
+	\newlistof{listofquadros}{loqd}{\listofquadrosname}
+	\newlistentry{listofquadros}{loqd}{0}
+\endgroup
+
+%\let\oldlistofquadros\listofquadros
+%\renewcommand{\listofquadros}{%
+%	\begingroup%
+%	\let\oldnumberline\numberline%
+%	\renewcommand{\numberline}{\listofquadrosname\space\oldnumberline}%
+%	\oldlistofquadros%
+%	\endgroup}
+
+
+% lista de algoritmos
+% -
+%\newcommand{\algorithmname}{ALGORITMO}
+%\renewcommand{\algorithmautorefname}{Algoritmo}
+%\renewcommand{\algorithmnumberautorefname}{Algoritmo}
+%\newcommand{\listofalgorithmsname}{LISTA DE ALGORITMOS}
+%\newfloat[chapter]{algorithm}{loalg}{\algorithmname}
+%\newlistof{listofalgorithms}{loalg}{\listofalgorithmsname}
+%\newlistentry{algorithm}{loalg}{0}
+%\counterwithout{algorithm}{chapter}		% atende às regras da ABNT em listas
+%\renewcommand{\cftalgorithmname}{\algorithmname\space}
+%\renewcommand*{\cftalgorithmaftersnum}{\hfill\textendash\hfill}
+%
+%\renewcommand{\listofalgorithms}{ALGORITMO}
+%\newcommand{\listofalgorithmsname}{LISTA DE ALGORITMOS}
+%\newcommand{\algorithmnumberautorefname}{Algoritmo}
+%\renewcommand{\algorithmautorefname}{Algoritmo}
+%
+%% configurações para atender às regras da ABNT em listas
+%\begingroup\makeatletter
+%\let\newcounter\@gobble\let\setcounter\@gobbletwo
+%\globaldefs\@ne \let\c@loalgdepth\@ne
+%\newlistof{listofalgorithms}{loalg}{\listofalgorithmsname}
+%\newlistentry{listofalgorithms}{loa}{0}
+%\endgroup
+%
+%\newcommand{\cftlistofalgorithmaftersnum}{\hfill\textendash\hfill}
+%
+%\let\oldlistofalgorithms\listofalgorithms
+%\renewcommand{\listofalgorithms}{%
+%	\begingroup%
+%	\let\oldnumberline\numberline%
+%	\renewcommand{\numberline}{\listofalgorithmsname\space\oldnumberline}%
+%	\oldlistofalgorithms%
+%	\endgroup}
 
 
 %-----------------------------------------------------------------------------
 % Nomes constantes do abnTeX2 em portugues (definições padrões)
 %-----------------------------------------------------------------------------
-	%% ajusta nomes padrões do babel
+%% ajusta nomes padrões do babel
 \addto\captionsbrazil{
 	% CAPITALIZAÇÃO DE LISTAS
 	\renewcommand{\bibname}{REFER{\^ E}NCIAS}
@@ -623,11 +869,14 @@
 	\renewcommand{\listadesiglasname}{LISTA DE ABREVIATURAS}
 	\renewcommand{\listfigurename}{LISTA DE FIGURAS}
 	\renewcommand{\listtablename}{LISTA DE TABELAS}
+	\renewcommand{\listofquadrosname}{LISTA DE QUADROS}
+	%\renewcommand{\listofalgorithms}{LISTA DE ALGORITMOS}
 	\renewcommand{\contentsname}{SUM{\'A}RIO}
+	\renewcommand{\appendixname}{AP{\^E}NDICES}
 	\renewcommand{\appendixtocname}{AP{\^E}NDICES}
 	\renewcommand{\appendixpagename}{AP{\^E}NDICES}
-	\renewcommand{\anexosname}{ANEXOS}
 	\renewcommand{\apendicesname}{AP{\^E}NDICES}
+	\renewcommand{\anexoname}{ANEXOS}
 	%% ajusta nomes
 	\renewcommand{\folhadeaprovacaoname}{Termo de Aprovação}
 	\renewcommand{\orientadorname}{Orientador:}
@@ -639,6 +888,7 @@
 	%% ajusta nomes usados com a macro \autoref
 	\renewcommand{\figureautorefname}{Figura}
 	\renewcommand{\tableautorefname}{Tabela}
+	\renewcommand{\quadroautorefname}{Quadro}
 	\renewcommand{\partautorefname}{Parte}
 	\renewcommand{\chapterautorefname}{Cap{\'i}tulo}
 	\renewcommand{\sectionautorefname}{Se{\c c}\~ao}
@@ -647,9 +897,69 @@
 	\renewcommand{\pageautorefname}{P{\'a}gina}
 	\renewcommand{\paragraphautorefname}{Par{\'a}grafo}
 	\renewcommand{\equationautorefname}{Equa{\c c}{\~a}o}
+	\renewcommand{\appendixautorefname}{Ap{\^e}ndice}
+%	\renewcommand{\anexoautorefname}{Anexo}
 }
+\newcommand{\refanexo}[1]{\hyperref[#1]{Anexo~\ref{#1}}}
 
 
+%----------------------------------------------------------------------------
+% define a macro \Autoref to allow multiple references to be passed to \autoref
+%----------------------------------------------------------------------------
+\makeatletter
+\newcommand\Autoref[1]{\@first@ref#1,@}
+\def\@first@ref#1,#2{%
+	\ifx#2@\@AutoRef{#1}\let\@nextref\@gobble% only one ref, revert to \AutoRef
+	\else\@AutoRefs{#1}~\ref{#1}% add autorefname and first reference
+	\let\@nextref\@next@ref% push processing to \@next@ref
+	\fi%
+	\@nextref#2%
+}
+\def\@next@ref#1,#2{%
+	\ifx#2@ e~\ref{#1}\let\@nextref\@gobble% at end: print e+\ref and stop
+	\else, \ref{#1}% print  ,+\ref and continue
+	\fi%
+	\@nextref#2%
+}
+\def\@AutoRef#1{%
+	\begingroup%
+	\def\chapterautorefname~##1\null{Cap{\'i}tulo~##1\null}%
+	\def\sectionautorefname~##1\null{Se{\c c}\~ao~##1\null}%
+	\def\subsectionautorefname~##1\null{Subse{\c c}{\~a}o~##1\null}%
+	\def\subsubsectionautorefname~##1\null{Subse{\c c}{\~a}o~##1\null}
+	\def\pageautorefname~##1\null{P{\'a}gina~##1\null}
+	\def\paragraphautorefname~##1\null{Par{\'a}grafo~##1\null}
+	\def\figureautorefname~##1\null{Figura~##1\null}%
+	\def\subfigureautorefname~##1\null{Figura~##1\null}%
+	\def\tableautorefname~##1\null{Tabela~##1\null}%
+	\def\quadroautorefname~##1\null{Quadro~##1\null}%
+	%\def\algorithmautorefname~##1\null{Algoritmo~##1\null}%
+	\def\equationautorefname~##1\null{Equa{\c c}{\~a}o~##1\null}%
+	\def\appendixautorefname~##1\null{Ap{\^e}ndice~##1\null}%
+%	\def\anexoutorefname~##1\null{Anexo~##1\null}%
+	\autoref{#1}%
+	\endgroup%
+}
+\def\@AutoRefs#1{%
+	\begingroup%
+	\def\chapterautorefname##1\null{Cap{\'i}tulos\null}%
+	\def\sectionautorefname##1\null{Se{\c c}{\~o}es\null}%
+	\def\subsectionautorefname##1\null{Subse{\c c}{\~o}es\null}%
+	\def\subsubsectionautorefname##1\null{Subse{\c c}\~oes\null}
+	\def\pageautorefname##1\null{P{\'a}ginas\null}
+	\def\paragraphautorefname##1\null{Par{\'a}grafos\null}
+	\def\figureautorefname##1\null{Figuras\null}%
+	\def\subfigureautorefname##1\null{Figuras\null}%
+	\def\tableautorefname##1\null{Tabelas\null}%
+	\def\quadroautorefname##1\null{Quadros\null}%
+	%\def\algorithmautorefname##1\null{Algoritmos\null}%
+	\def\equationautorefname##1\null{Equa{\c c}{\~o}es\null}%
+	\def\appendixautorefname~##1\null{Ap{\^e}ndices~##1\null}%
+%	\def\anexoautorefname~##1\null{Anexo~##1\null}%
+	\autoref{#1}%
+	\endgroup%
+}
+\makeatother
 
 %----------------------------------------------------------------------------
 % DEFINIÇÃO DE NOMES DE CORES
@@ -668,228 +978,228 @@
 % Caracteres acentuados para uso nos ambientes de códigos fonte
 \makeatother
 \lstset{%
-        inputencoding=utf8,
-        extendedchars=true,
-        literate=%
-        {é}{{\'{e}}}1
-        {è}{{\`{e}}}1
-        {ê}{{\^{e}}}1
-        {ë}{{\¨{e}}}1
-        {É}{{\'{E}}}1
-        {Ê}{{\^{E}}}1
-        {û}{{\^{u}}}1
-        {ù}{{\`{u}}}1
-        {ú}{{\'{u}}}1
-        {ü}{{\¨{u}}}1
-        {â}{{\^{a}}}1
-        {à}{{\`{a}}}1
-        {á}{{\'{a}}}1
-        {ã}{{\~{a}}}1
-        {Á}{{\'{A}}}1
-        {Â}{{\^{A}}}1
-        {Ã}{{\~{A}}}1
-        {ç}{{\c{c}}}1
-        {Ç}{{\c{C}}}1
-        {õ}{{\~{o}}}1
-        {ó}{{\'{o}}}1
-        {ô}{{\^{o}}}1
-        {Õ}{{\~{O}}}1
-        {Ó}{{\'{O}}}1
-        {Ô}{{\^{O}}}1
-        {î}{{\^{i}}}1
-        {Î}{{\^{I}}}1
-        {í}{{\'{i}}}1
-        {Í}{{\~{Í}}}1
-}
-
-% Define a formatação de código fonte do Tex
-\newcommand{\codigoTex}{%
-\lstset{%
-	language=[LaTeX]TeX,%
-    basicstyle=\linespread{0.94}\ttfamily\footnotesize,%
-    breaklines=true,%
-    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
-    showtabs=false,%
-    showspaces=false,%
-    showstringspaces=false,%
-    backgroundcolor=\color{whitesmoke},
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{deepcarminepink}\bfseries,
-    numberstyle=\tiny\color{tealblue},
-    stringstyle=\color{tealgreen}\itshape,
-    basicstyle=\footnotesize,
-    numbers=left,%
-	fancyvrb=true,%
-	mathescape=true,%
-	captionpos=t,%
-    escapeinside={\%*}{*)},%
-    numbersep=5pt,
-    firstnumber=1,
-    tabsize=2
-}
-}
-
-% Define a formatação de código fonte da linguagem Java
-\newcommand{\codigoJava}{%
-\lstset{%
-    language=Java,%
-	backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
-	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-	breaklines=true,                 % sets automatic line breaking
-	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-	keywordstyle=\color{blue},       % keyword style
-	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-	numbersep=5pt,                   % how far the line-numbers are from the code
-	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-	showstringspaces=false,          % underline spaces within strings only
-	showtabs=false,                  % show tabs within strings adding particular underscores
-	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
-	tabsize=2,	                   % sets default tabsize to 2 spaces
-	basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-	prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
-	commentstyle=\color{codegreen},
-	keywordstyle=\color{deepcarminepink}\bfseries,
-	numberstyle=\tiny\color{tealblue},
-	stringstyle=\color{tealgreen}\itshape,
-	numbers=left,%
-	captionpos=t,%
-	firstnumber=1,
-	escapeinside={\%*}{*)},%
-}
-}
-
-% Define a formatação de código fonte da linguagem C
-\newcommand{\codigoC}{%
-\lstset{%
-	language=C,                 % the language of the code
-	backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
-	%basicstyle=\footnotesize,        % the size of the fonts that are used for the code
-	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-	breaklines=true,                 % sets automatic line breaking
-	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-	keywordstyle=\color{blue},       % keyword style
-	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-	numbersep=5pt,                   % how far the line-numbers are from the code
-	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-	showstringspaces=false,          % underline spaces within strings only
-	showtabs=false,                  % show tabs within strings adding particular underscores
-	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
-	tabsize=2,	                   % sets default tabsize to 2 spaces
-    basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{deepcarminepink}\bfseries,
-    numberstyle=\tiny\color{tealblue},
-    stringstyle=\color{tealgreen}\itshape,
-    numbers=left,%
-	captionpos=t,%
-	firstnumber=1,
-    escapeinside={\%*}{*)},%
-}
-}
-
-% Define a formatação de código fonte da linguagem C++
-\newcommand{\codigoCPP}{%
-\lstset{%
-    language=C++,%
-    backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
-    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-    breaklines=true,                 % sets automatic line breaking
-    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-    keywordstyle=\color{blue},       % keyword style
-    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-    numbersep=5pt,                   % how far the line-numbers are from the code
-    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-    showstringspaces=false,          % underline spaces within strings only
-    showtabs=false,                  % show tabs within strings adding particular underscores
-    stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
-    tabsize=2,	                   % sets default tabsize to 2 spaces
-    basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{deepcarminepink}\bfseries,
-    numberstyle=\tiny\color{tealblue},
-    stringstyle=\color{tealgreen}\itshape,
-    numbers=left,%
-    captionpos=t,%
-    firstnumber=1,
-    escapeinside={\%*}{*)},%
-}
-}
-
-% Define a formatação de código fonte da linguagem Python
-\newcommand{\codigoPython}{%
-\lstset{%
-    language=Python,%
-    backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
-    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-    breaklines=true,                 % sets automatic line breaking
-    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-    keywordstyle=\color{blue},       % keyword style
-    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-    numbersep=5pt,                   % how far the line-numbers are from the code
-    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-    showstringspaces=false,          % underline spaces within strings only
-    showtabs=false,                  % show tabs within strings adding particular underscores
-    stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
-    tabsize=2,	                   % sets default tabsize to 2 spaces
-    basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{deepcarminepink}\bfseries,
-    numberstyle=\tiny\color{tealblue},
-    stringstyle=\color{tealgreen}\itshape,
-    numbers=left,%
-    captionpos=t,%
-    firstnumber=1,
-    escapeinside={\%*}{*)},%
-}
+	inputencoding=utf8,
+	extendedchars=true,
+	literate=%
+	{é}{{\'{e}}}1
+	{è}{{\`{e}}}1
+	{ê}{{\^{e}}}1
+	{ë}{{\¨{e}}}1
+	{É}{{\'{E}}}1
+	{Ê}{{\^{E}}}1
+	{û}{{\^{u}}}1
+	{ù}{{\`{u}}}1
+	{ú}{{\'{u}}}1
+	{ü}{{\¨{u}}}1
+	{â}{{\^{a}}}1
+	{à}{{\`{a}}}1
+	{á}{{\'{a}}}1
+	{ã}{{\~{a}}}1
+	{Á}{{\'{A}}}1
+	{Â}{{\^{A}}}1
+	{Ã}{{\~{A}}}1
+	{ç}{{\c{c}}}1
+	{Ç}{{\c{C}}}1
+	{õ}{{\~{o}}}1
+	{ó}{{\'{o}}}1
+	{ô}{{\^{o}}}1
+	{Õ}{{\~{O}}}1
+	{Ó}{{\'{O}}}1
+	{Ô}{{\^{O}}}1
+	{î}{{\^{i}}}1
+	{Î}{{\^{I}}}1
+	{í}{{\'{i}}}1
+	{Í}{{\~{Í}}}1
 }
 
 \lstdefinelanguage{Rust}{
-  morekeywords={
-    fn, let, mut, pub, impl, trait, struct, enum, match, if, else, while, for, loop,
-    in, use, mod, crate, super, self, Self, return, break, continue, as, const, static,
-    ref, type, where, move, async, await, dyn, unsafe, println
-  },
-  sensitive=true,
-  comment=[l]{//},
-  morecomment=[s]{/*}{*/},
-  morestring=[b]{"},
+	morekeywords={
+			fn, let, mut, pub, impl, trait, struct, enum, match, if, else, while, for, loop,
+			in, use, mod, crate, super, self, Self, return, break, continue, as, const, static,
+			ref, type, where, move, async, await, dyn, unsafe, println
+		},
+	sensitive=true,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]{"},
 }
 
 % Define a formatação de código fonte da linguagem Rust
 \newcommand{\codigoRust}{%
-\lstset{
-	language=Rust,
-    backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
-    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-    breaklines=true,                 % sets automatic line breaking
-    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-    keywordstyle=\color{blue},       % keyword style
-    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-    numbersep=5pt,                   % how far the line-numbers are from the code
-    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-    showstringspaces=false,          % underline spaces within strings only
-    showtabs=false,                  % show tabs within strings adding particular underscores
-    stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
-    tabsize=2,	                   % sets default tabsize to 2 spaces
-    basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{deepcarminepink}\bfseries,
-    numberstyle=\tiny\color{tealblue},
-    stringstyle=\color{tealgreen}\itshape,
-    numbers=left,%
-    captionpos=t,%
-    firstnumber=1,
-    escapeinside={\%*}{*)},%
+	\lstset{
+		language=Rust,
+		backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+		breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+		breaklines=true,                 % sets automatic line breaking
+		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+		keywordstyle=\color{blue},       % keyword style
+		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+		numbersep=5pt,                   % how far the line-numbers are from the code
+		rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+		showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+		showstringspaces=false,          % underline spaces within strings only
+		showtabs=false,                  % show tabs within strings adding particular underscores
+		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+		tabsize=2,	                   % sets default tabsize to 2 spaces
+		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
+		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		commentstyle=\color{codegreen},
+		keywordstyle=\color{deepcarminepink}\bfseries,
+		numberstyle=\tiny\color{tealblue},
+		stringstyle=\color{tealgreen}\itshape,
+		numbers=left,%
+		captionpos=t,%
+		firstnumber=1,
+		escapeinside={\%*}{*)},%
+	}
 }
+
+% Define a formatação de código fonte do Tex
+\newcommand{\codigoTex}{%
+	\lstset{%
+		language=[LaTeX]TeX,%
+		basicstyle=\linespread{0.94}\ttfamily\footnotesize,%
+		breaklines=true,%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		showtabs=false,%
+		showspaces=false,%
+		showstringspaces=false,%
+		backgroundcolor=\color{whitesmoke},
+		commentstyle=\color{codegreen},
+		keywordstyle=\color{deepcarminepink}\bfseries,
+		numberstyle=\tiny\color{tealblue},
+		stringstyle=\color{tealgreen}\itshape,
+		basicstyle=\footnotesize,
+		numbers=left,%
+		fancyvrb=true,%
+		mathescape=true,%
+		captionpos=t,%
+		escapeinside={\%*}{*)},%
+		numbersep=5pt,
+		firstnumber=1,
+		tabsize=2
+	}
+}
+
+% Define a formatação de código fonte da linguagem Java
+\newcommand{\codigoJava}{%
+	\lstset{%
+		language=Java,%
+		backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+		breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+		breaklines=true,                 % sets automatic line breaking
+		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+		keywordstyle=\color{blue},       % keyword style
+		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+		numbersep=5pt,                   % how far the line-numbers are from the code
+		rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+		showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+		showstringspaces=false,          % underline spaces within strings only
+		showtabs=false,                  % show tabs within strings adding particular underscores
+		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+		tabsize=2,	                   % sets default tabsize to 2 spaces
+		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		commentstyle=\color{codegreen},
+		keywordstyle=\color{deepcarminepink}\bfseries,
+		numberstyle=\tiny\color{tealblue},
+		stringstyle=\color{tealgreen}\itshape,
+		numbers=left,%
+		captionpos=t,%
+		firstnumber=1,
+		escapeinside={\%*}{*)},%
+	}
+}
+
+% Define a formatação de código fonte da linguagem C
+\newcommand{\codigoC}{%
+	\lstset{%
+		language=C,                 % the language of the code
+		backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+		%basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+		breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+		breaklines=true,                 % sets automatic line breaking
+		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+		keywordstyle=\color{blue},       % keyword style
+		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+		numbersep=5pt,                   % how far the line-numbers are from the code
+		rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+		showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+		showstringspaces=false,          % underline spaces within strings only
+		showtabs=false,                  % show tabs within strings adding particular underscores
+		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+		tabsize=2,	                   % sets default tabsize to 2 spaces
+		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		commentstyle=\color{codegreen},
+		keywordstyle=\color{deepcarminepink}\bfseries,
+		numberstyle=\tiny\color{tealblue},
+		stringstyle=\color{tealgreen}\itshape,
+		numbers=left,%
+		captionpos=t,%
+		firstnumber=1,
+		escapeinside={\%*}{*)},%
+	}
+}
+
+% Define a formatação de código fonte da linguagem C++
+\newcommand{\codigoCPP}{%
+	\lstset{%
+		language=C++,%
+		backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+		breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+		breaklines=true,                 % sets automatic line breaking
+		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+		keywordstyle=\color{blue},       % keyword style
+		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+		numbersep=5pt,                   % how far the line-numbers are from the code
+		rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+		showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+		showstringspaces=false,          % underline spaces within strings only
+		showtabs=false,                  % show tabs within strings adding particular underscores
+		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+		tabsize=2,	                   % sets default tabsize to 2 spaces
+		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		commentstyle=\color{codegreen},
+		keywordstyle=\color{deepcarminepink}\bfseries,
+		numberstyle=\tiny\color{tealblue},
+		stringstyle=\color{tealgreen}\itshape,
+		numbers=left,%
+		captionpos=t,%
+		firstnumber=1,
+		escapeinside={\%*}{*)},%
+	}
+}
+
+% Define a formatação de código fonte da linguagem Python
+\newcommand{\codigoPython}{%
+	\lstset{%
+		language=Python,%
+		backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+		breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+		breaklines=true,                 % sets automatic line breaking
+		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+		keywordstyle=\color{blue},       % keyword style
+		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+		numbersep=5pt,                   % how far the line-numbers are from the code
+		rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+		showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+		showstringspaces=false,          % underline spaces within strings only
+		showtabs=false,                  % show tabs within strings adding particular underscores
+		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+		tabsize=2,	                   % sets default tabsize to 2 spaces
+		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		commentstyle=\color{codegreen},
+		keywordstyle=\color{deepcarminepink}\bfseries,
+		numberstyle=\tiny\color{tealblue},
+		stringstyle=\color{tealgreen}\itshape,
+		numbers=left,%
+		captionpos=t,%
+		firstnumber=1,
+		escapeinside={\%*}{*)},%
+	}
 }
 
 % Define a formatação de código fonte da linguagem Assembler
@@ -910,7 +1220,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -940,7 +1250,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -970,7 +1280,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1000,7 +1310,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1030,7 +1340,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1060,7 +1370,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1090,7 +1400,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1104,32 +1414,32 @@
 
 % Define a formatação de código fonte da linguagem HTML
 \newcommand{\codigoHTML}{%
-\lstset{%
-	language=HTML,%
-	backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
-	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-	breaklines=true,                 % sets automatic line breaking
-	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-	keywordstyle=\color{blue},       % keyword style
-	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-	numbersep=5pt,                   % how far the line-numbers are from the code
-	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-	showstringspaces=false,          % underline spaces within strings only
-	showtabs=false,                  % show tabs within strings adding particular underscores
-	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
-	tabsize=2,	                   % sets default tabsize to 2 spaces
-	basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-	prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
-	commentstyle=\color{codegreen},
-	keywordstyle=\color{deepcarminepink}\bfseries,
-	numberstyle=\tiny\color{tealblue},
-	stringstyle=\color{tealgreen}\itshape,
-	numbers=left,%
-	captionpos=t,%
-	firstnumber=1,
-	escapeinside={\%*}{*)},%
-}
+	\lstset{%
+		language=HTML,%
+		backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+		breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+		breaklines=true,                 % sets automatic line breaking
+		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+		keywordstyle=\color{blue},       % keyword style
+		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+		numbersep=5pt,                   % how far the line-numbers are from the code
+		rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+		showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+		showstringspaces=false,          % underline spaces within strings only
+		showtabs=false,                  % show tabs within strings adding particular underscores
+		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+		tabsize=2,	                   % sets default tabsize to 2 spaces
+		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		commentstyle=\color{codegreen},
+		keywordstyle=\color{deepcarminepink}\bfseries,
+		numberstyle=\tiny\color{tealblue},
+		stringstyle=\color{tealgreen}\itshape,
+		numbers=left,%
+		captionpos=t,%
+		firstnumber=1,
+		escapeinside={\%*}{*)},%
+	}
 }
 
 % Define a formatação de código fonte da linguagem make
@@ -1150,7 +1460,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1180,7 +1490,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1211,7 +1521,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1242,7 +1552,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1272,7 +1582,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1302,7 +1612,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1333,7 +1643,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1363,7 +1673,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1377,32 +1687,32 @@
 
 % Define a formatação de código fonte da linguagem Ruby
 \newcommand{\codigoRuby}{%
-\lstset{%
-	language=Ruby,%
-	backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
-	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-	breaklines=true,                 % sets automatic line breaking
-	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-	keywordstyle=\color{blue},       % keyword style
-	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-	numbersep=5pt,                   % how far the line-numbers are from the code
-	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-	showstringspaces=false,          % underline spaces within strings only
-	showtabs=false,                  % show tabs within strings adding particular underscores
-	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
-	tabsize=2,	                   % sets default tabsize to 2 spaces
-	basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-	prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
-	commentstyle=\color{codegreen},
-	keywordstyle=\color{deepcarminepink}\bfseries,
-	numberstyle=\tiny\color{tealblue},
-	stringstyle=\color{tealgreen}\itshape,
-	numbers=left,%
-	captionpos=t,%
-	firstnumber=1,
-	escapeinside={\%*}{*)},%
-}
+	\lstset{%
+		language=Ruby,%
+		backgroundcolor=\color{whitesmoke},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+		breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+		breaklines=true,                 % sets automatic line breaking
+		keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+		keywordstyle=\color{blue},       % keyword style
+		numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+		numbersep=5pt,                   % how far the line-numbers are from the code
+		rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+		showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+		showstringspaces=false,          % underline spaces within strings only
+		showtabs=false,                  % show tabs within strings adding particular underscores
+		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+		tabsize=2,	                   % sets default tabsize to 2 spaces
+		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		commentstyle=\color{codegreen},
+		keywordstyle=\color{deepcarminepink}\bfseries,
+		numberstyle=\tiny\color{tealblue},
+		stringstyle=\color{tealgreen}\itshape,
+		numbers=left,%
+		captionpos=t,%
+		firstnumber=1,
+		escapeinside={\%*}{*)},%
+	}
 }
 
 % Define a formatação de código fonte da linguagem Scilab
@@ -1423,7 +1733,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1453,7 +1763,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1483,7 +1793,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1514,7 +1824,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1545,7 +1855,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
@@ -1576,7 +1886,7 @@
 		stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
 		tabsize=2,	                   % sets default tabsize to 2 spaces
 		basicstyle=\linespread{0.94}\ttfamily\small,%basicstyle=\ttfamily\footnotesize,%
-		prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
+		%prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},%
 		commentstyle=\color{codegreen},
 		keywordstyle=\color{deepcarminepink}\bfseries,
 		numberstyle=\tiny\color{tealblue},
