@@ -12,6 +12,8 @@ A \autoref{fig:mapa_interpretador} ilustra uma montanha fazendo analogia a algun
 	\label{fig:mapa_interpretador}
 \end{figure}
 
+Em termos de arquitetura de software, este trajeto pela montanha da \autoref{fig:mapa_interpretador} divide o interpretador em duas grandes etapas: o \textit{front-end} e o \textit{back-end}. O \textit{front-end} é responsável pela análise do código fonte, englobando as fases léxica e sintática para analisar a estrutura do programa. Já o \textit{back-end} encarrega-se da execução propriamente dita \cite{craftinginterpreters}. Neste trabalho, será implementado apenas o \textit{front-end}, com o \textit{back-end} sendo fundamentado teoricamente.
+
 A seguir, serão definidas em detalhe cada uma das três fases que o interpretador proposto utilizará, mostrando como o código fonte é processado até sua execução final.
 
 \subsubsection{Análise Léxica}
