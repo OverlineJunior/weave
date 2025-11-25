@@ -10,19 +10,20 @@ Porém, devido à complexidade de criar tanto o \textit{design} quanto a impleme
 
 \section{Pergunta Problema}
 
-Como desenvolver um protótipo de interpretador para uma linguagem de programação orientada ao ECS — com as fases de análise léxica e sintática implementadas e a fase de interpretação especificada conceitualmente — registrando e avaliando as decisões tomadas?
+Como desenvolver o \textit{front-end} de um interpretador para uma linguagem de programação orientada ao ECS, também fundamentando a integração da fase de interpretação?
 
 \section{Objetivos} \label{sec:objetivos}
 
 \subsection{Objetivo Geral} \label{sec:obj_geral}
 
-Projetar e documentar um protótipo de interpretador para uma linguagem de programação orientada ao ECS que possa servir de base para trabalhos futuros.
+Implementar o \textit{front-end} e descrever teoricamente a fase de interpretação de uma linguagem orientada ao ECS, para investigar a viabilidade e os desafios de integração entre a teoria de compiladores e o padrão ECS.
 
 \subsection{Objetivos Específicos}
 
 \begin{itemize}
-    \item Implementar as fases de análise léxica e sintática do interpretador a fim de tornar o ECS primeira classe na linguagem;
-    \item Especificar como a fase de interpretação pode ser implementada através da integração com uma biblioteca de ECS.
+    \item Implementar a fase de análise léxica, a fim de converter o código de entrada em uma sequência de tokens;
+    \item Implementar a fase de análise sintática, a fim de validar a estrutura gramatical do código de entrada e gerar a árvore de sintaxe abstrata (AST);
+    \item Fundamentar a fase de interpretação e descrever como ela pode ser integrada na linguagem proposta.
 \end{itemize}
 
 \section{Justificativa} \label{sec:justificativa}
