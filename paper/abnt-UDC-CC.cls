@@ -535,7 +535,7 @@
 	\vspace{\onelineskip}
 
 	\noindent
-	\textbf{Palavras-chaves}: \ifnotempty{\imprimirpalavrachaveum}{\imprimirpalavrachaveum.
+	\textbf{Palavras-chave}: \ifnotempty{\imprimirpalavrachaveum}{\imprimirpalavrachaveum.
 		\ifnotempty{\imprimirpalavrachavedois}{\ \imprimirpalavrachavedois.
 			\ifnotempty{\imprimirpalavrachavetres}{\ \imprimirpalavrachavetres.
 				\ifnotempty{\imprimirpalavrachavequatro}{\ \imprimirpalavrachavequatro.
