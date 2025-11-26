@@ -4,7 +4,7 @@
 
 O padrão consiste na separação de dado e lógica de tal forma que as vários entidades da aplicação possam ser compostas de dados reutilizáveis e independentes \cite{ecsfaq}, com as funções sendo direcionadas aos dados, e não às entidades em si. Devido ao desacoplamento gerado por essa separação, o padrão ECS garante alta flexibilidade e modularidade, além do aumento de desempenho gerado pela melhor distribuição de dados na memória \cite{ecsstorageinpics}.
 
-Neste trabalho, o padrão ECS será um dos principais fundamentos para o \textit{design} e implementação da linguagem de programação, já que o intuito dela será abstrair ele.
+Neste trabalho, o padrão ECS será um dos principais fundamentos para o \textit{design} e implementação da linguagem de programação, já que o intuito dela será abstraí-lo.
 
 \subsubsection{Os Três Elementos Fundamentais do ECS}
 
@@ -39,7 +39,7 @@ Em termos de código, o padrão ECS pode ser representado sem nenhum construto e
 
 É importante ressaltar que o \autoref{cod:exemplo_ecs}, por mais que seja funcional e siga o \textit{design} orientado a dados, ainda é uma simplificação da implementação de um padrão ECS incompleto. Na prática, o armazenamento dos dados é feito através de estruturas de dados mais complexas \cite{ecsstorageinpics}, que permitem que entidades escolham quais componentes possuem, que sistemas sejam executados automaticamente, além de outras funcionalidades principais do padrão ECS.
 
-Fora a definição de ECS e seus três elementos fundamentais, o padrão ainda peca pela falta de formalização — quais são as práticas recomendadas ao usar ECS? Como os sistemas são executados? E se apenas entidades, componentes e sistemas não forem suficientes para resolver meu problema? Essas perguntas não possuem respostas definitivas, porém, diferentes autores e implementações abordam o padrão do seu jeito. A seguir, são apresentados alguns conceitos herdados de tais autores e implementações.
+Fora a definição de ECS e seus três elementos fundamentais, o padrão ainda carece de formalização — quais são as práticas recomendadas ao usar ECS? Como os sistemas são executados? E se apenas entidades, componentes e sistemas não forem suficientes para resolver meu problema? Essas perguntas não possuem respostas definitivas, porém, diferentes autores e implementações abordam o padrão do seu jeito. A seguir, são apresentados alguns conceitos herdados de tais autores e implementações.
 
 \subsubsection{Agendador}
 
@@ -59,7 +59,7 @@ A \autoref{fig:diagrama_agendador} ilustra o agendador executando os sistemas de
 
 Independente da aplicação, é muito comum a necessidade de relacionar diferentes conceitos entre si. Exemplo disso são os sistemas de arquivos, onde pastas podem conter arquivos, uma relação pai-filho.
 
-Relacionamento de entidades (do inglês, \textit{entity relationship}) é um conceito que supre essa necessidade, permitindo que entidades se relacionem entre si. \citeonline{flecs} explica o conceito fazendo uma paralela com o ato de adicionar um componente a uma entidade, como ilustrado na \autoref{fig:entidade_posicao}.
+Relacionamento de entidades (do inglês, \textit{entity relationship}) é um conceito que supre essa necessidade, permitindo que entidades se relacionem entre si. \citeonline{flecs} explica o conceito fazendo uma analogia com o ato de adicionar um componente a uma entidade, como ilustrado na \autoref{fig:entidade_posicao}.
 
 \begin{figure}[H]
 	\centering

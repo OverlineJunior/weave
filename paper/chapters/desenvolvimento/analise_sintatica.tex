@@ -39,7 +39,7 @@ Com a AST representada no código, resta a implementação do \textit{parser}, q
 
 Note como a maioria das regras de produção tem como objetivo gerar as variantes das enumerações \texttt{Expr} e \texttt{Stmt}, salvo as regras auxiliares, como \texttt{field\_decl}, que servem para auxiliar na definição das regras principais.
 
-Com a gramática definida, o próximo passo foi a implementação do \textit{parser} utilizando a biblioteca \textit{Chumsky}, abordada na seção \ref{sec:chumsky}. Pelo fato da biblioteca abstrair maior parte da complexidade envolvida na construção do \textit{parser}, a implementação acabou sendo um espelho direto da gramática formal definida no \autoref{cod:grammar}, como ilustrado no \autoref{cod:parser}.
+Com a gramática definida, o próximo passo foi a implementação do \textit{parser} utilizando a biblioteca \textit{Chumsky}, abordada na seção \ref{sec:chumsky}. Pelo fato de a biblioteca abstrair maior parte da complexidade envolvida na construção do \textit{parser}, a implementação acabou sendo um espelho direto da gramática formal definida no \autoref{cod:grammar}, como ilustrado no \autoref{cod:parser}.
 
 \codigoRust
 \lstinputlisting[

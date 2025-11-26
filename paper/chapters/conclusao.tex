@@ -8,7 +8,7 @@ O escopo incluiu a implementação das fases de análise léxica e sintática, a
 
 Como analisado no capítulo \ref{ch:analise_resultados}, o protótipo de interpretador conseguiu transformar o código fonte em uma AST completa, e identificado que sua implementação se assemelha muito com a implementação do interpretador Jlox, salvo a fase de interpretação, que é onde há a ponte entre o interpretador e a biblioteca de ECS.
 
-A contribuição mais significativa deste trabalho é a implementação do protótipo de interpretador, que, atendendo a maioria dos objetivos propostos, serve como base para trabalhos futuros. Isso se deve pelo fato de que, assim como comentado na seção \ref{sec:justificativa}, a proposta deste trabalho não só é incomum, como também peca por não haver artigos e documentação sobre o assunto, tornando trabalhos futuros mais difíceis de serem feitos.
+A contribuição mais significativa deste trabalho é a implementação do protótipo de interpretador, que, atendendo a maioria dos objetivos propostos, serve como base para trabalhos futuros. Isso se deve pelo fato de que, assim como comentado na seção \ref{sec:justificativa}, a proposta deste trabalho não só é incomum, como também carece de artigos e documentações sobre o assunto, tornando trabalhos futuros mais difíceis de serem feitos.
 
 \section{Viabilidade e Limitações}
 
@@ -59,7 +59,7 @@ Baseado na documentação das bibliotecas de ECS Flecs e Bevy, será listado a s
 
 \subsection{Explorar o Conceito de Componentes e Sistemas como Entidades}
 
-Uma sugestão que talvez possa fazer a ideia de um interpretador orientado ao padrão ECS valer mais a pena é explorar como o conceito de componentes e sistemas tratados como entidades pode ser aplicado na linguagem proposta.
+Uma sugestão que talvez possa fazer a ideia de um interpretador orientado ao padrão ECS ser mais vantajosa é explorar como o conceito de componentes e sistemas tratados como entidades pode ser aplicado na linguagem proposta.
 
 Com este conceito aplicado, seria possível atribuir metadados a componentes e sistemas, além de poder criar sistemas que operam sobre outros sistemas ou componentes, permitindo vários tipos de abstrações diferentes sem a necessidade de novas alterações na linguagem, caracterizando assim uma linguagem altamente ortogonal.
 

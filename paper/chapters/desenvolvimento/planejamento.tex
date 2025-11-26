@@ -2,7 +2,7 @@
 
 Antes de iniciar o desenvolvimento do protótipo, foi realizado um planejamento com a finalidade de responder às questões de quais ferramentas utilizar, como a linguagem se pareceria, como seriam organizadas as diferentes partes do código, entre outras.
 
-Usando como base as definições da seção \ref{sec:design_linguagem}, a linguagem proposta foi uma linguagem de programação imperativa com tipagem dinâmica, facilidando a implementação do interpretador, já que não é necessário a implementação de um sistema de tipos complexo.
+Usando como base as definições da seção \ref{sec:design_linguagem}, a linguagem proposta foi uma linguagem de programação imperativa com tipagem dinâmica, facilitando a implementação do interpretador, já que não é necessário a implementação de um sistema de tipos complexo.
 
 A sintaxe foi inspirada na família de linguagens C, evidenciado pelo uso de chaves para delimitar blocos de código e instanciar componentes, ilustrado no \autoref{cod:goal_syntax}. A escolha se deve à familiaridade da sintaxe, que facilita a adoção da linguagem. Já a semântica foi inspirada na biblioteca de ECS Flecs e seu tratamento de componentes e sistemas como entidades \cite{flecs}. A escolha se deve ao potencial de flexibilidade e ortogonalidade que essa abordagem oferece, que será demonstrado pelas sugestões de pesquisas futuras.
 
@@ -21,4 +21,4 @@ Por fim, foi criado um exemplo de código na linguagem proposta, contendo a sint
 
 O \autoref{cod:goal_syntax} consiste na definição de componentes para representar pessoas, rochas e nomes, além da criação de entidades com esses componentes e um sistema que apenas imprime o nome de pessoas, excluindo as rochas. Vale ressaltar que o código representa toda a sintaxe da linguagem, o que significa que o que não está presente não faz parte da linguagem, como reatribuição de campos e operações aritméticas. Tal falta de recursos é intencional, já que o objetivo do protótipo é explorar a viabilidade da implementação de uma linguagem com recursos de ECS em específico, e não uma linguagem tradicional.
 
-Com a linguagem e ferramentas definidas, além do exemplo concreto de código para guiar o desenvolvimento, o planejamento foi concluído a implementação do interpretador pode ser iniciada.
+Com a linguagem e ferramentas definidas, além do exemplo concreto de código para guiar o desenvolvimento, o planejamento foi concluído e a implementação do interpretador pode ser iniciada.
