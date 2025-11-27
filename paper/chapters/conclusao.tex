@@ -1,14 +1,14 @@
 \chapter{Conclusão} \label{ch:conclusao}
 
-Este trabalho projetou e implementou de forma parcial um protótipo de interpretador para uma linguagem orientada ao padrão \textit{Entity Component System}, cumprindo a maioria dos objetivos inicialmente propostos, salvo a implementação completa da fase de interpretação.
+Este trabalho projetou e implementou o front-end de um interpretador para uma linguagem orientada ao padrão \textit{Entity Component System}, cumprindo os objetivos propostos de validar o \textit{design} da linguagem e fundamentar a fase de interpretação.
 
-O escopo incluiu a implementação das fases de análise léxica e sintática, além da formalização da fase de interpretação e do registro de escolhas de técnicas e bibliotecas utilizadas ao longo do desenvolvimento. Com o protótipo parcialmente funcional e a documentação de decisões tomadas completa, foi possível avaliar a viabilidade do trabalho, identificando tanto os pontos fortes quanto as limitações encontradas.
+O escopo incluiu a implementação das fases de análise léxica e sintática, além da formalização da fase de interpretação e do registro de escolhas de técnicas utilizadas ao longo do desenvolvimento. Com o \textit{front-end} funcional e a documentação de decisões tomadas completa, foi possível avaliar a viabilidade do trabalho, identificando tanto os pontos fortes quanto as limitações da abordagem.
 
 \section{Principais Resultados e Contribuições}
 
-Como analisado no capítulo \ref{ch:analise_resultados}, o protótipo de interpretador conseguiu transformar o código fonte em uma AST completa, e identificado que sua implementação se assemelha muito com a implementação do interpretador Jlox, salvo a fase de interpretação, que é onde há a ponte entre o interpretador e a biblioteca de ECS.
+Como analisado no \ref{ch:analise_resultados}, o \textit{front-end} do interpretador conseguiu transformar o código fonte em uma AST completa, e foi identificado que sua implementação se assemelha muito com a implementação do \textit{front-end} de Jlox. A principal diferença está na fase de interpretação, que foi abordada de forma teórica para conectar o interpretador à biblioteca de ECS.
 
-A contribuição mais significativa deste trabalho é a implementação do protótipo de interpretador, que, atendendo a maioria dos objetivos propostos, serve como base para trabalhos futuros. Isso se deve pelo fato de que, assim como comentado na seção \ref{sec:justificativa}, a proposta deste trabalho não só é incomum, como também carece de artigos e documentações sobre o assunto, tornando trabalhos futuros mais difíceis de serem feitos.
+A contribuição mais significativa deste trabalho é a implementação do \textit{front-end} e a formalização da linguagem, que, atendendo aos objetivos propostos, servem como base para trabalhos futuros. Isso se deve pelo fato de que, assim como comentado na seção \ref{sec:justificativa}, a proposta deste trabalho é incomum e há poucos artigos sobre o assunto, o que torna essa base inicial essencial para facilitar o desenvolvimento de pesquisas futuras.
 
 \section{Viabilidade e Limitações}
 
