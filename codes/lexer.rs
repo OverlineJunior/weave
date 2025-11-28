@@ -20,7 +20,7 @@ impl<'a> Lexer<'a> {
 			c if c.is_ascii_digit() => self.next_int()?,
 
 			// Strings.
-			'"' => self.next_string()?,
+			''' => self.next_string()?,
 
 			// Palavra-chave ou identificador.
 			c if is_id_start(*c) => self.next_id(),
