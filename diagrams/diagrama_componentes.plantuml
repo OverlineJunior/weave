@@ -32,35 +32,27 @@ interface Thiserror as thiserror
 
 lexer ..> token
 lexer ..> erro_lexico
+token -> valor
+erro_lexico ..|> thiserror
 
 parser ..> expressao
 parser ..> instrucao
 parser ..> erro_sintatico
 parser ..> chumsky
+instrucao -> expressao
+expressao -d-> valor
+erro_sintatico ..|> thiserror
 
 interpretador ..> executador
 interpretador ..> instrucao
 interpretador ..> erro_execucao
-
-token -> valor
-
-expressao -> valor
-
-instrucao -> expressao
-
 avaliador .> valor
-avaliador .> expressao
+avaliador .d.> expressao
 avaliador .> flecs
-
 executador ..> avaliador
 executador .> valor
-executador .> instrucao
+executador .d.> instrucao
 executador .> flecs
-
-erro_lexico ..|> thiserror
-
-erro_sintatico ..|> thiserror
-
 erro_execucao ..|> thiserror
 
 @enduml
